@@ -125,6 +125,8 @@ add_executable(
     Core/src/math/APrimitive.cpp
     Core/src/math/Vector3D.cpp
     Core/src/math/Point3D.cpp
+    Core/src/Canva.cpp
+    Core/src/Camera.cpp
     )
 
 # rules for raytracer project

@@ -26,9 +26,9 @@ namespace Math {
             Point3D operator+(Math::Vector3D &) const;
             Point3D operator-(Math::Vector3D &) const;
 
-            [[nodiscard]] double get_x() const;
-            [[nodiscard]] double get_y() const;
-            [[nodiscard]] double get_z() const;
+            [[nodiscard]] double getX() const;
+            [[nodiscard]] double getY() const;
+            [[nodiscard]] double getZ() const;
 
         private:
             double m_x = 0;

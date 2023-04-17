@@ -21,53 +21,53 @@ Math::Vector3D::Vector3D(double c_x, double c_y, double c_z) {
 
 Math::Vector3D Math::Vector3D::operator+(const Math::Vector3D &vector) const
 {
-    return Math::Vector3D{this->m_x + vector.get_x(), this->m_y + vector.get_y(), this->m_z + vector.get_z()};
+    return Math::Vector3D{this->m_x + vector.getX(), this->m_y + vector.getY(), this->m_z + vector.getZ()};
 }
 
 Math::Vector3D &Math::Vector3D::operator+=(Math::Vector3D &vector)
 {
-    this->m_x += vector.get_x();
-    this->m_y += vector.get_y();
-    this->m_z += vector.get_z();
+    this->m_x += vector.getX();
+    this->m_y += vector.getY();
+    this->m_z += vector.getZ();
     return *this;
 }
 
 Math::Vector3D Math::Vector3D::operator-(const Math::Vector3D &vector) const
 {
-    return Math::Vector3D{this->m_x - vector.get_x(), this->m_y - vector.get_y(), this->m_z - vector.get_z()};
+    return Math::Vector3D{this->m_x - vector.getX(), this->m_y - vector.getY(), this->m_z - vector.getZ()};
 }
 
 Math::Vector3D &Math::Vector3D::operator-=(Math::Vector3D &vector)
 {
-    this->m_x -= vector.get_x();
-    this->m_y -= vector.get_y();
-    this->m_z -= vector.get_z();
+    this->m_x -= vector.getX();
+    this->m_y -= vector.getY();
+    this->m_z -= vector.getZ();
     return *this;
 }
 
 Math::Vector3D Math::Vector3D::operator*(const Math::Vector3D &vector) const
 {
-    return Math::Vector3D{this->m_x * vector.get_x(), this->m_y * vector.get_y(), this->m_z * vector.get_z()};
+    return Math::Vector3D{this->m_x * vector.getX(), this->m_y * vector.getY(), this->m_z * vector.getZ()};
 }
 
 Math::Vector3D &Math::Vector3D::operator*=(Math::Vector3D &vector)
 {
-    this->m_x *= vector.get_x();
-    this->m_y *= vector.get_y();
-    this->m_z *= vector.get_z();
+    this->m_x *= vector.getX();
+    this->m_y *= vector.getY();
+    this->m_z *= vector.getZ();
     return *this;
 }
 
 Math::Vector3D Math::Vector3D::operator/(const Math::Vector3D &vector) const
 {
-    return Math::Vector3D{this->m_x / vector.get_x(), this->m_y / vector.get_y(), this->m_z / vector.get_z()};
+    return Math::Vector3D{this->m_x / vector.getX(), this->m_y / vector.getY(), this->m_z / vector.getZ()};
 }
 
 Math::Vector3D &Math::Vector3D::operator/=(Math::Vector3D &vector)
 {
-    this->m_x /= vector.get_x();
-    this->m_y /= vector.get_y();
-    this->m_z /= vector.get_z();
+    this->m_x /= vector.getX();
+    this->m_y /= vector.getY();
+    this->m_z /= vector.getZ();
     return *this;
 }
 
@@ -110,17 +110,17 @@ double Math::Vector3D::dot(const Math::Vector3D &vector) const
     return (1/2) * (std::pow(new_vector.length(), 2) - pow(this->length(), 2) - pow(vector.length(), 2));
 }
 
-double Math::Vector3D::get_x() const
+double Math::Vector3D::getX() const
 {
     return this->m_x;
 }
 
-double Math::Vector3D::get_y() const
+double Math::Vector3D::getY() const
 {
     return this->m_y;
 }
 
-double Math::Vector3D::get_z() const
+double Math::Vector3D::getZ() const
 {
     return this->m_z;
 }

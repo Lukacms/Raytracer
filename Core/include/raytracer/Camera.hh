@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <raytracer/Canva.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
 
@@ -15,6 +16,7 @@ namespace RayTracer {
     class Camera {
         public:
             Camera() = default;
+            Camera(Math::Point3D &origin, RayTracer::Canva &canva);
             Camera(const Camera&) = default;
             Camera(Camera &&) = default;
             ~Camera() = default;
@@ -26,5 +28,6 @@ namespace RayTracer {
 
         private:
             Math::Point3D m_origin{};
-    };    
+            RayTracer::Canva m_canva;
+    };
 }

@@ -33,9 +33,9 @@ namespace Math {
 
                 [[nodiscard]] double length() const;
                 [[nodiscard]] double dot(const Vector3D &vector) const;
-                [[nodiscard]] double get_x() const;
-                [[nodiscard]] double get_y() const;
-                [[nodiscard]] double get_z() const;
+                [[nodiscard]] double getX() const;
+                [[nodiscard]] double getY() const;
+                [[nodiscard]] double getZ() const;
 
             private:
                 double m_x = 0;
