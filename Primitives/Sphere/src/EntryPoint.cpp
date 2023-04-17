@@ -5,7 +5,7 @@
 ** EntryPoint
 */
 
-#include <raytracer/classes/Point3D.hh>
+#include <raytracer/math/Point3D.hh>
 #include <Sphere.hh>
 #include <memory>
 

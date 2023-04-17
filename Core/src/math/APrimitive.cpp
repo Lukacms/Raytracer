@@ -6,8 +6,8 @@
 */
 
 #include <cmath>
-#include <raytracer/classes/APrimitive.hh>
-#include <raytracer/classes/Vector3D.hh>
+#include <raytracer/math/APrimitive.hh>
+#include <raytracer/math/Vector3D.hh>
 #include <vector>
 
 // Constructor & Destructor

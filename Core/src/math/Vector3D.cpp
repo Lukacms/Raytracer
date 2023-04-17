@@ -5,7 +5,7 @@
 ** Vector3D
 */
 
-#include "../include/raytracer/classes/Vector3D.hh"
+#include <raytracer/math/Vector3D.hh>
 #include <cmath>
 
 

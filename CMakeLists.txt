@@ -122,9 +122,9 @@ set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
 add_executable(
     raytracer
     Core/src/main.cpp
-    Core/src/classes/APrimitive.cpp
-    Core/src/classes/Vector3D.cpp
-    Core/src/classes/Point3D.cpp
+    Core/src/math/APrimitive.cpp
+    Core/src/math/Vector3D.cpp
+    Core/src/math/Point3D.cpp
     )
 
 # rules for raytracer project
