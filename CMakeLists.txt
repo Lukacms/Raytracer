@@ -23,8 +23,7 @@ include_directories(Core/include/)
 
 # add a subdirectory to compile, to uncomment when CMakeLists will be complete
 # directories will need to change
-# add_subdirectory(Games)
-# add_subdirectory(Graphics)
+add_subdirectory(Primitives)
 
 # Warning flags
 set(GCC_WARNING_FLAGS
@@ -113,22 +112,25 @@ endif()
 
 message("Warning flags: ${WARNING_FLAGS}")
 
-# add_library(raytracer-interface INTERFACE)
+add_library(raytracer-interface INTERFACE)
 
 # link shared libraries and compile them
-# set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
-# set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
+set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
+set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
 
 # adding executables
 add_executable(
     raytracer
     Core/src/main.cpp
+    Core/src/APrimitive.cpp
+    Core/src/Vector3D.cpp
+    Core/src/Point3D.cpp
     )
 
 # rules for raytracer project
 target_link_libraries(
     raytracer
-    # raytracer-interface
+    raytracer-interface
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})
