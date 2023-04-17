@@ -127,6 +127,7 @@ add_executable(
     Core/src/math/Point3D.cpp
     Core/src/Canva.cpp
     Core/src/Camera.cpp
+    Core/src/Ray.cpp
     )
 
 # rules for raytracer project
