@@ -5,7 +5,7 @@
 ** main
 */
 
-#include <raytracer/raytracer.hh>
+#include <raytracer/RayTracer.hh>
 
 int main(int argc, const char *argv[])
 {

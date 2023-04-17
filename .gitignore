@@ -48,3 +48,4 @@ build/
 # specific to project
 /raytracer
 .cache
+plugins

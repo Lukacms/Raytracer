@@ -15,8 +15,8 @@ project(raytracer)
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
-# for library compilation => shared libraries of games and graphics
-set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+# for library compilation => shared libraries of primitives, lights etc
+set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/plugins)
 
 # include directories
 include_directories(Core/include/)
