@@ -3,7 +3,7 @@
 ##
 
 add_library(
-  sphere_plugin SHARED
+  raytracer_sphere SHARED
   src/Sphere.cpp
   src/EntryPoint.cpp
 )

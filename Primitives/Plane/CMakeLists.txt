@@ -3,7 +3,7 @@
 ##
 
 add_library(
-  plane_plugin SHARED
+  raytracer_plane SHARED
   src/Plane.cpp
   src/EntryPoint.cpp
 )
