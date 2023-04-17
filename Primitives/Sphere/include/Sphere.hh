@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <raytracer/Ray.hh>
-#include <raytracer/APrimitive.hh>
-#include <raytracer/Point3D.hh>
+#include <raytracer/classes/Ray.hh>
+#include <raytracer/classes/APrimitive.hh>
+#include <raytracer/classes/Point3D.hh>
 
 namespace Math {
     class Sphere : public APrimitive {

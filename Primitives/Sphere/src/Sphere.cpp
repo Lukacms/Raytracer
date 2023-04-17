@@ -5,7 +5,7 @@
 ** Sphere
 */
 
-#include <raytracer/Ray.hh>
+#include <raytracer/classes/Ray.hh>
 #include <Sphere.hh>
 #include <cmath>
 

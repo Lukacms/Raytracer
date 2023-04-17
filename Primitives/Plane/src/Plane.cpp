@@ -5,7 +5,7 @@
 ** Plane
 */
 
-#include "raytracer/Vector3D.hh"
+#include <raytracer/classes/Vector3D.hh>
 #include <Plane.hh>
 
 // Constructor & Destructor

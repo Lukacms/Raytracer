@@ -1,14 +1,14 @@
 /*
 ** EPITECH PROJECT, 2023
-** RayTracer
+** raytracer
 ** File description:
 ** APrimitive
 */
 
 #pragma once
 
-#include <raytracer/IPrimitive.hh>
-#include <raytracer/Point3D.hh>
+#include <raytracer/classes/IPrimitive.hh>
+#include <raytracer/classes/Point3D.hh>
 
 namespace Math {
 

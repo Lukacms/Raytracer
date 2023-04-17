@@ -5,8 +5,8 @@
 ** Point3D
 */
 
-#include <raytracer/Point3D.hh>
-#include <raytracer/Vector3D.hh>
+#include <raytracer/classes/Point3D.hh>
+#include <raytracer/classes/Vector3D.hh>
 
 // Constructor & Destructor
 

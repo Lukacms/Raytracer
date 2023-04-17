@@ -1,11 +1,11 @@
 /*
 ** EPITECH PROJECT, 2023
-** BS_RayTracer
+** RayTracer
 ** File description:
 ** Vector3D
 */
 
-#include "../include/raytracer/Vector3D.hh"
+#include "../include/raytracer/classes/Vector3D.hh"
 #include <cmath>
 
 

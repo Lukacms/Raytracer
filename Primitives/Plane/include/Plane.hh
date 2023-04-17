@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <raytracer/Vector3D.hh>
-#include <raytracer/APrimitive.hh>
-#include <raytracer/Ray.hh>
+#include <raytracer/classes/Vector3D.hh>
+#include <raytracer/classes/APrimitive.hh>
+#include <raytracer/classes/Ray.hh>
 
 namespace Math {
 
