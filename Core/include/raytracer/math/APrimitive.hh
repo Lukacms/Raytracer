@@ -31,6 +31,12 @@ namespace Math {
         MATRIX_3_3,
     };
 
+    enum class Axis {
+        X,
+        Y,
+        Z,
+    };
+
     class APrimitive : public IPrimitive {
         public:
             APrimitive() = default;
@@ -46,8 +52,11 @@ namespace Math {
             void rotate_z(double angle) final;
             void translate(double t_x, double t_y, double t_z) final;
             // void scale(double t_x, double t_y, double t_z) final;
+            [[nodiscard]] Color getColor() const final;
+            void setColor(int red, int green, int blue) final;
 
         protected:
             Math::Point3D m_origin{};
+            Color m_color{0, 0, 0};
     };
 }

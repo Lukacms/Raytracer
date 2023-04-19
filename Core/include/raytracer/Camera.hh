@@ -27,7 +27,7 @@ namespace RayTracer {
             RayTracer::Ray ray(double canva_x, double canva_y);
 
         private:
-            Math::Point3D m_origin{};
-            RayTracer::Canva m_canva;
+            Math::Point3D m_origin{0, 0, -1};
+            RayTracer::Canva m_canva{};
     };
 }

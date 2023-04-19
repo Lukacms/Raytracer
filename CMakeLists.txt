@@ -128,6 +128,8 @@ add_executable(
     Core/src/Canva.cpp
     Core/src/Camera.cpp
     Core/src/Ray.cpp
+    Core/src/factory/PrimitiveFactory.cpp
+    Core/src/factory/AFactory.cpp
     )
 
 # rules for raytracer project

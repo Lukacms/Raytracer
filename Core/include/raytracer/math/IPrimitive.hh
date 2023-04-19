@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
+#include <raytracer/Ray.hh>
+
 namespace Math {
     class IPrimitive {
         public:
@@ -22,6 +25,9 @@ namespace Math {
             virtual void rotate_y(double angle) = 0;
             virtual void rotate_z(double angle) = 0;
             virtual void translate(double t_x, double t_y, double t_z) = 0;
+            virtual bool hits(RayTracer::Ray &ray) const = 0;
             // virtual void scale(double t_x, double t_y, double t_z);
+            [[nodiscard]] virtual Color getColor() const = 0;
+            virtual void setColor(int red, int green, int blue) = 0;
     };
 }

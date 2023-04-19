@@ -25,7 +25,7 @@ namespace Math {
 
             [[nodiscard]] double get_radius() const;
             double set_radius(double radius);
-            bool hits(RayTracer::Ray &ray) const;
+            bool hits(RayTracer::Ray &ray) const final;
 
         private:
             double m_radius;

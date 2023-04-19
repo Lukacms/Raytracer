@@ -12,13 +12,6 @@
 #include <raytracer/Ray.hh>
 
 namespace Math {
-
-    enum class Axis {
-        X,
-        Y,
-        Z,
-    };
-
     class Plane : public APrimitive {
         public:
             Plane() = default;
@@ -30,8 +23,7 @@ namespace Math {
             Plane &operator=(const Plane&) = default;
             Plane &operator=(Plane &&);
 
-            bool hits(RayTracer::Ray &ray) const;
-
+            bool hits(RayTracer::Ray &ray) const final;
         private:
             Math::Vector3D m_normal;
     };

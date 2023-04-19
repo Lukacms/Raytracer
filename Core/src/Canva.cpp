@@ -41,8 +41,8 @@ void RayTracer::Canva::setOrigin(Math::Point3D &origin)
 
 Math::Point3D RayTracer::Canva::pointAt(double canva_x, double canva_y)
 {
-    double x_pos = this->m_origin.getX() + (canva_x * this->m_bottom_side.getX() * this->m_left_side.getX());
-    double y_pos = this->m_origin.getY() + (canva_y * this->m_bottom_side.getY() * this->m_left_side.getY());
+    double x_pos = canva_x + (this->m_origin.getX() * this->m_bottom_side.getX());
+    double y_pos = canva_y + (this->m_origin.getY() * this->m_left_side.getY());
 
     return Math::Point3D{x_pos, y_pos, this->m_origin.getZ()};
 }

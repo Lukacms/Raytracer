@@ -20,7 +20,7 @@ namespace RayTracer {
             ~Canva() = default;
     
             Canva &operator=(const Canva&) = default;
-            Canva &operator=(Canva &&);
+            Canva &operator=(Canva &&) = default;
 
             [[nodiscard]] Math::Vector3D &getBottomSide();
             [[nodiscard]] Math::Vector3D &getLeftSide();
@@ -29,7 +29,7 @@ namespace RayTracer {
             Math::Point3D pointAt(double canva_x, double canva_y);
 
         private:
-            Math::Point3D m_origin;
+            Math::Point3D m_origin{0, 0, 0};
             Math::Vector3D m_bottom_side{1, 0, 0};
             Math::Vector3D m_left_side{0, 1, 0};
     };

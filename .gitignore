@@ -49,3 +49,5 @@ build/
 /raytracer
 .cache
 plugins
+*.ppm
+.vscode

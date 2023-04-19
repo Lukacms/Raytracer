@@ -105,3 +105,15 @@ void Math::APrimitive::translate(double t_x, double t_y, double t_z)
 // {
 
 // }
+
+Color Math::APrimitive::getColor() const
+{
+    return this->m_color;
+}
+
+void Math::APrimitive::setColor(int red, int green, int blue)
+{
+    this->m_color.red = red;
+    this->m_color.green = green;
+    this->m_color.blue = blue;
+}
