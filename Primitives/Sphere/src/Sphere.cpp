@@ -5,7 +5,6 @@
 ** Sphere
 */
 
-#include <math.h>
 #include <raytracer/Ray.hh>
 #include <Sphere.hh>
 #include <cmath>
