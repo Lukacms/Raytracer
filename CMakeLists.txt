@@ -24,6 +24,7 @@ include_directories(Core/include/)
 # add a subdirectory to compile, to uncomment when CMakeLists will be complete
 # directories will need to change
 add_subdirectory(Primitives)
+add_subdirectory(Lights)
 
 # Warning flags
 set(GCC_WARNING_FLAGS
