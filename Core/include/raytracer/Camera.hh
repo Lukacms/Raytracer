@@ -15,7 +15,7 @@ namespace RayTracer {
 
     class Camera {
         public:
-            Camera() = default;
+            Camera();
             Camera(Math::Point3D &origin, RayTracer::Canva &canva);
             Camera(const Camera&) = default;
             Camera(Camera &&) = default;

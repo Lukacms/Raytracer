@@ -10,6 +10,14 @@
 
 // Constructor & Destructor
 
+RayTracer::Camera::Camera()
+{
+    Math::Point3D point{-(1/2), -(1/2), 0};
+    RayTracer::Canva canva{};
+
+    this->m_canva.setOrigin(point);
+}
+
 RayTracer::Camera::Camera(Math::Point3D &origin, RayTracer::Canva &canva)
 {
     this->m_origin = origin;

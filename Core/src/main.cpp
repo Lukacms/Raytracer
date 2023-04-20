@@ -22,7 +22,7 @@
 
 int main()
 {
-    Math::Point3D point1{0, 0, 1};
+    Math::Point3D point1{0, 0, 0.1};
     Math::Point3D point2{0, 0, -1};
     Math::Point3D point3{-0.5, -0.5, 0};
     RayTracer::Canva canva{point3};
@@ -36,9 +36,9 @@ int main()
     //RayTracer::Cylinder cylinder(Math::Point3D(0, 0, 50), Math::Vector3D(0, 0, 1), 20, 10);
     // Set up image buffer
     // Ray trace
-    std::cout << "P3\n800 800\n255\n";
-    for (double y = 0.00125; y <= 1; y += 0.00125) {
-        for (double x = 0.00125; x <= 1; x += 0.00125) {
+    std::cout << "P3\n1920 1080\n255\n";
+    for (double y = 0.00092; y <= 1; y += 0.00092) {
+        for (double x = 0.00052; x <= 1; x += 0.00052) {
             // Calculate ray for current pixel
             RayTracer::Ray ray = camera.ray(x, y);
             Color c = sphere->getColor();
