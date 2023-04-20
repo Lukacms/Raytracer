@@ -22,7 +22,7 @@
 
 int main()
 {
-    Math::Point3D point1{0, 0, 0.75};
+    Math::Point3D point1{0, 0, 1};
     Math::Point3D point2{0, 0, -1};
     Math::Point3D point3{-0.5, -0.5, 0};
     RayTracer::Canva canva{point3};
@@ -30,7 +30,7 @@ int main()
      RayTracer::Camera camera(point1, canva);
 
     // Set up sphere
-    std::unique_ptr<Math::IPrimitive> sphere = RayTracer::PrimitiveFactory::createSphere(point2, 0.1);
+    std::unique_ptr<Math::IPrimitive> sphere = RayTracer::PrimitiveFactory::createSphere(point2, 0.5);
     sphere->setColor(238,130,238);
     // Set up Cylinder
     //RayTracer::Cylinder cylinder(Math::Point3D(0, 0, 50), Math::Vector3D(0, 0, 1), 20, 10);
