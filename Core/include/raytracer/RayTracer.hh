@@ -11,7 +11,7 @@ constexpr int SUCCESS = 0;
 constexpr int FAILURE = 84;
 
 struct Color {
-    int red;
-    int green;
-    int blue;
+        int red;
+        int green;
+        int blue;
 };

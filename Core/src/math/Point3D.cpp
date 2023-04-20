@@ -21,12 +21,14 @@ Math::Point3D::Point3D(double c_x, double c_y, double c_z)
 
 Math::Point3D Math::Point3D::operator+(Math::Vector3D &vector) const
 {
-    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(), this->m_z + vector.getZ()};
+    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
+                         this->m_z + vector.getZ()};
 }
 
 Math::Point3D Math::Point3D::operator-(Math::Vector3D &vector) const
 {
-    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(), this->m_z + vector.getZ()};
+    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
+                         this->m_z + vector.getZ()};
 }
 
 Math::Point3D &Math::Point3D::operator+=(Math::Vector3D &vector)

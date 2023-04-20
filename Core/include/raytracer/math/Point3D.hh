@@ -9,17 +9,19 @@
 
 #include <raytracer/math/Vector3D.hh>
 
-namespace Math {
+namespace Math
+{
 
-    class Point3D {
+    class Point3D
+    {
         public:
             Point3D() = default;
             Point3D(double c_x, double c_y, double c_z);
-            Point3D(const Point3D&) = default;
+            Point3D(const Point3D &) = default;
             Point3D(Point3D &&) = default;
             ~Point3D() = default;
-    
-            Point3D &operator=(const Point3D&) = default;
+
+            Point3D &operator=(const Point3D &) = default;
             Point3D &operator=(Point3D &&) = default;
             Point3D &operator+=(Math::Vector3D &);
             Point3D &operator-=(Math::Vector3D &);
@@ -35,4 +37,4 @@ namespace Math {
             double m_y = 0;
             double m_z = 0;
     };
-}
+} // namespace Math

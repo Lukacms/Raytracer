@@ -11,17 +11,19 @@
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
 
-namespace RayTracer {
+namespace RayTracer
+{
 
-    class Camera {
+    class Camera
+    {
         public:
             Camera();
             Camera(Math::Point3D &origin, RayTracer::Canva &canva);
-            Camera(const Camera&) = default;
+            Camera(const Camera &) = default;
             Camera(Camera &&) = default;
             ~Camera() = default;
-    
-            Camera &operator=(const Camera&) = default;
+
+            Camera &operator=(const Camera &) = default;
             Camera &operator=(Camera &&);
 
             RayTracer::Ray ray(double canva_x, double canva_y);
@@ -30,4 +32,4 @@ namespace RayTracer {
             Math::Point3D m_origin{0, 0, -1};
             RayTracer::Canva m_canva{};
     };
-}
+} // namespace RayTracer

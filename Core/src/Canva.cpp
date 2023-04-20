@@ -5,8 +5,8 @@
 ** Canva
 */
 
-#include <raytracer/math/Point3D.hh>
 #include <raytracer/Canva.hh>
+#include <raytracer/math/Point3D.hh>
 
 // Contructor & Destructor
 
@@ -22,12 +22,10 @@ Math::Vector3D &RayTracer::Canva::getBottomSide()
     return this->m_bottom_side;
 }
 
-
 Math::Vector3D &RayTracer::Canva::getLeftSide()
 {
     return this->m_left_side;
 }
-
 
 Math::Point3D &RayTracer::Canva::getOrigin()
 {

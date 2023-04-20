@@ -10,15 +10,17 @@
 #include "raytracer/RayTracer.hh"
 #include <raytracer/Ray.hh>
 
-namespace Math {
-    class IPrimitive {
+namespace Math
+{
+    class IPrimitive
+    {
         public:
             IPrimitive() = default;
-            IPrimitive(const IPrimitive&) = default;
+            IPrimitive(const IPrimitive &) = default;
             IPrimitive(IPrimitive &&) = default;
             virtual ~IPrimitive() = default;
-    
-            IPrimitive &operator=(const IPrimitive&) = default;
+
+            IPrimitive &operator=(const IPrimitive &) = default;
             IPrimitive &operator=(IPrimitive &&) = default;
 
             virtual void rotate_x(double angle) = 0;
@@ -30,4 +32,4 @@ namespace Math {
             [[nodiscard]] virtual Color getColor() const = 0;
             virtual void setColor(int red, int green, int blue) = 0;
     };
-}
+} // namespace Math

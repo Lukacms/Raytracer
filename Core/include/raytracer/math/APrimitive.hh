@@ -10,7 +10,8 @@
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 
-namespace Math {
+namespace Math
+{
 
     enum MatrixIndex {
         MATRIX_0_0,
@@ -37,14 +38,15 @@ namespace Math {
         Z,
     };
 
-    class APrimitive : public IPrimitive {
+    class APrimitive : public IPrimitive
+    {
         public:
             APrimitive() = default;
-            APrimitive(const APrimitive&) = default;
+            APrimitive(const APrimitive &) = default;
             APrimitive(APrimitive &&) = default;
             ~APrimitive() override = default;
-    
-            APrimitive &operator=(const APrimitive&) = default;
+
+            APrimitive &operator=(const APrimitive &) = default;
             APrimitive &operator=(APrimitive &&);
 
             void rotate_x(double angle) final;
@@ -59,4 +61,4 @@ namespace Math {
             Math::Point3D m_origin{};
             Color m_color{0, 0, 0};
     };
-}
+} // namespace Math
