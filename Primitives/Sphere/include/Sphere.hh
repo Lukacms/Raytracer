@@ -11,16 +11,18 @@
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 
-namespace Math {
-    class Sphere : public APrimitive {
+namespace Math
+{
+    class Sphere : public APrimitive
+    {
         public:
             Sphere() = default;
             Sphere(Math::Point3D corigin, double cradius);
-            Sphere(const Sphere&) = default;
+            Sphere(const Sphere &) = default;
             Sphere(Sphere &&) = default;
             ~Sphere() override = default;
-    
-            Sphere &operator=(const Sphere&) = default;
+
+            Sphere &operator=(const Sphere &) = default;
             Sphere &operator=(Sphere &&);
 
             [[nodiscard]] double get_radius() const;
@@ -30,4 +32,4 @@ namespace Math {
         private:
             double m_radius;
     };
-}
+} // namespace Math

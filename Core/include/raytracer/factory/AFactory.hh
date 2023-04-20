@@ -11,7 +11,8 @@
 #include <raytracer/factory/IFactory.hh>
 #include <string>
 
-namespace RayTracer {
+namespace RayTracer
+{
     class AFactory : public IFactory
     {
         public:

@@ -7,19 +7,21 @@
 
 #pragma once
 
-#include <raytracer/math/Vector3D.hh>
 #include <raytracer/math/Point3D.hh>
+#include <raytracer/math/Vector3D.hh>
 
-namespace RayTracer {
-    class Canva {
+namespace RayTracer
+{
+    class Canva
+    {
         public:
             Canva() = default;
             Canva(Math::Point3D &origin);
-            Canva(const Canva&) = default;
+            Canva(const Canva &) = default;
             Canva(Canva &&) = default;
             ~Canva() = default;
-    
-            Canva &operator=(const Canva&) = default;
+
+            Canva &operator=(const Canva &) = default;
             Canva &operator=(Canva &&) = default;
 
             [[nodiscard]] Math::Vector3D &getBottomSide();
@@ -33,4 +35,4 @@ namespace RayTracer {
             Math::Vector3D m_bottom_side{1, 0, 0};
             Math::Vector3D m_left_side{0, 1, 0};
     };
-}
+} // namespace RayTracer

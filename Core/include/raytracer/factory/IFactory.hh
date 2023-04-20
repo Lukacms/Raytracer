@@ -7,16 +7,18 @@
 
 #pragma once
 
-namespace RayTracer {
+namespace RayTracer
+{
 
-    class IFactory {
+    class IFactory
+    {
         public:
             IFactory() = default;
-            IFactory(const IFactory&) = default;
+            IFactory(const IFactory &) = default;
             IFactory(IFactory &&) = default;
             ~IFactory() = default;
-    
-            IFactory &operator=(const IFactory&) = default;
+
+            IFactory &operator=(const IFactory &) = default;
             IFactory &operator=(IFactory &&);
     };
-}
+} // namespace RayTracer
