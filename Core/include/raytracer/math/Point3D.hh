@@ -9,9 +9,8 @@
 
 #include <raytracer/math/Vector3D.hh>
 
-namespace Math
+namespace math
 {
-
     class Point3D
     {
         public:
@@ -23,10 +22,10 @@ namespace Math
 
             Point3D &operator=(const Point3D &) = default;
             Point3D &operator=(Point3D &&) = default;
-            Point3D &operator+=(Math::Vector3D &);
-            Point3D &operator-=(Math::Vector3D &);
-            Point3D operator+(Math::Vector3D &) const;
-            Point3D operator-(Math::Vector3D &) const;
+            Point3D &operator+=(math::Vector3D &);
+            Point3D &operator-=(math::Vector3D &);
+            Point3D operator+(math::Vector3D &) const;
+            Point3D operator-(math::Vector3D &) const;
 
             [[nodiscard]] double getX() const;
             [[nodiscard]] double getY() const;
@@ -37,4 +36,4 @@ namespace Math
             double m_y = 0;
             double m_z = 0;
     };
-} // namespace Math
+} // namespace math

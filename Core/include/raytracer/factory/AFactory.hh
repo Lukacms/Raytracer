@@ -11,7 +11,7 @@
 #include <raytracer/factory/IFactory.hh>
 #include <string>
 
-namespace RayTracer
+namespace raytracer
 {
     class AFactory : public IFactory
     {
@@ -40,4 +40,4 @@ namespace RayTracer
                     std::string error_msg;
             };
     };
-} // namespace RayTracer
+} // namespace raytracer

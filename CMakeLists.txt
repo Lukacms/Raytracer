@@ -76,7 +76,7 @@ set(CMAKE_BUILD_TYPE
     ${CMAKE_BUILD_TYPE}
     CACHE
       STRING
-      "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel"
+      "Choose the type of build, options are: None Debug"
       FORCE)
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
@@ -119,10 +119,9 @@ add_library(raytracer-interface INTERFACE)
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
 
-# adding executables
-add_executable(
-    raytracer
-    Core/src/main.cpp
+add_library(
+    raytracer-core
+    STATIC
     Core/src/math/APrimitive.cpp
     Core/src/math/Vector3D.cpp
     Core/src/math/Point3D.cpp
@@ -132,13 +131,26 @@ add_executable(
     Core/src/factory/PrimitiveFactory.cpp
     Core/src/factory/AFactory.cpp
     )
+target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
+target_include_directories(raytracer-core PUBLIC include)
+set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
+set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
+
+
+# adding executables
+add_executable(
+    raytracer
+    Core/src/main.cpp
+    )
 
 # rules for raytracer project
 target_link_libraries(
     raytracer
+    raytracer-core
     raytracer-interface
     sfml-graphics
     sfml-window
+    config++ # library for libconfig++ => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

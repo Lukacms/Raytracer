@@ -9,7 +9,7 @@
 
 #include <raytracer/ALight.hh>
 
-namespace Light
+namespace light
 {
     class AmbientLight : public ALight
     {
@@ -24,4 +24,4 @@ namespace Light
 
         private:
     };
-} // namespace Light
+} // namespace light

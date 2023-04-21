@@ -10,7 +10,7 @@
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 
-namespace Math
+namespace math
 {
 
     enum MatrixIndex {
@@ -58,7 +58,7 @@ namespace Math
             void setColor(int red, int green, int blue) final;
 
         protected:
-            Math::Point3D m_origin{};
+            math::Point3D m_origin{};
             Color m_color{0, 0, 0};
     };
-} // namespace Math
+} // namespace math

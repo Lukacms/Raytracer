@@ -10,7 +10,7 @@
 
 // Constructor & Destructor
 
-Math::Point3D::Point3D(double c_x, double c_y, double c_z)
+math::Point3D::Point3D(double c_x, double c_y, double c_z)
 {
     this->m_x = c_x;
     this->m_y = c_y;
@@ -19,19 +19,19 @@ Math::Point3D::Point3D(double c_x, double c_y, double c_z)
 
 // Operators
 
-Math::Point3D Math::Point3D::operator+(Math::Vector3D &vector) const
+math::Point3D math::Point3D::operator+(math::Vector3D &vector) const
 {
-    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
+    return math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
                          this->m_z + vector.getZ()};
 }
 
-Math::Point3D Math::Point3D::operator-(Math::Vector3D &vector) const
+math::Point3D math::Point3D::operator-(math::Vector3D &vector) const
 {
-    return Math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
+    return math::Point3D{this->m_x + vector.getX(), this->m_y + vector.getY(),
                          this->m_z + vector.getZ()};
 }
 
-Math::Point3D &Math::Point3D::operator+=(Math::Vector3D &vector)
+math::Point3D &math::Point3D::operator+=(math::Vector3D &vector)
 {
     this->m_x += vector.getX();
     this->m_y += vector.getY();
@@ -39,7 +39,7 @@ Math::Point3D &Math::Point3D::operator+=(Math::Vector3D &vector)
     return *this;
 }
 
-Math::Point3D &Math::Point3D::operator-=(Math::Vector3D &vector)
+math::Point3D &math::Point3D::operator-=(math::Vector3D &vector)
 {
     this->m_x -= vector.getX();
     this->m_y -= vector.getY();
@@ -49,17 +49,17 @@ Math::Point3D &Math::Point3D::operator-=(Math::Vector3D &vector)
 
 // Methods
 
-double Math::Point3D::getX() const
+double math::Point3D::getX() const
 {
     return this->m_x;
 }
 
-double Math::Point3D::getY() const
+double math::Point3D::getY() const
 {
     return this->m_y;
 }
 
-double Math::Point3D::getZ() const
+double math::Point3D::getZ() const
 {
     return this->m_z;
 }
