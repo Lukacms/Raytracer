@@ -11,7 +11,7 @@
 
 // Constructor & Destructor
 
-Math::Sphere::Sphere(Math::Point3D corigin, double cradius)
+math::Sphere::Sphere(math::Point3D corigin, double cradius)
 {
     this->m_origin = corigin;
     this->m_radius = cradius;
@@ -19,7 +19,7 @@ Math::Sphere::Sphere(Math::Point3D corigin, double cradius)
 
 // Methods
 
-bool Math::Sphere::hits(RayTracer::Ray &ray) const
+bool math::Sphere::hits(raytracer::Ray &ray) const
 {
     double value_a = pow(ray.m_direction.getX(), 2) + pow(ray.m_direction.getY(), 2) +
         pow(ray.m_direction.getZ(), 2);

@@ -10,8 +10,7 @@
 
 extern "C" { // NOLINT
 
-// NOLINTNEXTLINE
-std::unique_ptr<Light::ILight> entry_point_light(Math::Point3D position)
+std::unique_ptr<light::ILight> entry_point_light(math::Point3D position) // NOLINT
 {
     return nullptr;
 };

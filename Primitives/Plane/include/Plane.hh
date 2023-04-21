@@ -11,13 +11,13 @@
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/Vector3D.hh>
 
-namespace Math
+namespace math
 {
     class Plane : public APrimitive
     {
         public:
             Plane() = default;
-            Plane(Math::Point3D corigin, Math::Axis axis);
+            Plane(math::Point3D corigin, math::Axis axis);
             Plane(const Plane &) = default;
             Plane(Plane &&) = default;
             ~Plane() override = default;
@@ -25,9 +25,9 @@ namespace Math
             Plane &operator=(const Plane &) = default;
             Plane &operator=(Plane &&);
 
-            bool hits(RayTracer::Ray &ray) const final;
+            bool hits(raytracer::Ray &ray) const final;
 
         private:
-            Math::Vector3D m_normal;
+            math::Vector3D m_normal;
     };
-} // namespace Math
+} // namespace math

@@ -10,37 +10,37 @@
 
 // Contructor & Destructor
 
-RayTracer::Canva::Canva(Math::Point3D &origin)
+raytracer::Canva::Canva(math::Point3D &origin)
 {
     this->m_origin = origin;
 }
 
 // Methods
 
-Math::Vector3D &RayTracer::Canva::getBottomSide()
+math::Vector3D &raytracer::Canva::getBottomSide()
 {
     return this->m_bottom_side;
 }
 
-Math::Vector3D &RayTracer::Canva::getLeftSide()
+math::Vector3D &raytracer::Canva::getLeftSide()
 {
     return this->m_left_side;
 }
 
-Math::Point3D &RayTracer::Canva::getOrigin()
+math::Point3D &raytracer::Canva::getOrigin()
 {
     return this->m_origin;
 }
 
-void RayTracer::Canva::setOrigin(Math::Point3D &origin)
+void raytracer::Canva::setOrigin(math::Point3D &origin)
 {
     this->m_origin = origin;
 }
 
-Math::Point3D RayTracer::Canva::pointAt(double canva_x, double canva_y)
+math::Point3D raytracer::Canva::pointAt(double canva_x, double canva_y)
 {
     double x_pos = canva_x + (this->m_origin.getX() * this->m_bottom_side.getX());
     double y_pos = canva_y + (this->m_origin.getY() * this->m_left_side.getY());
 
-    return Math::Point3D{x_pos, y_pos, this->m_origin.getZ()};
+    return math::Point3D{x_pos, y_pos, this->m_origin.getZ()};
 }

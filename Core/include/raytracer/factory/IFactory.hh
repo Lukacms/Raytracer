@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace RayTracer
+namespace raytracer
 {
 
     class IFactory
@@ -21,4 +21,4 @@ namespace RayTracer
             IFactory &operator=(const IFactory &) = default;
             IFactory &operator=(IFactory &&);
     };
-} // namespace RayTracer
+} // namespace raytracer

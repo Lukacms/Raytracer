@@ -9,19 +9,19 @@
 
 // Constructor & Destructor
 
-Light::ALight::ALight(Math::Point3D position)
+light::ALight::ALight(math::Point3D position)
 {
     this->m_position = position;
 }
 
 // Methods
 
-Math::Point3D &Light::ALight::getLightPosition()
+math::Point3D &light::ALight::getLightPosition()
 {
     return this->m_position;
 }
 
-void Light::ALight::setLightPosition(Math::Point3D position)
+void light::ALight::setLightPosition(math::Point3D position)
 {
     this->m_position = position;
 }

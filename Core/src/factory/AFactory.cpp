@@ -11,7 +11,7 @@
 
 // Methods
 
-const char *RayTracer::AFactory::FactoryException::what() const noexcept
+const char *raytracer::AFactory::FactoryException::what() const noexcept
 {
     return this->error_msg.c_str();
 }

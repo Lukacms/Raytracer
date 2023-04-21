@@ -9,7 +9,7 @@
 
 // Constructor & Destructor
 
-RayTracer::Ray::Ray(Math::Point3D corigin, Math::Vector3D cdirection)
+raytracer::Ray::Ray(math::Point3D corigin, math::Vector3D cdirection)
 {
     this->m_origin = corigin;
     this->m_direction = cdirection;

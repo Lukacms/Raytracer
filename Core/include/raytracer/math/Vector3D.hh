@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace Math
+namespace math
 {
     class Vector3D
     {
@@ -44,4 +44,4 @@ namespace Math
             double m_y = 0;
             double m_z = 0;
     };
-} // namespace Math
+} // namespace math

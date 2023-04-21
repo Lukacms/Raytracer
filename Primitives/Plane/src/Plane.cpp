@@ -10,20 +10,20 @@
 
 // Constructor & Destructor
 
-Math::Plane::Plane(Math::Point3D corigin, Math::Axis axis)
+math::Plane::Plane(math::Point3D corigin, math::Axis axis)
 {
     this->m_origin = corigin;
-    if (axis == Math::Axis::X)
-        this->m_normal = Math::Vector3D{1, 0, 0};
-    if (axis == Math::Axis::Y)
-        this->m_normal = Math::Vector3D{0, 1, 0};
-    if (axis == Math::Axis::Z)
-        this->m_normal = Math::Vector3D{0, 0, 1};
+    if (axis == math::Axis::X)
+        this->m_normal = math::Vector3D{1, 0, 0};
+    if (axis == math::Axis::Y)
+        this->m_normal = math::Vector3D{0, 1, 0};
+    if (axis == math::Axis::Z)
+        this->m_normal = math::Vector3D{0, 0, 1};
 }
 
 // Methods
 
-bool Math::Plane::hits(RayTracer::Ray &ray) const
+bool math::Plane::hits(raytracer::Ray &ray) const
 {
     return (this->m_normal.dot(ray.m_direction) == 0);
 }

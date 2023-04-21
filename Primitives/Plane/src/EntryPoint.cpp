@@ -11,11 +11,10 @@
 
 extern "C" { // NOLINT
 
-// NOLINTNEXTLINE
-std::unique_ptr<Math::Plane> entry_point_primitive(Math::Point3D &origin, Math::Axis axis)
+std::unique_ptr<math::Plane> entry_point_primitive(math::Point3D &origin, math::Axis axis) // NOLINT
 {
 
-    std::unique_ptr<Math::Plane> new_plane = std::make_unique<Math::Plane>(origin, axis);
+    std::unique_ptr<math::Plane> new_plane = std::make_unique<math::Plane>(origin, axis);
     return new_plane;
 }
 }

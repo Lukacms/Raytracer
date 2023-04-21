@@ -20,7 +20,7 @@ const std::string_view LOAD_METHOD = "entry_point_primitive";
 const std::string_view ERROR_CANNOT_LOAD = "RayTracer: Unable to load library.";
 const std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";
 
-namespace RayTracer
+namespace raytracer
 {
     class PrimitiveFactory : public AFactory
     {
@@ -33,11 +33,11 @@ namespace RayTracer
             PrimitiveFactory &operator=(const PrimitiveFactory &) = default;
             PrimitiveFactory &operator=(PrimitiveFactory &&);
 
-            static std::unique_ptr<Math::IPrimitive> createSphere(Math::Point3D &origin,
+            static std::unique_ptr<math::IPrimitive> createSphere(math::Point3D &origin,
                                                                   double radius);
-            static std::unique_ptr<Math::IPrimitive> createPlane(Math::Point3D &origin,
-                                                                 Math::Axis axis);
+            static std::unique_ptr<math::IPrimitive> createPlane(math::Point3D &origin,
+                                                                 math::Axis axis);
 
         private:
     };
-} // namespace RayTracer
+} // namespace raytracer

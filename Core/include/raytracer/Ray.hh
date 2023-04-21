@@ -10,13 +10,13 @@
 #include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
 
-namespace RayTracer
+namespace raytracer
 {
     class Ray
     {
         public:
             Ray() = default;
-            Ray(Math::Point3D corigin, Math::Vector3D cdirection);
+            Ray(math::Point3D corigin, math::Vector3D cdirection);
             Ray(const Ray &) = default;
             Ray(Ray &&) = default;
             ~Ray() = default;
@@ -24,7 +24,7 @@ namespace RayTracer
             Ray &operator=(const Ray &) = default;
             Ray &operator=(Ray &&);
 
-            Math::Point3D m_origin{};
-            Math::Vector3D m_direction{};
+            math::Point3D m_origin{};
+            math::Vector3D m_direction{};
     };
-} // namespace RayTracer
+} // namespace raytracer
