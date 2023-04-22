@@ -16,8 +16,8 @@
 
 const std::string_view SPHERE_LIB = "./plugins/raytracer_sphere.so";
 const std::string_view PLANE_LIB = "./plugins/raytracer_plane.so";
-const std::string_view LOAD_METHOD = "entry_point_primitive";
-const std::string_view ERROR_CANNOT_LOAD = "RayTracer: Unable to load library.";
+const std::string_view LOAD_PRIMITIVE_METHOD = "entry_point_primitive";
+const std::string_view ERROR_PRIMITIVE_CANNOT_LOAD = "RayTracer: Unable to load library.";
 const std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";
 
 namespace raytracer

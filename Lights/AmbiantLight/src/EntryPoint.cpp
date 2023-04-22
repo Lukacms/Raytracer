@@ -5,13 +5,14 @@
 ** EntryPoint
 */
 
-#include <AmbiantLight.hh>
+#include <raytracer/math/Point3D.hh>
 #include <memory>
+#include <AmbiantLight.hh>
 
 extern "C" { // NOLINT
 
-std::unique_ptr<light::ILight> entry_point_light(math::Point3D position) // NOLINT
-{
-    return nullptr;
-};
+    std::unique_ptr<light::ILight> entry_point_light(math::Point3D &position) // NOLINT
+    {
+        return std::make_unique<light::AmbientLight>(position);
+    };
 }

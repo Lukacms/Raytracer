@@ -5,8 +5,9 @@
 ** Plane
 */
 
-#include <Plane.hh>
+#include <memory>
 #include <raytracer/math/Vector3D.hh>
+#include <Plane.hh>
 
 // Constructor & Destructor
 
@@ -23,7 +24,7 @@ math::Plane::Plane(math::Point3D corigin, math::Axis axis)
 
 // Methods
 
-bool math::Plane::hits(raytracer::Ray &ray) const
+bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
 {
     return (this->m_normal.dot(ray.m_direction) == 0);
 }

@@ -130,6 +130,8 @@ add_library(
     Core/src/Ray.cpp
     Core/src/factory/PrimitiveFactory.cpp
     Core/src/factory/AFactory.cpp
+    Core/src/factory/LightFactory.cpp
+    Core/src/ALight.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
@@ -141,6 +143,16 @@ set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
 add_executable(
     raytracer
     Core/src/main.cpp
+    Core/src/math/APrimitive.cpp
+    Core/src/math/Vector3D.cpp
+    Core/src/math/Point3D.cpp
+    Core/src/Canva.cpp
+    Core/src/Camera.cpp
+    Core/src/Ray.cpp
+    Core/src/factory/PrimitiveFactory.cpp
+    Core/src/factory/AFactory.cpp
+    Core/src/factory/LightFactory.cpp
+    Core/src/ALight.cpp
     )
 
 # rules for raytracer project
