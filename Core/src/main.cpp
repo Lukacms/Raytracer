@@ -24,10 +24,10 @@
 
 int main()
 {
-    math::Point3D point1{0, 0, 0.1};
+    math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
     math::Point3D point3{-0.5, -0.5, 0};
-    math::Point3D point4{1, 1, 0.5};
+    math::Point3D point4{2, 0, 1};
     raytracer::Canva canva{point3};
     // Set up camera
     raytracer::Camera camera(point1, canva);

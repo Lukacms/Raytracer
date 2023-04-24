@@ -5,10 +5,10 @@
 ** AmbiantLight
 */
 
-#include <raytracer/math/Point3D.hh>
-#include <raytracer/Ray.hh>
 #include <AmbiantLight.hh>
 #include <iostream>
+#include <raytracer/Ray.hh>
+#include <raytracer/math/Point3D.hh>
 
 // Constructor & Destructor
 
@@ -21,11 +21,17 @@ light::AmbientLight::AmbientLight(math::Point3D &position)
 
 Color light::AmbientLight::lighten(HitInfos &infos, Color color)
 {
-    math::Vector3D light{infos.point_on_primitive.getX() - this->m_position.getX(), infos.point_on_primitive.getY() - this->m_position.getY(), infos.point_on_primitive.getZ() - this->m_position.getZ()};
-    double rho = infos.normal.dot(light);
+    math::Vector3D light{this->m_position.getX() - infos.point.getX(),
+                         this->m_position.getY() - infos.point.getY(),
+                         this->m_position.getZ() - infos.point.getZ()};
+    double rho = light.dot(infos.normal);
 
-    color.red *= rho;
-    color.green *= rho;
-    color.blue *= rho;
+    if (rho <= 0)
+        return Color{0, 0, 0};
+    // if (rho > 0 && rho <= 1) {
+        color.red *= rho;
+        color.green *= rho;
+        color.blue *= rho;
+    // }
     return color;
 }

@@ -13,12 +13,6 @@
 constexpr int SUCCESS = 0;
 constexpr int FAILURE = 84;
 
-enum class Solutions {
-    ZERO,
-    ONE,
-    TWO
-};
-
 struct Color {
         int red;
         int green;
@@ -26,7 +20,7 @@ struct Color {
 };
 
 struct HitInfos {
-    Solutions is_solution;
-    math::Point3D point_on_primitive;
+    bool is_solution;
+    math::Point3D point;
     math::Vector3D normal;
 };
