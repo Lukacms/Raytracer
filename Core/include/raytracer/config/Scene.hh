@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include "raytracer/ILight.hh"
-#include "raytracer/math/IPrimitive.hh"
 #include <memory>
+#include <raytracer/ILight.hh>
+#include <raytracer/math/IPrimitive.hh>
 #include <vector>
 
 namespace raytracer

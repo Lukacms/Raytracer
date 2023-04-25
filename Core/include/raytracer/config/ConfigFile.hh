@@ -8,9 +8,9 @@
 #pragma once
 
 #include <exception>
+#include <raytracer/config/Scene.hh>
 #include <string>
 #include <string_view>
-#include <utility>
 
 /* utils to get the file */
 constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/config/"};
@@ -25,7 +25,7 @@ namespace raytracer
     {
         public:
             // ctor / dtors
-            ConfigFile() = default;
+            ConfigFile(std::string pfilepath);
             ConfigFile(ConfigFile const &to_copy) = default;
             ConfigFile(ConfigFile &&to_move) = default;
             ~ConfigFile() = default;
@@ -39,8 +39,7 @@ namespace raytracer
             class ConfigException : public std::exception
             {
                 public:
-                    ConfigException(std::string pexcep) : excep{std::move(pexcep)} {}
-
+                    ConfigException(std::string pexcep);
                     ConfigException(ConfigException const &to_copy) = default;
                     ConfigException(ConfigException &&to_move) = default;
                     ~ConfigException() override = default;
@@ -54,5 +53,10 @@ namespace raytracer
             };
 
         private:
+            // attributes
+            std::string filepath{};
+            raytracer::Scene scene{};
+
+            // private methods
     };
 } // namespace raytracer
