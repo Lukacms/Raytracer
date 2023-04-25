@@ -162,6 +162,7 @@ target_link_libraries(
     raytracer-interface
     sfml-graphics
     sfml-window
+    fmt
     config++ # library for libconfig++ => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
