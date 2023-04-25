@@ -13,6 +13,7 @@ project(raytracer)
 
 # change library prefix to none
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
 # for library compilation => shared libraries of primitives, lights etc
@@ -130,6 +131,8 @@ add_library(
     Core/src/Ray.cpp
     Core/src/factory/PrimitiveFactory.cpp
     Core/src/factory/AFactory.cpp
+    Core/src/config/ConfigFile.cpp
+    Core/src/config/ConfigException.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
@@ -146,6 +149,8 @@ FetchContent_Declare(
     GIT_TAG 4f13b7f5152427b5e511a09617ca2d9ff63f7800 # last version available
     )
 FetchContent_MakeAvailable(config++)
+
+message("Finished loading library")
 
 # adding executables
 add_executable(

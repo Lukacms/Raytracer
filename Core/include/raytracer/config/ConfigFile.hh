@@ -8,6 +8,7 @@
 #pragma once
 
 #include <exception>
+#include <libconfig.h++>
 #include <raytracer/config/Scene.hh>
 #include <string>
 #include <string_view>
@@ -26,12 +27,12 @@ namespace raytracer
         public:
             // ctor / dtors
             ConfigFile(std::string pfilepath);
-            ConfigFile(ConfigFile const &to_copy) = default;
-            ConfigFile(ConfigFile &&to_move) = default;
+            ConfigFile(ConfigFile const &to_copy);
+            ConfigFile(ConfigFile &&to_move);
             ~ConfigFile() = default;
             // operators override
-            ConfigFile &operator=(ConfigFile const &to_copy) = default;
-            ConfigFile &operator=(ConfigFile &&to_move) = default;
+            ConfigFile &operator=(ConfigFile const &to_copy);
+            ConfigFile &operator=(ConfigFile &&to_move);
 
             // methods
             void parse();
@@ -57,6 +58,8 @@ namespace raytracer
             // attributes
             std::string filepath{};
             raytracer::Scene scene{};
+            // libConfig
+            libconfig::Config config{};
 
             // private methods
             std::string getFullPath();
