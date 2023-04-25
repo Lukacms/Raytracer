@@ -9,4 +9,12 @@
 #include <string>
 
 // ctor and dtor for class
-raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pfilepath)} {}
+raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pfilepath)}
+{
+    this->getFullPath();
+}
+
+void raytracer::ConfigFile::parse()
+{
+    // TODO; implement method
+}

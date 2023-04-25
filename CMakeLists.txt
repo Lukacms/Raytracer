@@ -136,6 +136,16 @@ target_include_directories(raytracer-core PUBLIC include)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
 
+# make sure libconfig++ is installed
+message("Loading LibConfig++")
+include(FetchContent)
+
+FetchContent_Declare(
+    config++
+    GIT_REPOSITORY https://github.com/hyperrealm/libconfig
+    GIT_TAG 4f13b7f5152427b5e511a09617ca2d9ff63f7800 # last version available
+    )
+FetchContent_MakeAvailable(config++)
 
 # adding executables
 add_executable(
