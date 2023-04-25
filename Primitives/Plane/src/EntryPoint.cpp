@@ -5,6 +5,8 @@
 ** EntryPoint
 */
 
+#pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
+
 #include <Plane.hh>
 #include <memory>
 #include <raytracer/math/Point3D.hh>

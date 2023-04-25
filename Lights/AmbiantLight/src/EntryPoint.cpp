@@ -5,6 +5,8 @@
 ** EntryPoint
 */
 
+#pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
+
 #include <AmbiantLight.hh>
 #include <memory>
 
