@@ -18,7 +18,7 @@ namespace light
     {
         public:
             AmbientLight() = default;
-            AmbientLight(math::Point3D &position);
+            AmbientLight(math::Point3D &position, double coefficient);
             AmbientLight(const AmbientLight&) = default;
             AmbientLight(AmbientLight &&) = default;
             ~AmbientLight() override = default;
@@ -28,5 +28,6 @@ namespace light
 
             Color lighten(HitInfos &infos, Color color) final;
         private:
+            double m_coefficient;
     };
 } // namespace light

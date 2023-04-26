@@ -14,7 +14,8 @@
 #include <raytracer/math/Point3D.hh>
 
 const std::string_view AMBIANT_LIB = "./plugins/raytracer_ambiant_light.so";
-const std::string_view DIRECTIONNAL_LIB = "./plugins/raytracer_directionnal_light.so";
+const std::string_view POINT_LIB = "./plugins/raytracer_point_light.so";
+const std::string_view DIRECTIONAL_LIB = "./plugins/raytracer_directional_light.so";
 const std::string_view LOAD_LIGHT_METHOD = "entry_point_light";
 const std::string_view ERROR_LIGHT_CANNOT_LOAD = "RayTracer: Unable to load library.";
 const std::string_view ERROR_NOT_LIGHT = "RayTracer: Not a light library.";
@@ -33,6 +34,10 @@ namespace raytracer
             LightFactory &operator=(LightFactory &&);
 
             static std::unique_ptr<light::ILight> createAmbiant(math::Point3D &origin);
+            static std::unique_ptr<light::ILight> createAmbiant(math::Point3D &origin,
+                                                                double coefficient);
+            static std::unique_ptr<light::ILight> createDirectional(math::Vector3D &direction);
+            static std::unique_ptr<light::ILight> createPoint(math::Point3D &origin);
 
         private:
     };

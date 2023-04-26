@@ -12,26 +12,18 @@
 
 // Constructor & Destructor
 
-light::AmbientLight::AmbientLight(math::Point3D &position)
+light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
 {
     this->m_position = position;
+    this->m_coefficient = coefficient;
 }
 
 // Methods
 
 Color light::AmbientLight::lighten(HitInfos &infos, Color color)
 {
-    math::Vector3D light{this->m_position.getX() - infos.point.getX(),
-                         this->m_position.getY() - infos.point.getY(),
-                         this->m_position.getZ() - infos.point.getZ()};
-    double rho = light.dot(infos.normal);
-
-    if (rho <= 0)
-        return Color{0, 0, 0};
-    // if (rho > 0 && rho <= 1) {
-        color.red *= rho;
-        color.green *= rho;
-        color.blue *= rho;
-    // }
+    color.red *= this->m_coefficient;
+    color.green *= this->m_coefficient;
+    color.blue *= this->m_coefficient;
     return color;
 }

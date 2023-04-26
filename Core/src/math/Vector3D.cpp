@@ -78,8 +78,8 @@ math::Vector3D &math::Vector3D::operator/=(math::Vector3D &vector)
 
 math::Vector3D math::Vector3D::operator*(double coefficient) const
 {
-    return math::Vector3D{this->m_x * coefficient, this->m_y + coefficient,
-                          this->m_z + coefficient};
+    return math::Vector3D{this->m_x * coefficient, this->m_y * coefficient,
+                          this->m_z * coefficient};
 }
 
 math::Vector3D &math::Vector3D::operator*=(double coefficient)
