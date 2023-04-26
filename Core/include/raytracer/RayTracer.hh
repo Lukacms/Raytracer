@@ -17,6 +17,7 @@ constexpr int FAILURE = 84;
 constexpr std::string_view HEADER_MSG{"Raytracer: "};
 
 struct Color {
+    public:
         int red;
         int green;
         int blue;

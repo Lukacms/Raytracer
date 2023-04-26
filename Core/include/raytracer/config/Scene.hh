@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <raytracer/Camera.hh>
 #include <raytracer/ILight.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <vector>
@@ -19,6 +20,8 @@ namespace raytracer
      * NOTE: may need to associate a few methods
      */
     struct Scene {
+        public:
+            raytracer::Camera camera{};
             std::vector<std::unique_ptr<light::ILight>> lights{};
             std::vector<std::unique_ptr<math::IPrimitive>> primitives{};
     };

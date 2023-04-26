@@ -28,12 +28,12 @@ namespace raytracer
         public:
             // ctor / dtors
             ConfigFile(std::string pfilepath);
-            ConfigFile(ConfigFile const &to_copy);
-            ConfigFile(ConfigFile &&to_move);
+            ConfigFile(ConfigFile const &to_copy) = default;
+            ConfigFile(ConfigFile &&to_move) = default;
             ~ConfigFile() = default;
             // operators override
-            ConfigFile &operator=(ConfigFile const &to_copy);
-            ConfigFile &operator=(ConfigFile &&to_move);
+            ConfigFile &operator=(ConfigFile const &to_copy) = default;
+            ConfigFile &operator=(ConfigFile &&to_move) = default;
 
             // methods
             void parse();
