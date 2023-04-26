@@ -72,7 +72,7 @@ int main()
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up Core
-    raytracer::Raytracer core{camera, raytracer::Resolution{3840, 2160}};
+    raytracer::Raytracer core{camera, raytracer::Resolution{8000, 8000}};
     // Set up sphere
     std::unique_ptr<math::IPrimitive> sphere =
         raytracer::PrimitiveFactory::createSphere(point2, 0.5);

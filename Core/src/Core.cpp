@@ -17,8 +17,10 @@
 raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res)
     : m_camera(camera), m_resolution(res)
 {
-    m_resolution.x = 1 / m_resolution.x;
-    m_resolution.y = 1 / m_resolution.y;
+    m_resolution.x_value = 1.0 / res.x;
+    m_resolution.y_value = 1.0 / res.y;
+    std::cout << m_resolution.x_value << '\n';
+    std::cout << m_resolution.y_value << '\n';
 }
 
 void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)
@@ -69,9 +71,10 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray)
 void raytracer::Raytracer::launch()
 {
     std::cout << m_resolution.y << m_resolution.x << '\n';
-    for (double y_axes = m_resolution.y; y_axes <= 1; y_axes += m_resolution.y) {
-        for (double x_axes = m_resolution.x; x_axes <= 1; x_axes += m_resolution.x) {
-            raytracer::Ray ray = m_camera.ray(x_axes, y_axes);
+    for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
+        for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
+            raytracer::Ray ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
+                                              static_cast<double>(y_axes) * m_resolution.y_value);
             int closest = get_closest(ray);
             m_result.emplace_back(Color{0, 0, 0});
             if (closest >= 0) {
