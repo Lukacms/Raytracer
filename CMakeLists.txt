@@ -1,5 +1,5 @@
 ##
-## CMakeLists: Arcade / Arcade
+## CMakeLists: Raytracer / Raytracer
 ##
 
 cmake_minimum_required(VERSION 3.16)
@@ -139,16 +139,17 @@ target_include_directories(raytracer-core PUBLIC include)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
 
-# make sure libconfig++ is installed
-message("Loading LibConfig++")
+# make sure nlohmann_json is installed
+message("Loading nlohmann_json")
+
+set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
+
 include(FetchContent)
 
-FetchContent_Declare(
-    config++
-    GIT_REPOSITORY https://github.com/hyperrealm/libconfig
-    GIT_TAG 4f13b7f5152427b5e511a09617ca2d9ff63f7800 # last version available
-    )
-FetchContent_MakeAvailable(config++)
+FetchContent_Declare(json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+    DOWNLOAD_EXTRACT_TIMESTAMP true)
+FetchContent_MakeAvailable(json)
 
 message("Finished loading library")
 
@@ -160,12 +161,12 @@ add_executable(
 
 # rules for raytracer project
 target_link_libraries(
-    raytracer
+    raytracer PRIVATE
     raytracer-core
     raytracer-interface
     sfml-graphics
     sfml-window
-    config++ # library for libconfig++ => parse configuration files
+    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

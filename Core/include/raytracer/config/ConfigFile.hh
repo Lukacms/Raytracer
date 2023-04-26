@@ -8,7 +8,8 @@
 #pragma once
 
 #include <exception>
-#include <libconfig.h++>
+#include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 #include <raytracer/config/Scene.hh>
 #include <string>
 #include <string_view>
@@ -58,8 +59,8 @@ namespace raytracer
             // attributes
             std::string filepath{};
             raytracer::Scene scene{};
-            // libConfig
-            libconfig::Config config{};
+            // nlohmann_json
+            nlohmann::json config{};
 
             // private methods
             std::string getFullPath();

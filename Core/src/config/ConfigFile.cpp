@@ -12,7 +12,7 @@
 
 raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pfilepath)}
 {
-    this->getFullPath();
+    this->filepath = this->getFullPath();
 }
 
 // can't copy either the scene (contains unique ptrs) and the config (don't have a copy constructor)
@@ -43,7 +43,17 @@ raytracer::ConfigFile &raytracer::ConfigFile::operator=(ConfigFile &&to_move)
 
 /* methods */
 
+std::string raytracer::ConfigFile::getFullPath()
+{
+    std::string fullpath{};
+
+    if (this->filepath.find(FULLPATH_INDIC) != std::string::npos)
+        return this->filepath;
+    fullpath = DEFAULT_CONFIG_PATH.data() + this->filepath;
+    return fullpath;
+}
+
 void raytracer::ConfigFile::parse()
 {
-    // TODO; implement method
+    // open and read the file given by the filepath
 }
