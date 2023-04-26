@@ -14,9 +14,14 @@
 #include <string>
 #include <string_view>
 
+using njson = nlohmann::json;
+
 /* utils to get the file */
 constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/config/"};
 constexpr char FULLPATH_INDIC{'/'};
+
+/* exception messages */
+constexpr std::string_view INVALID_FILE{"File could not be open."};
 
 namespace raytracer
 {
@@ -60,9 +65,10 @@ namespace raytracer
             std::string filepath{};
             raytracer::Scene scene{};
             // nlohmann_json
-            nlohmann::json config{};
+            njson config{};
 
             // private methods
             std::string getFullPath();
+            void initConfig();
     };
 } // namespace raytracer

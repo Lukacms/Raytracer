@@ -5,6 +5,7 @@
 ** ConfigFile
 */
 
+#include <fstream>
 #include <raytracer/config/ConfigFile.hh>
 #include <string>
 
@@ -27,7 +28,24 @@ std::string raytracer::ConfigFile::getFullPath()
     return fullpath;
 }
 
+void raytracer::ConfigFile::initConfig()
+{
+    std::ifstream ifstream{this->filepath};
+
+    if (!ifstream.is_open())
+        throw ConfigFile::ConfigException(INVALID_FILE.data());
+    try {
+        this->config = njson::parse(ifstream);
+    } catch (njson::parse_error &e) {
+        throw ConfigFile::ConfigException(std::string{e.what()});
+    }
+}
+
 void raytracer::ConfigFile::parse()
 {
-    // open and read the file given by the filepath
+    try {
+        this->initConfig();
+    } catch (ConfigFile::ConfigException &e) {
+        throw e;
+    }
 }

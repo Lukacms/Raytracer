@@ -22,11 +22,6 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/plugins)
 # include directories
 include_directories(Core/include/)
 
-# add a subdirectory to compile, to uncomment when CMakeLists will be complete
-# directories will need to change
-add_subdirectory(Primitives)
-add_subdirectory(Lights)
-
 # Warning flags
 set(GCC_WARNING_FLAGS
     -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches
@@ -50,7 +45,7 @@ set(CLANG_WARNING_FLAGS
     -Wno-weak-vtables)
 
 if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 13.0.0)
-  set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
+    set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
 endif()
 
 set(WARNING_FLAGS
@@ -71,6 +66,32 @@ set(WARNING_FLAGS
     -Weffc++
     -Wno-padded
     -Wno-ctad-maybe-unsupported)
+
+# add a subdirectory to compile, to uncomment when CMakeLists will be complete
+# directories will need to change
+add_subdirectory(Primitives)
+add_subdirectory(Lights)
+
+# set colors for the messages because why not ?
+if(NOT WIN32)
+  string(ASCII 27 Esc)
+  set(ColourReset "${Esc}[m")
+  set(ColourBold  "${Esc}[1m")
+  set(Red         "${Esc}[31m")
+  set(Green       "${Esc}[32m")
+  set(Yellow      "${Esc}[33m")
+  set(Blue        "${Esc}[34m")
+  set(Magenta     "${Esc}[35m")
+  set(Cyan        "${Esc}[36m")
+  set(White       "${Esc}[37m")
+  set(BoldRed     "${Esc}[1;31m")
+  set(BoldGreen   "${Esc}[1;32m")
+  set(BoldYellow  "${Esc}[1;33m")
+  set(BoldBlue    "${Esc}[1;34m")
+  set(BoldMagenta "${Esc}[1;35m")
+  set(BoldCyan    "${Esc}[1;36m")
+  set(BoldWhite   "${Esc}[1;37m")
+endif()
 
 # set different flags
 set(CMAKE_BUILD_TYPE
@@ -112,7 +133,7 @@ else()
   error("${CMAKE_CXX_COMPILER_ID}: Unsupported compiler.")
 endif()
 
-message("Warning flags: ${WARNING_FLAGS}")
+message("Warning flags: ${Cyan} ${WARNING_FLAGS}${ColourReset}")
 
 add_library(raytracer-interface INTERFACE)
 
@@ -140,7 +161,7 @@ set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
 
 # make sure nlohmann_json is installed
-message("Loading nlohmann_json")
+message("${BoldGreen}Loading nlohmann_json${ColourReset}")
 
 set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
 
@@ -151,7 +172,7 @@ FetchContent_Declare(json
     DOWNLOAD_EXTRACT_TIMESTAMP true)
 FetchContent_MakeAvailable(json)
 
-message("Finished loading library")
+message("${BoldGreen}Finished loading library${ColourReset}")
 
 # adding executables
 add_executable(
