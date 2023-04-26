@@ -27,6 +27,7 @@ namespace raytracer
             Camera &operator=(Camera &&);
 
             raytracer::Ray ray(double canva_x, double canva_y);
+            [[nodiscard]] math::Point3D get_origin() const;
 
         private:
             math::Point3D m_origin{0, 0, -1};

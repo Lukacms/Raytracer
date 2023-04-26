@@ -5,6 +5,7 @@
 ** Camera
 */
 
+#include "raytracer/math/Point3D.hh"
 #include <raytracer/Camera.hh>
 #include <raytracer/Ray.hh>
 
@@ -34,4 +35,9 @@ raytracer::Ray raytracer::Camera::ray(double canva_x, double canva_y)
     double pos_z = new_point.getZ() - this->m_origin.getZ();
 
     return raytracer::Ray{new_point, math::Vector3D{pos_x, pos_y, pos_z}};
+}
+
+[[nodiscard]] math::Point3D raytracer::Camera::get_origin() const
+{
+    return m_origin;
 }

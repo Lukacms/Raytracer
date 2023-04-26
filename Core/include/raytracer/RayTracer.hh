@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <raytracer/math/Vector3D.hh>
+#include <raytracer/math/Point3D.hh>
 #include <string_view>
 
 /* return codes */
@@ -21,4 +23,10 @@ struct Color {
         int red;
         int green;
         int blue;
+};
+
+struct HitInfos {
+    bool is_solution;
+    math::Point3D point;
+    math::Vector3D normal;
 };

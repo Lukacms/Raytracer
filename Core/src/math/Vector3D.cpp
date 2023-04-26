@@ -6,6 +6,7 @@
 */
 
 #include <cmath>
+#include <math.h>
 #include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
@@ -77,8 +78,8 @@ math::Vector3D &math::Vector3D::operator/=(math::Vector3D &vector)
 
 math::Vector3D math::Vector3D::operator*(double coefficient) const
 {
-    return math::Vector3D{this->m_x * coefficient, this->m_y + coefficient,
-                          this->m_z + coefficient};
+    return math::Vector3D{this->m_x * coefficient, this->m_y * coefficient,
+                          this->m_z * coefficient};
 }
 
 math::Vector3D &math::Vector3D::operator*=(double coefficient)
@@ -107,14 +108,12 @@ math::Vector3D &math::Vector3D::operator/=(double coefficient)
 
 double math::Vector3D::length() const
 {
-    return sqrt(std::pow(m_x, 2) + std::pow(m_y, 2) + std::pow(m_z, 2));
+    return sqrt(this->dot(*this));
 }
 
 double math::Vector3D::dot(const math::Vector3D &vector) const
 {
-    math::Vector3D new_vector = *this + vector;
-    return (1 / 2) *
-        (std::pow(new_vector.length(), 2) - pow(this->length(), 2) - pow(vector.length(), 2));
+    return this->getX() * vector.getX() + this->getY() * vector.getY() + this->getZ() * vector.getZ();
 }
 
 double math::Vector3D::getX() const

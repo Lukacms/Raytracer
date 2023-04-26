@@ -11,7 +11,6 @@
 
 namespace math
 {
-
     class Point3D
     {
         public:

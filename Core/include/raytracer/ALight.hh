@@ -28,7 +28,7 @@ namespace light
             void setLightPosition(math::Point3D position) final;
             [[nodiscard]] math::Point3D &getLightPosition() final;
 
-        private:
+        protected:
             math::Point3D m_position{};
     };
 } // namespace light
