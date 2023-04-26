@@ -29,8 +29,8 @@ Color light::PointLight::lighten(HitInfos &infos, Color color)
 
     if (rho <= 0)
         return Color{0, 0, 0};
-    color.red *= rho;
-    color.green *= rho;
-    color.blue *= rho;
+    color.red *= static_cast<int>(rho);
+    color.green *= static_cast<int>(rho);
+    color.blue *= static_cast<int>(rho);
     return color;
 }

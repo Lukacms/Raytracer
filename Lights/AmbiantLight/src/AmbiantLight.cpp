@@ -20,10 +20,10 @@ light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
 
 // Methods
 
-Color light::AmbientLight::lighten(HitInfos &infos, Color color)
+Color light::AmbientLight::lighten(HitInfos & /* infos */, Color color)
 {
-    color.red *= this->m_coefficient;
-    color.green *= this->m_coefficient;
-    color.blue *= this->m_coefficient;
+    color.red *= static_cast<int>(this->m_coefficient);
+    color.green *= static_cast<int>(this->m_coefficient);
+    color.blue *= static_cast<int>(this->m_coefficient);
     return color;
 }

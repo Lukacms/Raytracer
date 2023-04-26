@@ -5,14 +5,16 @@
 ** EntryPoint
 */
 
-#include <raytracer/math/Point3D.hh>
-#include <memory>
+#pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
+
 #include <PointLight.hh>
+#include <memory>
+#include <raytracer/math/Point3D.hh>
 
 extern "C" { // NOLINT
 
-    std::unique_ptr<light::ILight> entry_point_light(math::Point3D &position) // NOLINT
-    {
-        return std::make_unique<light::PointLight>(position);
-    };
+std::unique_ptr<light::ILight> entry_point_light(math::Point3D &position) // NOLINT
+{
+    return std::make_unique<light::PointLight>(position);
+};
 }
