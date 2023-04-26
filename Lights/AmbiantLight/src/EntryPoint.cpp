@@ -5,9 +5,12 @@
 ** EntryPoint
 */
 
-#include <raytracer/math/Point3D.hh>
+#pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
+
+#include <AmbiantLight.hh>
 #include <memory>
 #include <AmbiantLight.hh>
+#include <raytracer/math/Point3D.hh>
 
 extern "C" { // NOLINT
 
