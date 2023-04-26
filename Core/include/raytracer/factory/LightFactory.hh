@@ -33,7 +33,6 @@ namespace raytracer
             LightFactory &operator=(const LightFactory &) = default;
             LightFactory &operator=(LightFactory &&);
 
-            static std::unique_ptr<light::ILight> createAmbiant(math::Point3D &origin);
             static std::unique_ptr<light::ILight> createAmbiant(math::Point3D &origin,
                                                                 double coefficient);
             static std::unique_ptr<light::ILight> createDirectional(math::Vector3D &direction);

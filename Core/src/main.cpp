@@ -83,7 +83,8 @@ int main()
     std::unique_ptr<math::IPrimitive> sphere3 =
         raytracer::PrimitiveFactory::createSphere(point6, 0.5);
     sphere3->setColor(0, 255, 0);
-    std::unique_ptr<light::ILight> light = raytracer::LightFactory::createAmbiant(point4);
+    std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
+    // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createAmbiant(point4, 55.00);
     core.add_object(std::move(sphere));
     core.add_object(std::move(sphere2));
     core.add_object(std::move(sphere3));
