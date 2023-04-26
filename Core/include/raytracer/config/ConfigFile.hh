@@ -9,7 +9,6 @@
 
 #include <exception>
 #include <nlohmann/json.hpp>
-#include <nlohmann/json_fwd.hpp>
 #include <raytracer/config/Scene.hh>
 #include <string>
 #include <string_view>

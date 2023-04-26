@@ -5,7 +5,6 @@
 ** main
 */
 
-#include "raytracer/math/APrimitive.hh"
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
@@ -14,15 +13,23 @@
 #include <raytracer/Core.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/config/ConfigFile.hh>
 #include <raytracer/factory/LightFactory.hh>
 #include <raytracer/factory/PrimitiveFactory.hh>
+#include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 
-// int main(int argc, const char *argv[])
-// {
-//     return SUCCESS;
-// }
+int main(int argc, const char *argv[])
+{
+
+    if (argc != 2) {
+        std::cout << HELP_MSG;
+        return FAILURE;
+    }
+    raytracer::ConfigFile config{argv[1]};
+    return SUCCESS;
+}
 
 /*
 int main()
@@ -60,7 +67,7 @@ int main()
 }
 */
 
-int main()
+/* int main()
 {
     math::Point3D point1{0, 0, 1};
     math::Point3D point5{-2, 0, -3};
@@ -90,4 +97,4 @@ int main()
     core.add_object(std::move(sphere3));
     core.add_lights(std::move(light));
     core.launch();
-}
+} */

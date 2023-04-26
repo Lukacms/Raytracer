@@ -57,6 +57,7 @@ set(WARNING_FLAGS
     -Wold-style-cast
     -Wcast-align
     -Wunused
+    -Wno-covered-switch-default
     -Woverloaded-virtual
     -Wpedantic
     -Wconversion
@@ -182,18 +183,6 @@ message("${BoldGreen}Finished loading library${ColourReset}")
 add_executable(
     raytracer
     Core/src/main.cpp
-    Core/src/math/APrimitive.cpp
-    Core/src/math/Vector3D.cpp
-    Core/src/math/Point3D.cpp
-    Core/src/Canva.cpp
-    Core/src/Camera.cpp
-    Core/src/Ray.cpp
-    Core/src/factory/PrimitiveFactory.cpp
-    Core/src/factory/AFactory.cpp
-    Core/src/factory/LightFactory.cpp
-    Core/src/ALight.cpp
-    Core/src/Core.cpp
-    Core/src/PpmCreator.cpp
     )
 
 # rules for raytracer project
