@@ -132,6 +132,8 @@ add_library(
     Core/src/factory/AFactory.cpp
     Core/src/factory/LightFactory.cpp
     Core/src/ALight.cpp
+    Core/src/Core.cpp
+    Core/src/PpmCreator.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
@@ -153,6 +155,8 @@ add_executable(
     Core/src/factory/AFactory.cpp
     Core/src/factory/LightFactory.cpp
     Core/src/ALight.cpp
+    Core/src/Core.cpp
+    Core/src/PpmCreator.cpp
     )
 
 # rules for raytracer project
@@ -162,6 +166,7 @@ target_link_libraries(
     raytracer-interface
     sfml-graphics
     sfml-window
+    fmt
     config++ # library for libconfig++ => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
