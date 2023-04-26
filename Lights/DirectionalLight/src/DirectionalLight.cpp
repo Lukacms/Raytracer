@@ -5,11 +5,11 @@
 ** DirectionalLight
 */
 
-#include <raytracer/math/Vector3D.hh>
 #include <DirectionalLight.hh>
 #include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
+#include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
 
@@ -28,8 +28,8 @@ Color light::DirectionalLight::lighten(HitInfos &infos, Color color)
 
     if (rho < 0)
         return Color{0, 0, 0};
-    color.red *= rho;
-    color.green *= rho;
-    color.blue *= rho;
+    color.red *= static_cast<int>(rho);
+    color.green *= static_cast<int>(rho);
+    color.blue *= static_cast<int>(rho);
     return color;
 }

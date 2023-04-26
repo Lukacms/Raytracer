@@ -35,7 +35,7 @@ void PpmCreator::create_ppm()
         if (m_name.size() <= 4 || m_name.substr(m_name.size() - 4) != ".ppm")
             throw;
     } catch (std::out_of_range &e) {
-        throw;
+        throw e;
     }
     file.open(m_name);
     std::string res{"P3\n" + std::to_string(m_res.x) + " " + std::to_string(m_res.y) + "\n255\n"};
