@@ -14,19 +14,19 @@
 #include <raytracer/Core.hh>
 #include <utility>
 
-raytracer::Core::Core(raytracer::Camera &camera, const raytracer::Resolution &res)
+raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res)
     : m_camera(camera), m_resolution(res)
 {
     m_resolution.x = 1 / m_resolution.x;
     m_resolution.y = 1 / m_resolution.y;
 }
 
-void raytracer::Core::add_lights(std::unique_ptr<light::ILight> &&light)
+void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)
 {
     m_lights.push_back(std::move(light));
 }
 
-void raytracer::Core::add_object(std::unique_ptr<math::IPrimitive> &&object)
+void raytracer::Raytracer::add_object(std::unique_ptr<math::IPrimitive> &&object)
 {
     m_objects.push_back(std::move(object));
 }
@@ -38,7 +38,7 @@ static double get_length(math::Point3D first, math::Point3D second)
                      std::pow(second.getZ() - first.getZ(), 2));
 }
 
-int raytracer::Core::get_closest(raytracer::Ray &ray)
+int raytracer::Raytracer::get_closest(raytracer::Ray &ray)
 {
     int index_closest{-1};
     int index{0};
@@ -66,8 +66,9 @@ int raytracer::Core::get_closest(raytracer::Ray &ray)
     return index_closest;
 }
 
-void raytracer::Core::launch()
+void raytracer::Raytracer::launch()
 {
+    std::cout << m_resolution.y << m_resolution.x << '\n';
     for (double y_axes = m_resolution.y; y_axes <= 1; y_axes += m_resolution.y) {
         for (double x_axes = m_resolution.x; x_axes <= 1; x_axes += m_resolution.x) {
             raytracer::Ray ray = m_camera.ray(x_axes, y_axes);

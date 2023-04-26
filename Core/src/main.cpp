@@ -72,7 +72,7 @@ int main()
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up Core
-    raytracer::Core core{camera};
+    raytracer::Raytracer core{camera, raytracer::Resolution{3840, 2160}};
     // Set up sphere
     std::unique_ptr<math::IPrimitive> sphere =
         raytracer::PrimitiveFactory::createSphere(point2, 0.5);
@@ -84,10 +84,14 @@ int main()
         raytracer::PrimitiveFactory::createSphere(point6, 0.5);
     sphere3->setColor(0, 255, 0);
     std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
+    std::unique_ptr<math::IPrimitive> plan =
+        raytracer::PrimitiveFactory::createPlane(point6, math::Axis{0});
+    plan->setColor(255, 0, 0);
     // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createAmbiant(point4, 55.00);
     core.add_object(std::move(sphere));
     core.add_object(std::move(sphere2));
     core.add_object(std::move(sphere3));
+    // core.add_object(std::move(plan));
     core.add_lights(std::move(light));
     core.launch();
 }

@@ -22,16 +22,16 @@ namespace raytracer
 
     constexpr raytracer::Resolution DEFAULT_RES{800, 800};
 
-    class Core
+    class Raytracer
     {
         public:
-            Core(Core const &to_copy) = delete;
-            Core() = delete;
-            Core(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
-            Core(Core &&to_move) = default;
-            Core &operator=(Core const &to_copy) = delete;
-            Core &operator=(Core &&to_move) = default;
-            ~Core() = default;
+            Raytracer(Raytracer const &to_copy) = delete;
+            Raytracer() = delete;
+            Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
+            Raytracer(Raytracer &&to_move) = default;
+            Raytracer &operator=(Raytracer const &to_copy) = delete;
+            Raytracer &operator=(Raytracer &&to_move) = default;
+            ~Raytracer() = default;
 
             void launch();
             void add_lights(std::unique_ptr<light::ILight> &&light);
