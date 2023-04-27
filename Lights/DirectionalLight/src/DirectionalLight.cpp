@@ -20,14 +20,15 @@ light::DirectionalLight::DirectionalLight(math::Vector3D &direction)
 
 // Methods
 
-Color light::DirectionalLight::lighten(HitInfos &infos, Color color)
+raytracer::Color light::DirectionalLight::lighten(raytracer::HitInfos &infos,
+                                                  raytracer::Color color)
 {
     math::Vector3D tmp_vector = this->m_direction * -1;
     tmp_vector /= tmp_vector.length();
     double rho = tmp_vector.dot(infos.normal);
 
     if (rho < 0)
-        return Color{0, 0, 0};
+        return raytracer::Color{0, 0, 0};
     color.red *= static_cast<int>(rho);
     color.green *= static_cast<int>(rho);
     color.blue *= static_cast<int>(rho);

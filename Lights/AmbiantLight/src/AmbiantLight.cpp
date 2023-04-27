@@ -20,7 +20,8 @@ light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
 
 // Methods
 
-Color light::AmbientLight::lighten(HitInfos & /* infos */, Color color)
+raytracer::Color light::AmbientLight::lighten(raytracer::HitInfos & /* infos */,
+                                              raytracer::Color color)
 {
     color.red *= static_cast<int>(this->m_coefficient);
     color.green *= static_cast<int>(this->m_coefficient);

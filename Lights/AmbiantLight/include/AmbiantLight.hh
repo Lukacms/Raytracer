@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "raytracer/math/Point3D.hh"
 #include <raytracer/ALight.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/math/Point3D.hh>
 
 namespace light
 {

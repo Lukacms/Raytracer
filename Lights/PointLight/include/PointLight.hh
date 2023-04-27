@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include <raytracer/math/Point3D.hh>
+#include <raytracer/ALight.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
-#include <raytracer/ALight.hh>
+#include <raytracer/math/Point3D.hh>
 
 namespace light
 {
@@ -19,14 +19,15 @@ namespace light
         public:
             PointLight() = default;
             PointLight(math::Point3D &position);
-            PointLight(const PointLight&) = default;
+            PointLight(const PointLight &) = default;
             PointLight(PointLight &&) = default;
             ~PointLight() override = default;
 
             PointLight &operator=(const PointLight &) = default;
             PointLight &operator=(PointLight &&);
 
-            Color lighten(HitInfos &infos, Color color) final;
+            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Color color) final;
+
         private:
     };
 } // namespace light

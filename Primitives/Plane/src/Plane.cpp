@@ -24,7 +24,7 @@ math::Plane::Plane(math::Point3D corigin, math::Axis axis)
 
 // Methods
 
-bool math::Plane::hits(raytracer::Ray &ray, HitInfos & /*infos*/) const
+bool math::Plane::hits(raytracer::Ray &ray, raytracer::HitInfos & /*infos*/) const
 {
     return (this->m_normal.dot(ray.m_direction) == 0);
 }

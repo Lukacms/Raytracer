@@ -17,6 +17,22 @@ math::Point3D::Point3D(double c_x, double c_y, double c_z)
     this->m_z = c_z;
 }
 
+/* njson */
+math::Point3D::Point3D(const njson &json)
+{
+    this->m_x = json.at("x");
+    this->m_y = json.at("y");
+    this->m_z = json.at("z");
+}
+
+math::Point3D &math::Point3D::operator=(const njson &json)
+{
+    this->m_x = json.at("x");
+    this->m_y = json.at("y");
+    this->m_z = json.at("z");
+    return *this;
+}
+
 // Operators
 
 math::Point3D math::Point3D::operator+(math::Vector3D &vector) const

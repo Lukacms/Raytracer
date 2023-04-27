@@ -159,6 +159,7 @@ add_library(
     Core/src/PpmCreator.cpp
     Core/src/config/ConfigFile.cpp
     Core/src/config/ConfigException.cpp
+    Core/src/Raytracer.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)

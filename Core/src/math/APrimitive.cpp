@@ -12,6 +12,20 @@
 
 // Constructor & Destructor
 
+/* njson config */
+math::APrimitive::APrimitive(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_color = json.at("color");
+}
+
+math::APrimitive &math::APrimitive::operator=(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_color = json.at("color");
+    return *this;
+}
+
 // Methods
 
 void math::APrimitive::rotate_x(double angle)

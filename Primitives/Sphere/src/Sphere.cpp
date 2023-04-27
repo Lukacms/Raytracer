@@ -22,7 +22,7 @@ math::Sphere::Sphere(math::Point3D corigin, double cradius)
 
 // Methods
 
-bool math::Sphere::hits(raytracer::Ray &ray, HitInfos &infos) const
+bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
 {
     double value_a = pow(ray.m_direction.getX(), 2) + pow(ray.m_direction.getY(), 2) +
         pow(ray.m_direction.getZ(), 2);

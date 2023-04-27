@@ -33,6 +33,13 @@ raytracer::Camera::Camera(const njson &json)
     this->m_canva = json.at("canva");
 }
 
+raytracer::Camera &raytracer::Camera::operator=(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_canva = json.at("canva");
+    return *this;
+}
+
 // Methods
 
 raytracer::Ray raytracer::Camera::ray(double canva_x, double canva_y)
