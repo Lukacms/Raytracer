@@ -76,9 +76,9 @@ void raytracer::Core::launch()
             if (closest >= 0) {
                 m_result[m_result.size() - 1] = m_objects[static_cast<size_t>(closest)]->getColor();
                 m_result[m_result.size() - 1] =
-                    m_lights[0]->lighten(m_max_infos, m_result[m_result.size() - 1]);
+                m_lights[0]->lighten(m_max_infos, m_result[m_result.size() - 1]);
             } else {
-                m_result[m_result.size() - 1] = Color{0, 0, 0};
+                m_result[m_result.size() - 1] = Color{52, 37, 47};
             }
         }
     }
