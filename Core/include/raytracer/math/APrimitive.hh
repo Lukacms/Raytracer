@@ -7,8 +7,11 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
+
+using njson = nlohmann::json;
 
 namespace math
 {
@@ -41,24 +44,31 @@ namespace math
     class APrimitive : public IPrimitive
     {
         public:
+            /* ctor / dtor */
             APrimitive() = default;
             APrimitive(const APrimitive &) = default;
             APrimitive(APrimitive &&) = default;
             ~APrimitive() override = default;
 
+            /* operator overload */
             APrimitive &operator=(const APrimitive &) = default;
-            APrimitive &operator=(APrimitive &&);
+            APrimitive &operator=(APrimitive &&) = default;
 
+            /* needed to load config */
+            APrimitive(const njson &json);
+            APrimitive &operator=(const njson &json);
+
+            /* methods */
             void rotate_x(double angle) final;
             void rotate_y(double angle) final;
             void rotate_z(double angle) final;
             void translate(double t_x, double t_y, double t_z) final;
             // void scale(double t_x, double t_y, double t_z) final;
-            [[nodiscard]] Color getColor() const final;
+            [[nodiscard]] raytracer::Color getColor() const final;
             void setColor(int red, int green, int blue) final;
 
         protected:
             math::Point3D m_origin{};
-            Color m_color{0, 0, 0};
+            raytracer::Color m_color{0, 0, 0};
     };
 } // namespace math

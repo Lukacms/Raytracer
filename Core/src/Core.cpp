@@ -72,7 +72,7 @@ void raytracer::Core::launch()
         for (double x_axes = m_resolution.x; x_axes <= 1; x_axes += m_resolution.x) {
             raytracer::Ray ray = m_camera.ray(x_axes, y_axes);
             int closest = get_closest(ray);
-            m_result.emplace_back(Color{0, 0, 0});
+            m_result.emplace_back(0, 0, 0);
             if (closest >= 0) {
                 m_result[m_result.size() - 1] = m_objects[static_cast<size_t>(closest)]->getColor();
                 m_result[m_result.size() - 1] =

@@ -28,6 +28,11 @@ int main(int argc, const char *argv[])
         return FAILURE;
     }
     raytracer::ConfigFile config{argv[1]};
+    try {
+        config.parse();
+    } catch (raytracer::ConfigFile::ConfigException &e) {
+        std::cout << HEADER_MSG << e.what() << "\n";
+    }
     return SUCCESS;
 }
 

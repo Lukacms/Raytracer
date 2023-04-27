@@ -48,4 +48,5 @@ void raytracer::ConfigFile::parse()
     } catch (ConfigFile::ConfigException &e) {
         throw e;
     }
+    this->scene.camera = this->config.at("camera");
 }

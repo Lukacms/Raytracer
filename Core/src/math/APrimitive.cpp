@@ -86,7 +86,7 @@ void math::APrimitive::translate(double t_x, double t_y, double t_z)
 
 // }
 
-Color math::APrimitive::getColor() const
+raytracer::Color math::APrimitive::getColor() const
 {
     return this->m_color;
 }
