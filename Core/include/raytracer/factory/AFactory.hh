@@ -22,7 +22,7 @@ namespace raytracer
             ~AFactory() = default;
 
             AFactory &operator=(const AFactory &) = default;
-            AFactory &operator=(AFactory &&);
+            AFactory &operator=(AFactory &&) = default;
 
             class FactoryException : public std::exception
             {

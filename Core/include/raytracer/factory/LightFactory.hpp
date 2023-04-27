@@ -7,11 +7,17 @@
 
 #pragma once
 
+#include <dlfcn.h>
 #include <memory>
+#include <nlohmann/json.hpp>
 #include <raytracer/ALight.hh>
+#include <raytracer/ILight.hh>
 #include <raytracer/factory/AFactory.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
+#include <utility>
+
+using njson = nlohmann::json;
 
 const std::string_view AMBIANT_LIB = "./plugins/raytracer_ambiant_light.so";
 const std::string_view POINT_LIB = "./plugins/raytracer_point_light.so";
@@ -33,11 +39,29 @@ namespace raytracer
             LightFactory &operator=(const LightFactory &) = default;
             LightFactory &operator=(LightFactory &&);
 
+            static std::unique_ptr<light::ILight> createLight(njson &json) { return nullptr; }
+
+        private:
+            template <typename... T_values>
+            std::unique_ptr<light::ILight> create(const std::string &path, T_values &&...values)
+            {
+                std::unique_ptr<light::ILight> new_light;
+                void *handle = nullptr;
+
+                if (!(handle = dlopen(path.c_str(), RTLD_LAZY)))
+                    throw raytracer::LightFactory::FactoryException(dlerror());
+                auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(T_values & ...)>(
+                    dlsym(handle, LOAD_LIGHT_METHOD.data()));
+                if (!loader)
+                    throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());
+                if (!(new_light = loader(std::forward<T_values>(values)...)))
+                    throw raytracer::LightFactory::FactoryException(ERROR_NOT_LIGHT.data());
+                return new_light;
+            }
+
             static std::unique_ptr<light::ILight> createAmbiant(math::Point3D &origin,
                                                                 double coefficient);
             static std::unique_ptr<light::ILight> createDirectional(math::Vector3D &direction);
             static std::unique_ptr<light::ILight> createPoint(math::Point3D &origin);
-
-        private:
     };
 } // namespace raytracer

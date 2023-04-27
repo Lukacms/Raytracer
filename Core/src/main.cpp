@@ -14,8 +14,8 @@
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/config/ConfigFile.hh>
-#include <raytracer/factory/LightFactory.hh>
-#include <raytracer/factory/PrimitiveFactory.hh>
+#include <raytracer/factory/LightFactory.hpp>
+#include <raytracer/factory/PrimitiveFactory.hpp>
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
     }
     raytracer::ConfigFile config{argv[1]};
     try {
-        config.parse();
+        config.parse(); // NOLINT
     } catch (raytracer::ConfigFile::ConfigException &e) {
         std::cout << HEADER_MSG << e.what() << "\n";
     }

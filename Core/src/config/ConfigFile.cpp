@@ -7,6 +7,9 @@
 
 #include <fstream>
 #include <raytracer/config/ConfigFile.hh>
+#include <raytracer/config/Scene.hh>
+#include <raytracer/factory/LightFactory.hpp>
+#include <raytracer/factory/PrimitiveFactory.hpp>
 #include <string>
 
 /* ctor and dtor for class */
@@ -41,7 +44,7 @@ void raytracer::ConfigFile::initConfig()
     }
 }
 
-void raytracer::ConfigFile::parse()
+raytracer::Scene raytracer::ConfigFile::parse()
 {
     try {
         this->initConfig();
@@ -49,4 +52,9 @@ void raytracer::ConfigFile::parse()
         throw e;
     }
     this->scene.camera = this->config.at("camera");
+    for (auto &primitive : this->config.at("primitives"))
+        this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
+    for (auto &light : this->config.at("lights"))
+        this->scene.lights.emplace_back(LightFactory::createLight(light));
+    return std::move(this->scene);
 }

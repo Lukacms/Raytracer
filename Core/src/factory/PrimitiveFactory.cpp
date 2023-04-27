@@ -5,16 +5,21 @@
 ** PrimitiveFactory
 */
 
-#include "raytracer/math/APrimitive.hh"
 #include <dlfcn.h>
 #include <memory>
 #include <raytracer/factory/AFactory.hh>
-#include <raytracer/factory/PrimitiveFactory.hh>
+#include <raytracer/factory/PrimitiveFactory.hpp>
+#include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/IPrimitive.hh>
 
 // Constructor & Destructor
 
 // Methods
+std::unique_ptr<math::IPrimitive>
+raytracer::PrimitiveFactory::createPrimitive(const njson & /* json */)
+{
+    return nullptr;
+}
 
 std::unique_ptr<math::IPrimitive> raytracer::PrimitiveFactory::createSphere(math::Point3D &origin,
                                                                             double radius)

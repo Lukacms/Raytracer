@@ -5,22 +5,23 @@
 ** LightFactory
 */
 
-#include <raytracer/factory/LightFactory.hh>
 #include <dlfcn.h>
+#include <raytracer/factory/LightFactory.hpp>
 
 // Constructor & Destructor
 
 // Methods
 
-std::unique_ptr<light::ILight> raytracer::LightFactory::createAmbiant(math::Point3D &origin, double coefficient)
+std::unique_ptr<light::ILight> raytracer::LightFactory::createAmbiant(math::Point3D &origin,
+                                                                      double coefficient)
 {
     std::unique_ptr<light::ILight> new_light;
     void *handle;
 
     if (!(handle = dlopen(AMBIANT_LIB.data(), RTLD_LAZY)))
         throw raytracer::LightFactory::FactoryException(dlerror());
-    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(math::Point3D &origin, double coefficient)>(
-        dlsym(handle, LOAD_LIGHT_METHOD.data()));
+    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(
+        math::Point3D & origin, double coefficient)>(dlsym(handle, LOAD_LIGHT_METHOD.data()));
     if (!loader)
         throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());
     if (!(new_light = loader(origin, coefficient)))
@@ -35,7 +36,7 @@ std::unique_ptr<light::ILight> raytracer::LightFactory::createPoint(math::Point3
 
     if (!(handle = dlopen(POINT_LIB.data(), RTLD_LAZY)))
         throw raytracer::LightFactory::FactoryException(dlerror());
-    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(math::Point3D &origin)>(
+    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(math::Point3D & origin)>(
         dlsym(handle, LOAD_LIGHT_METHOD.data()));
     if (!loader)
         throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());
@@ -44,7 +45,6 @@ std::unique_ptr<light::ILight> raytracer::LightFactory::createPoint(math::Point3
     return new_light;
 }
 
-
 std::unique_ptr<light::ILight> raytracer::LightFactory::createDirectional(math::Vector3D &direction)
 {
     std::unique_ptr<light::ILight> new_light;
@@ -52,7 +52,7 @@ std::unique_ptr<light::ILight> raytracer::LightFactory::createDirectional(math::
 
     if (!(handle = dlopen(DIRECTIONAL_LIB.data(), RTLD_LAZY)))
         throw raytracer::LightFactory::FactoryException(dlerror());
-    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(math::Vector3D &direction)>(
+    auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(math::Vector3D & direction)>(
         dlsym(handle, LOAD_LIGHT_METHOD.data()));
     if (!loader)
         throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());

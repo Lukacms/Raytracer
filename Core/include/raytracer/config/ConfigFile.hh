@@ -40,7 +40,7 @@ namespace raytracer
             ConfigFile &operator=(ConfigFile &&to_move) = default;
 
             // methods
-            void parse();
+            [[nodiscard]] Scene parse();
 
             // exception class
             class ConfigException : public std::exception
