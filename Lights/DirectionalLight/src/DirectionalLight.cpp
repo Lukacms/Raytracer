@@ -28,9 +28,9 @@ Color light::DirectionalLight::lighten(HitInfos &infos, raytracer::Ray &view, Co
 
     if (rho < 0)
         return Color{0, 0, 0};
-    color.red *= rho;
-    color.green *= rho;
-    color.blue *= rho;
+    color.red = static_cast<int>(color.red * rho);
+    color.green = static_cast<int>(color.green * rho);
+    color.blue = static_cast<int>(color.blue * rho);
     return color;
 }
 

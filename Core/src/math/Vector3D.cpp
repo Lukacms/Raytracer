@@ -113,7 +113,8 @@ double math::Vector3D::length() const
 
 double math::Vector3D::dot(const math::Vector3D &vector) const
 {
-    return this->getX() * vector.getX() + this->getY() * vector.getY() + this->getZ() * vector.getZ();
+    return this->getX() * vector.getX() + this->getY() * vector.getY() +
+        this->getZ() * vector.getZ();
 }
 
 double math::Vector3D::getX() const

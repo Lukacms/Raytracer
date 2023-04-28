@@ -21,15 +21,15 @@ class PpmCreator
         ~PpmCreator() = default;
         PpmCreator &operator=(PpmCreator const &to_copy) = delete;
         PpmCreator &operator=(PpmCreator &&to_move) = delete;
-        static void create_ppm_file(std::vector<Color> result, raytracer::Resolution res,
+        static void create_ppm_file(std::vector<Pixel> result, raytracer::Resolution res,
                                     std::string filename);
 
     private:
-        std::vector<Color> m_result;
+        std::vector<Pixel> m_result;
         raytracer::Resolution m_res;
         std::string m_name{"output.ppm"};
 
-        PpmCreator(std::vector<Color> &result, raytracer::Resolution &res,
+        PpmCreator(std::vector<Pixel> &result, raytracer::Resolution &res,
                    std::string &filename) noexcept;
 
         void create_ppm();

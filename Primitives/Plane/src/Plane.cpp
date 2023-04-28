@@ -38,7 +38,8 @@ bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
                       this->m_normal.getZ() * ray.m_direction.getZ());
     double value_b =
         (this->m_normal.getX() * ray.m_origin.getX() + this->m_normal.getY() * ray.m_origin.getY() +
-         this->m_normal.getZ() * ray.m_origin.getZ()) - value_d;
+         this->m_normal.getZ() * ray.m_origin.getZ()) -
+        value_d;
     double solution = -value_b / value_a;
 
     if (this->m_normal.dot(ray.m_direction) == 0 || solution < 0)

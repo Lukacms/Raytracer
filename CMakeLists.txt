@@ -1,5 +1,5 @@
 ##
-## CMakeLists: Arcade / Arcade
+## CMakeLists: Raytracer / Raytracer
 ##
 
 cmake_minimum_required(VERSION 3.16)
@@ -13,6 +13,7 @@ project(raytracer)
 
 # change library prefix to none
 set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 
 # for library compilation => shared libraries of primitives, lights etc
@@ -20,11 +21,6 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/plugins)
 
 # include directories
 include_directories(Core/include/)
-
-# add a subdirectory to compile, to uncomment when CMakeLists will be complete
-# directories will need to change
-add_subdirectory(Primitives)
-add_subdirectory(Lights)
 
 # Warning flags
 set(GCC_WARNING_FLAGS
@@ -49,7 +45,7 @@ set(CLANG_WARNING_FLAGS
     -Wno-weak-vtables)
 
 if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 13.0.0)
-  set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
+    set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
 endif()
 
 set(WARNING_FLAGS
@@ -70,6 +66,32 @@ set(WARNING_FLAGS
     -Weffc++
     -Wno-padded
     -Wno-ctad-maybe-unsupported)
+
+# add a subdirectory to compile, to uncomment when CMakeLists will be complete
+# directories will need to change
+add_subdirectory(Primitives)
+add_subdirectory(Lights)
+
+# set colors for the messages because why not ?
+if(NOT WIN32)
+  string(ASCII 27 Esc)
+  set(ColourReset "${Esc}[m")
+  set(ColourBold  "${Esc}[1m")
+  set(Red         "${Esc}[31m")
+  set(Green       "${Esc}[32m")
+  set(Yellow      "${Esc}[33m")
+  set(Blue        "${Esc}[34m")
+  set(Magenta     "${Esc}[35m")
+  set(Cyan        "${Esc}[36m")
+  set(White       "${Esc}[37m")
+  set(BoldRed     "${Esc}[1;31m")
+  set(BoldGreen   "${Esc}[1;32m")
+  set(BoldYellow  "${Esc}[1;33m")
+  set(BoldBlue    "${Esc}[1;34m")
+  set(BoldMagenta "${Esc}[1;35m")
+  set(BoldCyan    "${Esc}[1;36m")
+  set(BoldWhite   "${Esc}[1;37m")
+endif()
 
 # set different flags
 set(CMAKE_BUILD_TYPE
@@ -111,7 +133,7 @@ else()
   error("${CMAKE_CXX_COMPILER_ID}: Unsupported compiler.")
 endif()
 
-message("Warning flags: ${WARNING_FLAGS}")
+message("Warning flags: ${Cyan} ${WARNING_FLAGS}${ColourReset}")
 
 add_library(raytracer-interface INTERFACE)
 
@@ -134,12 +156,27 @@ add_library(
     Core/src/ALight.cpp
     Core/src/Core.cpp
     Core/src/PpmCreator.cpp
+    Core/src/config/ConfigFile.cpp
+    Core/src/config/ConfigException.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
 
+# make sure nlohmann_json is installed
+message("${BoldGreen}Loading nlohmann_json${ColourReset}")
+
+set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
+
+include(FetchContent)
+
+FetchContent_Declare(json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+    DOWNLOAD_EXTRACT_TIMESTAMP true)
+FetchContent_MakeAvailable(json)
+
+message("${BoldGreen}Finished loading library${ColourReset}")
 
 # adding executables
 add_executable(
@@ -161,13 +198,13 @@ add_executable(
 
 # rules for raytracer project
 target_link_libraries(
-    raytracer
+    raytracer PRIVATE
     raytracer-core
     raytracer-interface
     sfml-graphics
     sfml-window
     fmt
-    config++ # library for libconfig++ => parse configuration files
+    #    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

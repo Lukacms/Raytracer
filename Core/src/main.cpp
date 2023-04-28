@@ -5,7 +5,9 @@
 ** main
 */
 
+#include "raytracer/ILight.hh"
 #include "raytracer/math/APrimitive.hh"
+#include "raytracer/math/Vector3D.hh"
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
@@ -74,7 +76,7 @@ int main()
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up Core
-    raytracer::Core core{camera};
+    raytracer::Raytracer core{camera, raytracer::Resolution{800, 800}};
     // Set up sphere
     std::unique_ptr<math::IPrimitive> plane =
         raytracer::PrimitiveFactory::createPlane(point7, math::Axis::Y);

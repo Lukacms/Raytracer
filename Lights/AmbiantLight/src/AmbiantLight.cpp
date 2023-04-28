@@ -5,6 +5,7 @@
 ** AmbiantLight
 */
 
+#include "raytracer/math/Vector3D.hh"
 #include <AmbiantLight.hh>
 #include <iostream>
 #include <raytracer/Ray.hh>
@@ -22,9 +23,9 @@ light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
 
 Color light::AmbientLight::lighten(HitInfos &infos, raytracer::Ray &view, Color color)
 {
-    color.red *= this->m_coefficient;
-    color.green *= this->m_coefficient;
-    color.blue *= this->m_coefficient;
+    color.red = static_cast<int>(color.red * this->m_coefficient);
+    color.green = static_cast<int>(color.green * this->m_coefficient);
+    color.blue = static_cast<int>(color.blue * this->m_coefficient);
     return color;
 }
 

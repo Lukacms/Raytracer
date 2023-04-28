@@ -80,7 +80,8 @@ math::Vector3D light::PointLight::getPhongSpecular(math::Vector3D &normal,
 
     if (reflected_vector.dot(cam_vector) > 0 && reflected_vector.dot(cam_vector) < 1) {
         fmt::print("Dot Product : {}\n", reflected_vector.dot(cam_vector));
-        double specular = 255 * reflected_vector.dot(cam_vector) / (reflected_vector.length() * camera_vector.length());
+        double specular = 255 * reflected_vector.dot(cam_vector) /
+            (reflected_vector.length() * camera_vector.length());
         return math::Vector3D{specular, specular, specular};
     }
     return math::Vector3D{0, 0, 0};
