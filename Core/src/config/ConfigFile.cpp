@@ -5,6 +5,7 @@
 ** ConfigFile
 */
 
+#include "raytracer/factory/AFactory.hh"
 #include <fstream>
 #include <iostream>
 #include <raytracer/config/ConfigFile.hh>
@@ -53,23 +54,14 @@ raytracer::Scene raytracer::ConfigFile::parse()
     }
     try {
         this->scene.camera = this->config.at("camera");
-    } catch (njson::exception &e) {
-        std::cout << "njson - cam: " << e.what() << "\n";
-        throw ConfigFile::ConfigException("Couldn't load json");
-    }
-    try {
         for (auto &primitive : this->config.at("primitives"))
             this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
-    } catch (njson::exception &e) {
-        std::cout << "njson - primitives: " << e.what() << "\n";
-        throw ConfigFile::ConfigException("Couldn't load json");
-    }
-    try {
         for (auto &light : this->config.at("lights"))
             this->scene.lights.emplace_back(LightFactory::createLight(light));
     } catch (njson::exception &e) {
-        std::cout << "njson - lights: " << e.what() << "\n";
-        throw ConfigFile::ConfigException("Couldn't load json");
+        throw ConfigFile::ConfigException(std::string{"Couldn't load json: "} + e.what());
+    } catch (raytracer::AFactory::FactoryException &e) {
+        throw ConfigFile::ConfigException(e.what());
     }
     return std::move(this->scene);
 }
