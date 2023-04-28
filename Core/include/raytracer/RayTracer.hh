@@ -31,9 +31,7 @@ namespace raytracer
         public:
             /* ctor / dtor */
             Color() = default;
-
-            Color(int pred, int pgreen, int pblue) : red{pred}, green{pgreen}, blue{pblue} {}
-
+            Color(int pred, int pgreen, int pblue);
             Color(const Color &) = default;
             Color(Color &&) = default;
             ~Color() = default;

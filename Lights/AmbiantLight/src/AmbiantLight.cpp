@@ -13,9 +13,9 @@
 // Constructor & Destructor
 
 light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
+    : m_coefficient{coefficient}
 {
     this->m_position = position;
-    this->m_coefficient = coefficient;
 }
 
 // Methods

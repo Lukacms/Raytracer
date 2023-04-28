@@ -21,12 +21,12 @@
 
 using njson = nlohmann::json;
 
-const std::string_view AMBIENT_LIB{"./plugins/raytracer_ambiant_light.so"};
-const std::string_view POINT_LIB{"./plugins/raytracer_point_light.so"};
-const std::string_view DIRECTIONAL_LIB = "./plugins/raytracer_directional_light.so";
-const std::string_view LOAD_LIGHT_METHOD{"entry_point_light"};
-const std::string_view ERROR_LIGHT_CANNOT_LOAD{"RayTracer: Unable to load library."};
-const std::string_view ERROR_NOT_LIGHT{"RayTracer: Not a light library."};
+constexpr std::string_view AMBIENT_LIB{"./plugins/raytracer_ambiant_light.so"};
+constexpr std::string_view POINT_LIB{"./plugins/raytracer_point_light.so"};
+constexpr std::string_view DIRECTIONAL_LIB = "./plugins/raytracer_directional_light.so";
+constexpr std::string_view LOAD_LIGHT_METHOD{"entry_point_light"};
+constexpr std::string_view ERROR_LIGHT_CANNOT_LOAD{"RayTracer: Unable to load library."};
+constexpr std::string_view ERROR_NOT_LIGHT{"RayTracer: Not a light library."};
 
 namespace raytracer
 {

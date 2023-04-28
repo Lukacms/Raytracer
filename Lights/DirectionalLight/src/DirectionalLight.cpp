@@ -13,10 +13,7 @@
 
 // Constructor & Destructor
 
-light::DirectionalLight::DirectionalLight(math::Vector3D &direction)
-{
-    this->m_direction = direction;
-}
+light::DirectionalLight::DirectionalLight(math::Vector3D &direction) : m_direction{direction} {}
 
 // Methods
 

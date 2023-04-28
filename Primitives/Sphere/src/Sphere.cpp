@@ -55,7 +55,7 @@ bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
         infos.normal = math::Vector3D{infos.point.getX() - this->m_origin.getX(),
                                       infos.point.getY() - this->m_origin.getY(),
                                       infos.point.getZ() - this->m_origin.getZ()};
-    } else if (delta == 0) {
+    } else if (delta == 0.0) {
         infos.is_solution = true;
         double x_0 = (-value_b - sqrt(delta)) / (2 * value_a);
         infos.point = math::Point3D{ray.m_origin.getX() + x_0 * ray.m_direction.getX(),

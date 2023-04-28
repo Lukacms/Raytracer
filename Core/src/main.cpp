@@ -8,31 +8,26 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
-#include <raytracer/Camera.hh>
-#include <raytracer/Canva.hh>
 #include <raytracer/Core.hh>
-#include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/config/ConfigFile.hh>
-#include <raytracer/factory/LightFactory.hpp>
-#include <raytracer/factory/PrimitiveFactory.hpp>
-#include <raytracer/math/APrimitive.hh>
-#include <raytracer/math/IPrimitive.hh>
-#include <raytracer/math/Point3D.hh>
+#include <raytracer/config/Scene.hh>
 
 int main(int argc, const char *argv[])
 {
-
+    raytracer::Scene scene{};
     if (argc != 2) {
         std::cout << HELP_MSG;
         return FAILURE;
     }
     raytracer::ConfigFile config{argv[1]};
     try {
-        config.parse(); // NOLINT
+        scene = config.parse();
     } catch (raytracer::ConfigFile::ConfigException &e) {
         std::cout << HEADER_MSG << e.what() << "\n";
+        return FAILURE;
     }
+    std::cout << "oui\n";
     return SUCCESS;
 }
 

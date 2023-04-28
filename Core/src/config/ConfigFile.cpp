@@ -6,6 +6,7 @@
 */
 
 #include <fstream>
+#include <iostream>
 #include <raytracer/config/ConfigFile.hh>
 #include <raytracer/config/Scene.hh>
 #include <raytracer/factory/LightFactory.hpp>
@@ -13,7 +14,6 @@
 #include <string>
 
 /* ctor and dtor for class */
-
 raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pfilepath)}
 {
     this->filepath = this->getFullPath();
@@ -51,10 +51,25 @@ raytracer::Scene raytracer::ConfigFile::parse()
     } catch (ConfigFile::ConfigException &e) {
         throw e;
     }
-    this->scene.camera = this->config.at("camera");
-    for (auto &primitive : this->config.at("primitives"))
-        this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
-    for (auto &light : this->config.at("lights"))
-        this->scene.lights.emplace_back(LightFactory::createLight(light));
+    try {
+        this->scene.camera = this->config.at("camera");
+    } catch (njson::exception &e) {
+        std::cout << "njson - cam: " << e.what() << "\n";
+        throw ConfigFile::ConfigException("Couldn't load json");
+    }
+    try {
+        for (auto &primitive : this->config.at("primitives"))
+            this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
+    } catch (njson::exception &e) {
+        std::cout << "njson - primitives: " << e.what() << "\n";
+        throw ConfigFile::ConfigException("Couldn't load json");
+    }
+    try {
+        for (auto &light : this->config.at("lights"))
+            this->scene.lights.emplace_back(LightFactory::createLight(light));
+    } catch (njson::exception &e) {
+        std::cout << "njson - lights: " << e.what() << "\n";
+        throw ConfigFile::ConfigException("Couldn't load json");
+    }
     return std::move(this->scene);
 }

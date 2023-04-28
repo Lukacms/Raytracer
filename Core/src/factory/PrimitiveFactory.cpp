@@ -6,6 +6,7 @@
 */
 
 #include <dlfcn.h>
+#include <iostream>
 #include <memory>
 #include <raytracer/factory/AFactory.hh>
 #include <raytracer/factory/PrimitiveFactory.hpp>
@@ -30,8 +31,13 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
 };
 
 // Methods
-std::unique_ptr<math::IPrimitive> raytracer::PrimitiveFactory::createPrimitive(const njson &json)
+std::unique_ptr<math::IPrimitive> raytracer::PrimitiveFactory::createPrimitive(njson &json)
 {
     std::string type = json["type"];
+
+    for (const auto &prim : HANDLER) {
+        if (prim.type == type)
+            return prim.handler(prim.libpath, json);
+    }
     throw PrimitiveFactory::FactoryException(ERROR_NOT_PRIMITIVE.data());
 }

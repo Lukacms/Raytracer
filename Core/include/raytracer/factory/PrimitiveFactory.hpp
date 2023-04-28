@@ -8,6 +8,7 @@
 #pragma once
 
 #include <dlfcn.h>
+#include <iostream>
 #include <memory>
 #include <nlohmann/json_fwd.hpp>
 #include <raytracer/factory/AFactory.hh>
@@ -16,11 +17,11 @@
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 
-const std::string_view SPHERE_LIB = "./plugins/raytracer_sphere.so";
-const std::string_view PLANE_LIB = "./plugins/raytracer_plane.so";
-const std::string_view LOAD_PRIMITIVE_METHOD = "entry_point_primitive";
-const std::string_view ERROR_PRIMITIVE_CANNOT_LOAD = "RayTracer: Unable to load library.";
-const std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";
+constexpr std::string_view SPHERE_LIB = "./plugins/raytracer_sphere.so";
+constexpr std::string_view PLANE_LIB = "./plugins/raytracer_plane.so";
+constexpr std::string_view LOAD_PRIMITIVE_METHOD = "entry_point_primitive";
+constexpr std::string_view ERROR_PRIMITIVE_CANNOT_LOAD = "RayTracer: Unable to load library.";
+constexpr std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";
 
 using njson = nlohmann::json;
 
@@ -43,7 +44,7 @@ namespace raytracer
             PrimitiveFactory &operator=(const PrimitiveFactory &) = default;
             PrimitiveFactory &operator=(PrimitiveFactory &&) = default;
 
-            static std::unique_ptr<math::IPrimitive> createPrimitive(const njson &json);
+            static std::unique_ptr<math::IPrimitive> createPrimitive(njson &json);
 
             template <typename... T_values> static std::unique_ptr<math::IPrimitive>
             create(const std::string &path, T_values &&...values)
