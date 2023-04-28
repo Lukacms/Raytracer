@@ -7,6 +7,7 @@
 
 #include "raytracer/PpmCreator.hh"
 #include "raytracer/Ray.hh"
+#include "raytracer/RayTracer.hh"
 #include "raytracer/math/Point3D.hh"
 #include <cmath>
 #include <fmt/core.h>
@@ -19,8 +20,6 @@ raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Reso
 {
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
-    std::cout << m_resolution.x_value << '\n';
-    std::cout << m_resolution.y_value << '\n';
 }
 
 void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)
@@ -68,21 +67,34 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray)
     return index_closest;
 }
 
+void raytracer::Raytracer::shader_b_w()
+{
+    for (auto &result : m_result) {
+        int median = (result.color.green + result.color.blue + result.color.red) / 3;
+        result.color = Color{median, median, median};
+    }
+}
+
 void raytracer::Raytracer::launch()
 {
-    std::cout << m_resolution.y << m_resolution.x << '\n';
     for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
         for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
             raytracer::Ray ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
                                               static_cast<double>(y_axes) * m_resolution.y_value);
             int closest = get_closest(ray);
-            m_result.emplace_back(Color{0, 0, 0});
+            m_result.emplace_back();
+            m_result[0].color = Color{0, 0, 0};
+            m_result[0].infos = HitInfos{false, math::Point3D{}, math::Vector3D{}};
             if (closest >= 0) {
-                m_result[m_result.size() - 1] = m_objects[static_cast<size_t>(closest)]->getColor();
-                m_result[m_result.size() - 1] =
-                    m_lights[0]->lighten(m_max_infos, m_result[m_result.size() - 1]);
+                for (size_t i{0}; i < m_lights.size(); i++) {
+                    m_result[m_result.size() - 1].color =
+                        m_objects[static_cast<size_t>(closest)]->getColor();
+                    m_result[m_result.size() - 1].color = m_lights[i]->lighten(
+                        m_max_infos, m_result[m_result.size() - 1].color, ray.m_direction);
+                    m_result[m_result.size() - 1].infos = m_max_infos;
+                }
             } else {
-                m_result[m_result.size() - 1] = Color{0, 0, 0};
+                m_result[m_result.size() - 1].color = Color{0, 0, 0};
             }
         }
     }

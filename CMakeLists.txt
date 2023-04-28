@@ -204,7 +204,7 @@ target_link_libraries(
     sfml-graphics
     sfml-window
     fmt
-    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
+    #    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

@@ -19,7 +19,7 @@ light::PointLight::PointLight(math::Point3D &position)
 
 // Methods
 
-Color light::PointLight::lighten(HitInfos &infos, Color color)
+Color light::PointLight::lighten(HitInfos &infos, Color color, math::Vector3D & /*ray*/)
 {
     math::Vector3D light{this->m_position.getX() - infos.point.getX(),
                          this->m_position.getY() - infos.point.getY(),

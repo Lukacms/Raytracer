@@ -5,7 +5,9 @@
 ** main
 */
 
+#include "raytracer/ILight.hh"
 #include "raytracer/math/APrimitive.hh"
+#include "raytracer/math/Vector3D.hh"
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
@@ -63,11 +65,11 @@ int main()
 int main()
 {
     math::Point3D point1{0, 0, 1};
-    math::Point3D point5{-2, 0, -3};
-    math::Point3D point2{-0.5, 0, -2};
+    math::Point3D point5{1, 0, -2};
+    math::Point3D point2{-1, 0, -2};
     math::Point3D point6{0, 0, -1};
     math::Point3D point3{-0.5, -0.5, 0};
-    math::Point3D point4{2, 0, 1};
+    math::Point3D point4{0, 0, 0};
     raytracer::Canva canva{point3};
     // Set up camera
     raytracer::Camera camera(point1, canva);
@@ -83,15 +85,18 @@ int main()
     std::unique_ptr<math::IPrimitive> sphere3 =
         raytracer::PrimitiveFactory::createSphere(point6, 0.5);
     sphere3->setColor(0, 255, 0);
+    math::Vector3D ed{0, 0, -1};
+    // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createDirectional(ed);
+    // std::unique_ptr<light::ILight> light2 = raytracer::LightFactory::createAmbiant(point4, 0.5);
     std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
     std::unique_ptr<math::IPrimitive> plan =
         raytracer::PrimitiveFactory::createPlane(point6, math::Axis{0});
-    plan->setColor(255, 0, 0);
-    // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createAmbiant(point4, 55.00);
+    plan->setColor(255, 255, 255);
     core.add_object(std::move(sphere));
     core.add_object(std::move(sphere2));
     core.add_object(std::move(sphere3));
     // core.add_object(std::move(plan));
+    // core.add_lights(std::move(light2));
     core.add_lights(std::move(light));
     core.launch();
 }

@@ -20,7 +20,7 @@ light::DirectionalLight::DirectionalLight(math::Vector3D &direction)
 
 // Methods
 
-Color light::DirectionalLight::lighten(HitInfos &infos, Color color)
+Color light::DirectionalLight::lighten(HitInfos &infos, Color color, math::Vector3D & /* ray */)
 {
     math::Vector3D tmp_vector = this->m_direction * -1;
     tmp_vector /= tmp_vector.length();

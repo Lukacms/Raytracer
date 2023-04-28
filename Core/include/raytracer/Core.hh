@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
 #include <memory>
 #include <raytracer/Camera.hh>
 #include <raytracer/ILight.hh>
@@ -38,6 +39,7 @@ namespace raytracer
             void launch();
             void add_lights(std::unique_ptr<light::ILight> &&light);
             void add_object(std::unique_ptr<math::IPrimitive> &&object);
+            void shader_b_w();
 
         private:
             int get_closest(raytracer::Ray &ray);
@@ -45,7 +47,7 @@ namespace raytracer
             std::vector<std::unique_ptr<math::IPrimitive>> m_objects{};
             raytracer::Camera m_camera{};
             Resolution m_resolution{};
-            std::vector<Color> m_result{};
+            std::vector<Pixel> m_result{};
             HitInfos m_max_infos{};
     };
 } // namespace raytracer
