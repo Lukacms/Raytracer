@@ -26,6 +26,12 @@ using njson = nlohmann::json;
 
 namespace raytracer
 {
+    struct PrimitiveHandler {
+            std::string type;
+            std::string libpath;
+            std::function<std::unique_ptr<math::IPrimitive>(const std::string &, njson &)> handler;
+    };
+
     class PrimitiveFactory : public AFactory
     {
         public:
@@ -39,9 +45,8 @@ namespace raytracer
 
             static std::unique_ptr<math::IPrimitive> createPrimitive(const njson &json);
 
-        private:
-            template <typename... T_values>
-            std::unique_ptr<math::IPrimitive> create(const std::string &path, T_values &&...values)
+            template <typename... T_values> static std::unique_ptr<math::IPrimitive>
+            create(const std::string &path, T_values &&...values)
             {
                 std::unique_ptr<math::IPrimitive> new_primitive;
                 void *handle = nullptr;
@@ -59,9 +64,6 @@ namespace raytracer
                 return new_primitive;
             }
 
-            static std::unique_ptr<math::IPrimitive> createSphere(math::Point3D &origin,
-                                                                  double radius);
-            static std::unique_ptr<math::IPrimitive> createPlane(math::Point3D &origin,
-                                                                 math::Axis axis);
+        private:
     };
 } // namespace raytracer
