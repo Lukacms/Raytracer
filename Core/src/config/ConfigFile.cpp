@@ -5,11 +5,11 @@
 ** ConfigFile
 */
 
-#include "raytracer/factory/AFactory.hh"
 #include <fstream>
 #include <iostream>
 #include <raytracer/config/ConfigFile.hh>
 #include <raytracer/config/Scene.hh>
+#include <raytracer/factory/AFactory.hh>
 #include <raytracer/factory/LightFactory.hpp>
 #include <raytracer/factory/PrimitiveFactory.hpp>
 #include <string>

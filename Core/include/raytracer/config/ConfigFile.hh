@@ -16,7 +16,7 @@
 using njson = nlohmann::json;
 
 /* utils to get the file */
-constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/config/"};
+constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/configs/"};
 constexpr char FULLPATH_INDIC{'/'};
 
 /* exception messages */
