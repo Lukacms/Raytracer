@@ -27,7 +27,6 @@ int main(int argc, const char *argv[])
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
     }
-    std::cout << "oui\n";
     return SUCCESS;
 }
 

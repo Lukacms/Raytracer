@@ -14,10 +14,9 @@
 
 // Constructor & Destructor
 
-math::Sphere::Sphere(math::Point3D corigin, double cradius)
+math::Sphere::Sphere(math::Point3D corigin, double cradius) : m_radius{cradius}
 {
     this->m_origin = corigin;
-    this->m_radius = cradius;
 }
 
 // Methods

@@ -24,7 +24,7 @@ static const std::vector<raytracer::LightHandler> HANDLER{
          double coefficient = json["coefficient"];
          return raytracer::LightFactory::create(lib, coefficient);
      }},
-    {"directionnal", DIRECTIONAL_LIB.data(),
+    {"directional", DIRECTIONAL_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<light::ILight> {
          math::Vector3D direction = json["direction"];
          return raytracer::LightFactory::create(lib, direction);
@@ -46,5 +46,6 @@ std::unique_ptr<light::ILight> raytracer::LightFactory::createLight(njson &json)
         if (light.type == type)
             return light.handler(light.libpath, json);
     }
+    std::cout << "type:\t" << type << "\n";
     throw LightFactory::FactoryException(ERROR_NOT_LIGHT.data());
 }
