@@ -7,10 +7,12 @@
 
 #pragma once
 
-#include <raytracer/math/Point3D.hh>
-#include <raytracer/RayTracer.hh>
-#include <raytracer/Ray.hh>
 #include <memory>
+#include <raytracer/Ray.hh>
+#include <raytracer/RayTracer.hh>
+#include <raytracer/math/IPrimitive.hh>
+#include <raytracer/math/Point3D.hh>
+#include <vector>
 
 namespace light
 {
@@ -27,6 +29,9 @@ namespace light
 
             virtual void setLightPosition(math::Point3D position) = 0;
             [[nodiscard]] virtual math::Point3D &getLightPosition() = 0;
-            virtual Color lighten(HitInfos &infos, Color color) = 0;
+            virtual Color lighten(HitInfos &infos, raytracer::Ray &view, Color color) = 0;
+            virtual bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
+                                    std::unique_ptr<math::IPrimitive> &current,
+                                    HitInfos &infos) = 0;
     };
 } // namespace light
