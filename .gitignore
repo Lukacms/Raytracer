@@ -47,7 +47,6 @@ build/
 
 # specific to project
 /raytracer
-/assets
 .cache
 plugins
 *.ppm
