@@ -16,9 +16,11 @@
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
+#include <string_view>
 
 constexpr std::string_view SPHERE_LIB = "./plugins/raytracer_sphere.so";
 constexpr std::string_view PLANE_LIB = "./plugins/raytracer_plane.so";
+constexpr std::string_view MOEBIUS_LIB = "./plugins/raytracer_moebius.so";
 constexpr std::string_view LOAD_PRIMITIVE_METHOD = "entry_point_primitive";
 constexpr std::string_view ERROR_PRIMITIVE_CANNOT_LOAD = "RayTracer: Unable to load library.";
 constexpr std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";

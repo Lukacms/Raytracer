@@ -28,6 +28,14 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
          math::Axis axis = json["axis"];
          return raytracer::PrimitiveFactory::create(lib, origin, axis);
      }},
+    {"moebius", MOEBIUS_LIB.data(),
+     [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
+         math::Point3D origin = json["origin"];
+         double radius = json["radius"];
+         raytracer::Color color = json["color"];
+
+         return raytracer::PrimitiveFactory::create(lib, origin, radius, color);
+     }},
 };
 
 // Methods
