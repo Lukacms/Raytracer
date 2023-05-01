@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
 #include <memory>
 #include <raytracer/Camera.hh>
 #include <raytracer/ILight.hh>
@@ -16,26 +17,29 @@
 namespace raytracer
 {
     struct Resolution {
-            double x{0};
-            double y{0};
+            int x{0};
+            int y{0};
+            double x_value{0.00};
+            double y_value{0.00};
     };
 
     constexpr raytracer::Resolution DEFAULT_RES{800, 800};
 
-    class Core
+    class Raytracer
     {
         public:
-            Core(Core const &to_copy) = delete;
-            Core() = delete;
-            Core(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
-            Core(Core &&to_move) = default;
-            Core &operator=(Core const &to_copy) = delete;
-            Core &operator=(Core &&to_move) = default;
-            ~Core() = default;
+            Raytracer(Raytracer const &to_copy) = delete;
+            Raytracer() = delete;
+            Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
+            Raytracer(Raytracer &&to_move) = default;
+            Raytracer &operator=(Raytracer const &to_copy) = delete;
+            Raytracer &operator=(Raytracer &&to_move) = default;
+            ~Raytracer() = default;
 
             void launch();
             void add_lights(std::unique_ptr<light::ILight> &&light);
             void add_object(std::unique_ptr<math::IPrimitive> &&object);
+            void shader_b_w();
 
         private:
             int get_closest(raytracer::Ray &ray);
@@ -43,7 +47,7 @@ namespace raytracer
             std::vector<std::unique_ptr<math::IPrimitive>> m_objects{};
             raytracer::Camera m_camera{};
             Resolution m_resolution{};
-            std::vector<Color> m_result{};
+            std::vector<Pixel> m_result{};
             HitInfos m_max_infos{};
     };
 } // namespace raytracer

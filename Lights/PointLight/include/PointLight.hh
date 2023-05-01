@@ -11,6 +11,7 @@
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/math/Point3D.hh>
+#include <raytracer/math/Vector3D.hh>
 
 namespace light
 {
@@ -26,8 +27,15 @@ namespace light
             PointLight &operator=(const PointLight &) = default;
             PointLight &operator=(PointLight &&);
 
-            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Color color) final;
+            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
+                                     raytracer::Color color) final;
+            bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
+                            std::unique_ptr<math::IPrimitive> &current,
+                            raytracer::HitInfos &infos) final;
 
         private:
+            static math::Vector3D getPhongSpecular(math::Vector3D &normal,
+                                                   math::Vector3D &camera_vector,
+                                                   math::Vector3D &light_vector);
     };
 } // namespace light

@@ -57,4 +57,11 @@ namespace raytracer
             math::Point3D point;
             math::Vector3D normal;
     };
+
+    struct Pixel {
+        public:
+            /* attributes */
+            Color color;
+            HitInfos infos;
+    };
 } // namespace raytracer

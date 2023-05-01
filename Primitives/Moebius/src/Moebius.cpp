@@ -9,7 +9,7 @@
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 
-bool math::Moebius::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
+bool math::Moebius::hits(raytracer::Ray & /* ray */, raytracer::HitInfos & /* infos */) const
 {
     return true;
 }

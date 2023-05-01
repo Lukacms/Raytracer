@@ -140,7 +140,7 @@ add_subdirectory(Lights)
 message("${Green}Finished loading shared libraries${ColourReset}")
 
 # make sure nlohmann_json is installed
-message("${BoldGreen}Loading nlohmann_json${ColourReset}")
+message("${BoldRed}Loading nlohmann_json${ColourReset}")
 
 set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
 
@@ -151,7 +151,7 @@ FetchContent_Declare(json
     DOWNLOAD_EXTRACT_TIMESTAMP true)
 FetchContent_MakeAvailable(json)
 
-message("${BoldGreen}Finished loading library${ColourReset}")
+message("${BoldRed}Finished loading library${ColourReset}")
 
 # link shared libraries and compile them
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)

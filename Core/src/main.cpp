@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
     }
-    raytracer::Core core{scene.camera};
+    raytracer::Raytracer core{scene.camera};
     core.add_object(std::move(scene.primitives[0]));
     core.add_object(std::move(scene.primitives[1]));
     core.add_object(std::move(scene.primitives[2]));
@@ -76,35 +76,35 @@ int main(int argc, const char *argv[])
     math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
     math::Point3D point3{-0.5, -0.5, 0};
-    math::Point3D point4{0, -1, -1};
+    math::Point3D point4{2, -2, 3};
     math::Point3D point5{-2, 0, -3};
-    math::Point3D point6{1, 0, -1};
+    math::Point3D point6{0.5, 0, -2};
     math::Point3D point7{0, -0.5, 0};
-    math::Vector3D vector{-1, 1, -1};
+    math::Vector3D vector{-1, 0.5, -1};
     raytracer::Canva canva{point3};
     double const size = 0.5;
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up Core
-    raytracer::Core core{camera};
+    raytracer::Raytracer core{camera, raytracer::Resolution{800, 800}};
     // Set up sphere
     std::unique_ptr<math::IPrimitive> plane =
         raytracer::PrimitiveFactory::createPlane(point7, math::Axis::Y);
     std::unique_ptr<math::IPrimitive> sphere =
         raytracer::PrimitiveFactory::createSphere(point2, 0.5);
     sphere->setColor(255, 0, 255);
-    std::unique_ptr<math::IPrimitive> sphere2 =
-        raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), point5, size);
-    sphere2->setColor(255, 0, 0);
+    // std::unique_ptr<math::IPrimitive> sphere2 =
+    //     raytracer::PrimitiveFactory::createSphere(point5, 0.5);
+    // sphere2->setColor(255, 0, 0);
     std::unique_ptr<math::IPrimitive> sphere3 =
         raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), point6, size);
     sphere3->setColor(0, 255, 0);
     plane->setColor(255, 255, 0);
-    std::unique_ptr<light::ILight> light = raytracer::LightFactory::createDirectional(vector);
-    // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
+    // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createDirectional(vector);
+    std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
     // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createAmbiant(point4, 1);
     core.add_object(std::move(sphere));
-    core.add_object(std::move(sphere2));
+    // core.add_object(std::move(sphere2));
     core.add_object(std::move(sphere3));
     core.add_object(std::move(plane));
     core.add_lights(std::move(light));
