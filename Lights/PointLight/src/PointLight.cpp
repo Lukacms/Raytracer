@@ -6,6 +6,7 @@
 */
 
 #include <PointLight.hh>
+#include <fmt/core.h>
 #include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
