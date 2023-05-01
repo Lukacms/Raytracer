@@ -13,17 +13,18 @@
 // Constructor & Destructor
 
 light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
+    : m_coefficient{coefficient}
 {
     this->m_position = position;
-    this->m_coefficient = coefficient;
 }
 
 // Methods
 
-Color light::AmbientLight::lighten(HitInfos &infos, Color color)
+raytracer::Color light::AmbientLight::lighten(raytracer::HitInfos & /* infos */,
+                                              raytracer::Color color)
 {
-    color.red *= this->m_coefficient;
-    color.green *= this->m_coefficient;
-    color.blue *= this->m_coefficient;
+    color.red *= static_cast<int>(this->m_coefficient);
+    color.green *= static_cast<int>(this->m_coefficient);
+    color.blue *= static_cast<int>(this->m_coefficient);
     return color;
 }

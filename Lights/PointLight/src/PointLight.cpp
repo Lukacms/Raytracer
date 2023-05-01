@@ -20,7 +20,7 @@ light::PointLight::PointLight(math::Point3D &position)
 
 // Methods
 
-Color light::PointLight::lighten(HitInfos &infos, Color color)
+raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Color color)
 {
     math::Vector3D light{this->m_position.getX() - infos.point.getX(),
                          this->m_position.getY() - infos.point.getY(),
@@ -29,9 +29,9 @@ Color light::PointLight::lighten(HitInfos &infos, Color color)
     double rho = light.dot(infos.normal);
 
     if (rho <= 0)
-        return Color{0, 0, 0};
-    color.red *= rho;
-    color.green *= rho;
-    color.blue *= rho;
+        return raytracer::Color{0, 0, 0};
+    color.red *= static_cast<int>(rho);
+    color.green *= static_cast<int>(rho);
+    color.blue *= static_cast<int>(rho);
     return color;
 }

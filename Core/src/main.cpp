@@ -5,27 +5,40 @@
 ** main
 */
 
-#include "raytracer/math/APrimitive.hh"
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
-#include <raytracer/Camera.hh>
-#include <raytracer/Canva.hh>
 #include <raytracer/Core.hh>
-#include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
-#include <raytracer/factory/LightFactory.hh>
-#include <raytracer/factory/PrimitiveFactory.hh>
-#include <raytracer/math/IPrimitive.hh>
-#include <raytracer/math/Point3D.hh>
+#include <raytracer/config/ConfigFile.hh>
+#include <raytracer/config/Scene.hh>
+#include <raytracer/factory/LightFactory.hpp>
+#include <raytracer/factory/PrimitiveFactory.hpp>
 
-// int main(int argc, const char *argv[])
-// {
-//     return SUCCESS;
-// }
+int main(int argc, const char *argv[])
+{
+    raytracer::Scene scene{};
+    if (argc != 2) {
+        std::cout << HELP_MSG;
+        return FAILURE;
+    }
+    raytracer::ConfigFile config{argv[1]};
+    try {
+        scene = config.parse();
+    } catch (raytracer::ConfigFile::ConfigException &e) {
+        std::cout << HEADER_MSG << e.what() << "\n";
+        return FAILURE;
+    }
+    raytracer::Core core{scene.camera};
+    core.add_object(std::move(scene.primitives[0]));
+    core.add_object(std::move(scene.primitives[1]));
+    core.add_object(std::move(scene.primitives[2]));
+    core.add_lights(std::move(scene.lights[0]));
+    core.launch();
+    return SUCCESS;
+}
 
-/*
-int main()
+/* int main()
 {
     math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
@@ -56,11 +69,9 @@ int main()
         }
     }
     return 0;
-<<<<<<< HEAD
-}
-*/
+} */
 
-int main()
+/* int main()
 {
     math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
@@ -71,6 +82,7 @@ int main()
     math::Point3D point7{0, -0.5, 0};
     math::Vector3D vector{-1, 1, -1};
     raytracer::Canva canva{point3};
+    double const size = 0.5;
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up Core
@@ -82,10 +94,10 @@ int main()
         raytracer::PrimitiveFactory::createSphere(point2, 0.5);
     sphere->setColor(255, 0, 255);
     std::unique_ptr<math::IPrimitive> sphere2 =
-        raytracer::PrimitiveFactory::createSphere(point5, 0.5);
+        raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), point5, size);
     sphere2->setColor(255, 0, 0);
     std::unique_ptr<math::IPrimitive> sphere3 =
-        raytracer::PrimitiveFactory::createSphere(point6, 0.5);
+        raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), point6, size);
     sphere3->setColor(0, 255, 0);
     plane->setColor(255, 255, 0);
     std::unique_ptr<light::ILight> light = raytracer::LightFactory::createDirectional(vector);
@@ -97,4 +109,4 @@ int main()
     core.add_object(std::move(plane));
     core.add_lights(std::move(light));
     core.launch();
-}
+} */
