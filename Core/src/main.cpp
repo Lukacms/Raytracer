@@ -30,9 +30,14 @@ int main(int argc, const char *argv[])
         return FAILURE;
     }
     raytracer::Raytracer core{scene.camera};
+    scene.primitives[0]->setColor(255, 0, 0);
+    scene.primitives[1]->setColor(0, 255, 0);
+    scene.primitives[2]->setColor(0, 0, 255);
+    scene.primitives[3]->setColor(255, 0, 255);
     core.add_object(std::move(scene.primitives[0]));
     core.add_object(std::move(scene.primitives[1]));
     core.add_object(std::move(scene.primitives[2]));
+    core.add_object(std::move(scene.primitives[3]));
     core.add_lights(std::move(scene.lights[0]));
     core.launch();
     return SUCCESS;
