@@ -39,9 +39,9 @@ Color light::PointLight::lighten(HitInfos &infos, raytracer::Ray &view, Color co
     double specular = reflection.dot(inversed_view) / (reflection.length() * inversed_view.length());
 
     if (rho > 0)
-        light_coefficient += 0.6 * rho;
+        light_coefficient += this->m_intensity * rho;
     if (specular > 0 && specular < 1)
-        light_coefficient += 0.6 * pow(specular, 10);
+        light_coefficient += this->m_intensity * pow(specular, 10);
     color.red *= light_coefficient;
     color.green *= light_coefficient;
     color.blue *= light_coefficient;

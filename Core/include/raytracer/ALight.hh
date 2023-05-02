@@ -27,8 +27,10 @@ namespace light
 
             void setLightPosition(math::Point3D position) final;
             [[nodiscard]] math::Point3D &getLightPosition() final;
+            void setIntensity(double intensity) final;
 
         protected:
             math::Point3D m_position{};
+            double m_intensity = 1.0;
     };
 } // namespace light
