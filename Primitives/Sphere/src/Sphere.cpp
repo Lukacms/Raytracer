@@ -7,6 +7,7 @@
 
 #include <Sphere.hh>
 #include <cmath>
+#include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/math/Point3D.hh>
