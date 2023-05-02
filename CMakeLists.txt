@@ -153,6 +153,21 @@ FetchContent_MakeAvailable(json)
 
 message("${BoldRed}Finished loading library${ColourReset}")
 
+# make sure fmt is installed
+message("${BoldRed}Loading fmt${ColourReset}")
+
+set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
+
+include(FetchContent)
+
+FetchContent_Declare(json
+    GIT_REPOSITORY https://github.com/fmtlib/fmt
+    GIT_TAG 9.1.0
+    )
+FetchContent_MakeAvailable(json)
+
+message("${BoldRed}Finished loading library${ColourReset}")
+
 # link shared libraries and compile them
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
