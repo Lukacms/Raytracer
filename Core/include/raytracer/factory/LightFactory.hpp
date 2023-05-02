@@ -18,6 +18,7 @@
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
 #include <string>
+#include <tuple>
 #include <utility>
 
 using njson = nlohmann::json;
@@ -51,18 +52,19 @@ namespace raytracer
             static std::unique_ptr<light::ILight> createLight(njson &json);
 
             template <typename... T_values> static std::unique_ptr<light::ILight>
-            create(const std::string &path, T_values &&...values)
+            create(const std::string &path, std::tuple<T_values...> values)
             {
                 std::unique_ptr<light::ILight> new_light;
                 void *handle = nullptr;
 
                 if (!(handle = dlopen(path.c_str(), RTLD_LAZY)))
                     throw raytracer::LightFactory::FactoryException(dlerror());
-                auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(T_values & ...)>(
-                    dlsym(handle, LOAD_LIGHT_METHOD.data()));
+                auto *loader =
+                    reinterpret_cast<std::unique_ptr<light::ILight> (*)(T_values && ...)>(
+                        dlsym(handle, LOAD_LIGHT_METHOD.data()));
                 if (!loader)
                     throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());
-                if (!(new_light = loader(std::forward<T_values>(values)...)))
+                if (!(new_light = loader(std::forward<T_values>(std::get<T_values>(values))...)))
                     throw raytracer::LightFactory::FactoryException(ERROR_NOT_LIGHT.data());
                 return new_light;
             }

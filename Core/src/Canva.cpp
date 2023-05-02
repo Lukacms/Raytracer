@@ -5,6 +5,7 @@
 ** Canva
 */
 
+#include <iostream>
 #include <raytracer/Canva.hh>
 #include <raytracer/math/Point3D.hh>
 

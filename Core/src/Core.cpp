@@ -39,9 +39,8 @@ static double get_length(math::Point3D first, math::Point3D second)
                      std::pow(second.getZ() - first.getZ(), 2));
 }
 
-int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection)
+int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection, int index_closest)
 {
-    int index_closest{-1};
     int index{0};
     int incr{0};
     math::Point3D camera_origin = m_camera.get_origin();
@@ -52,13 +51,15 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection)
     for (auto &object : m_objects) {
         HitInfos infos{};
         if (object->hits(ray, infos)) {
+            std::cout << "test\n";
             if (incr == 0) {
                 m_max_infos = infos;
                 incr++;
             }
             if (get_length(camera_origin, infos.point) <=
                 get_length(camera_origin, m_max_infos.point)) {
-                index_closest = index;
+                if (index_closest == -1)
+                    index_closest = index;
                 m_max_infos = infos;
             }
         }
@@ -67,9 +68,10 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection)
     if (index_reflection > 0 && index_closest == 0) {
         ray.reflect_ray(m_max_infos);
         raytracer::Ray copy{ray};
-        index_closest = get_closest(copy, --index_reflection);
+        get_closest(copy, --index_reflection, index_closest);
         std::cout << index_closest << "\n";
     }
+    // std::cout << index_closest << '\n';
     return index_closest;
 }
 
@@ -83,11 +85,17 @@ void raytracer::Raytracer::shader_b_w()
 
 void raytracer::Raytracer::launch()
 {
+
+    for (auto &object : m_objects) {
+        //        std::cout << object->getColor().red << ' ';
+        //       std::cout << object->getColor().green << ' ';
+        //      std::cout << object->getColor().blue << '\n';
+    }
     for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
         for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
             raytracer::Ray ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
                                               static_cast<double>(y_axes) * m_resolution.y_value);
-            int closest = get_closest(ray, 1);
+            int closest = get_closest(ray, 1, -1);
             m_result.emplace_back();
             m_result[0].color = Color{0, 0, 0};
             m_result[0].infos = HitInfos{false, math::Point3D{}, math::Vector3D{}};

@@ -13,6 +13,7 @@
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <string>
+#include <tuple>
 #include <vector>
 
 static const std::vector<raytracer::PrimitiveHandler> HANDLER{
@@ -20,21 +21,29 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          double radius = json["radius"];
-         return raytracer::PrimitiveFactory::create(lib, origin, radius);
+         raytracer::Color color = json["color"];
+         std::unique_ptr<math::IPrimitive> prim =
+             raytracer::PrimitiveFactory::create(lib, std::forward_as_tuple(origin, radius));
+         prim->setColor(color.red, color.green, color.blue);
+         return prim;
      }},
     {"plane", PLANE_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          math::Axis axis = json["axis"];
-         return raytracer::PrimitiveFactory::create(lib, origin, axis);
+         raytracer::Color color = json["color"];
+         std::unique_ptr<math::IPrimitive> prim =
+             raytracer::PrimitiveFactory::create(lib, std::forward_as_tuple(origin, axis));
+         prim->setColor(color.red, color.green, color.blue);
+         return prim;
      }},
     {"moebius", MOEBIUS_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          double radius = json["radius"];
          raytracer::Color color = json["color"];
-
-         return raytracer::PrimitiveFactory::create(lib, origin, radius, color);
+         return raytracer::PrimitiveFactory::create(lib,
+                                                    std::forward_as_tuple(origin, radius, color));
      }},
 };
 

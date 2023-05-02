@@ -5,6 +5,7 @@
 ** Camera
 */
 
+#include <iostream>
 #include <nlohmann/json.hpp>
 #include <raytracer/Camera.hh>
 #include <raytracer/Ray.hh>
@@ -17,7 +18,14 @@ raytracer::Camera::Camera()
     math::Point3D point{-(1 / 2), -(1 / 2), 0};
     raytracer::Canva canva{};
 
+    std::cout << "camera ";
+    std::cout << m_origin.getX() << ' ';
+    std::cout << m_origin.getY() << ' ';
+    std::cout << m_origin.getZ() << ' ';
     this->m_canva.setOrigin(point);
+    std::cout << m_canva.getOrigin().getX() << ' ';
+    std::cout << m_canva.getOrigin().getY() << ' ';
+    std::cout << m_canva.getOrigin().getZ() << '\n';
 }
 
 raytracer::Camera::Camera(math::Point3D &origin, raytracer::Canva &canva)
