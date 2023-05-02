@@ -33,17 +33,17 @@ Color light::PointLight::lighten(HitInfos &infos, raytracer::Ray &view, Color co
                          this->m_position.getZ() - infos.point.getZ()};
     light /= light.length();
     double rho = light.dot(infos.normal);
-    // math::Vector3D specular = getPhongSpecular(infos.normal, view.m_direction, light);
+    //    math::Vector3D specular = getPhongSpecular(infos.normal, view.m_direction, light);
 
     if (rho <= 0)
         return Color{0, 0, 0};
-    // fmt::print("Specular : {} {} {}\n", specular.getX(), specular.getY(), specular.getZ());
-    // color.red = (color.red * rho) + specular.getX();
-    // color.green = (color.green * rho) + specular.getY();
-    // color.blue = (color.blue * rho) + specular.getZ();
-    color.red = (color.red * rho);
-    color.green = (color.green * rho);
-    color.blue = (color.blue * rho);
+    //   fmt::print("Specular : {} {} {}\n", specular.getX(), specular.getY(), specular.getZ());
+    //  color.red = static_cast<int>((color.red * rho) + specular.getX());
+    //  color.green = static_cast<int>((color.green * rho) + specular.getY());
+    //  color.blue = static_cast<int>((color.blue * rho) + specular.getZ());
+    color.red = static_cast<int>((color.red * rho));
+    color.green = static_cast<int>((color.green * rho));
+    color.blue = static_cast<int>((color.blue * rho));
     return color;
 }
 
@@ -80,8 +80,9 @@ math::Vector3D light::PointLight::getPhongSpecular(math::Vector3D &normal,
 
     if (reflected_vector.dot(cam_vector) > 0 && reflected_vector.dot(cam_vector) < 1) {
         fmt::print("Dot Product : {}\n", reflected_vector.dot(cam_vector));
-        double specular = 255 * reflected_vector.dot(cam_vector) /
+        double specular = 1 * reflected_vector.dot(cam_vector) /
             (reflected_vector.length() * camera_vector.length());
+        // double specular{255 * reflected_vector.dot(light_vector)};
         return math::Vector3D{specular, specular, specular};
     }
     return math::Vector3D{0, 0, 0};

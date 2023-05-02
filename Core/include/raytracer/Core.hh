@@ -42,7 +42,7 @@ namespace raytracer
             void shader_b_w();
 
         private:
-            int get_closest(raytracer::Ray &ray);
+            int get_closest(raytracer::Ray &ray, int nb_reflection);
             std::vector<std::unique_ptr<light::ILight>> m_lights{};
             std::vector<std::unique_ptr<math::IPrimitive>> m_objects{};
             raytracer::Camera m_camera{};

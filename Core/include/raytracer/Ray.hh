@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
 #include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
 
@@ -22,8 +23,13 @@ namespace raytracer
             ~Ray() = default;
 
             Ray &operator=(const Ray &) = default;
-            Ray &operator=(Ray &&);
+            Ray &operator=(Ray &&) = default;
 
+            [[nodiscard]] math::Point3D get_origin() const;
+            [[nodiscard]] math::Vector3D get_direction() const;
+            void reflect_ray(const HitInfos &infos);
+
+        private:
             math::Point3D m_origin{};
             math::Vector3D m_direction{};
     };

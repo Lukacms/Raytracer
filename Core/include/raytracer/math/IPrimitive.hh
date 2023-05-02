@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <memory>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 

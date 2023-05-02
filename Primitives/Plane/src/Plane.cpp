@@ -33,20 +33,20 @@ bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
     double value_d = -(this->m_normal.getX() * this->m_origin.getX() +
                        this->m_normal.getY() * this->m_origin.getY() + this->m_normal.getZ() +
                        this->m_origin.getZ());
-    double value_a = (this->m_normal.getX() * ray.m_direction.getX() +
-                      this->m_normal.getY() * ray.m_direction.getY() +
-                      this->m_normal.getZ() * ray.m_direction.getZ());
-    double value_b =
-        (this->m_normal.getX() * ray.m_origin.getX() + this->m_normal.getY() * ray.m_origin.getY() +
-         this->m_normal.getZ() * ray.m_origin.getZ()) -
+    double value_a = (this->m_normal.getX() * ray.get_direction().getX() +
+                      this->m_normal.getY() * ray.get_direction().getY() +
+                      this->m_normal.getZ() * ray.get_direction().getZ());
+    double value_b = (this->m_normal.getX() * ray.get_origin().getX() +
+                      this->m_normal.getY() * ray.get_origin().getY() +
+                      this->m_normal.getZ() * ray.get_origin().getZ()) -
         value_d;
     double solution = -value_b / value_a;
 
-    if (this->m_normal.dot(ray.m_direction) == 0 || solution < 0)
+    if (this->m_normal.dot(ray.get_direction()) == 0 || solution < 0)
         return false;
     infos.normal = this->m_normal;
-    infos.point = Point3D{ray.m_origin.getX() + ray.m_direction.getX() * solution,
-                          ray.m_origin.getY() + ray.m_direction.getY() * solution,
-                          ray.m_origin.getZ() + ray.m_direction.getZ() * solution};
+    infos.point = Point3D{ray.get_origin().getX() + ray.get_direction().getX() * solution,
+                          ray.get_origin().getY() + ray.get_direction().getY() * solution,
+                          ray.get_origin().getZ() + ray.get_direction().getZ() * solution};
     return true;
 }
