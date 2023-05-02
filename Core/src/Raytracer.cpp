@@ -19,6 +19,5 @@ raytracer::Color &raytracer::Color::operator=(const njson &json)
     this->red = json["r"];
     this->green = json["g"];
     this->blue = json["b"];
-    std::cout << json << "\n";
     return *this;
 }

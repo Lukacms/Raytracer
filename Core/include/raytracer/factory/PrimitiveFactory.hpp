@@ -48,8 +48,9 @@ namespace raytracer
 
             static std::unique_ptr<math::IPrimitive> createPrimitive(njson &json);
 
-            template <typename... T_values> static std::unique_ptr<math::IPrimitive>
-            create(const std::string &path, std::tuple<T_values...> values)
+            template <typename TSignature, typename... TValues>
+            static std::unique_ptr<math::IPrimitive> create(const std::string &path,
+                                                            std::tuple<TValues...> values)
             {
                 std::unique_ptr<math::IPrimitive> new_primitive;
                 void *handle = nullptr;
@@ -57,13 +58,11 @@ namespace raytracer
                 if (!(handle = dlopen(path.c_str(), RTLD_LAZY)))
                     throw raytracer::PrimitiveFactory::FactoryException(dlerror());
                 auto *loader =
-                    reinterpret_cast<std::unique_ptr<math::IPrimitive> (*)(T_values && ...)>(
-                        dlsym(handle, LOAD_PRIMITIVE_METHOD.data()));
+                    reinterpret_cast<TSignature *>(dlsym(handle, LOAD_PRIMITIVE_METHOD.data()));
                 if (!loader)
                     throw raytracer::PrimitiveFactory::FactoryException(
                         ERROR_PRIMITIVE_CANNOT_LOAD.data());
-                if (!(new_primitive =
-                          loader(std::forward<T_values>(std::get<T_values>(values))...)))
+                if (!(new_primitive = loader(std::forward<TValues>(std::get<TValues>(values))...)))
                     throw raytracer::PrimitiveFactory::FactoryException(ERROR_NOT_PRIMITIVE.data());
                 return new_primitive;
             }

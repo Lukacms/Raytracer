@@ -15,7 +15,7 @@
 #include <raytracer/factory/LightFactory.hpp>
 #include <raytracer/factory/PrimitiveFactory.hpp>
 
-/* int main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
     raytracer::Scene scene{};
     if (argc != 2) {
@@ -36,9 +36,9 @@
     core.add_lights(std::move(scene.lights[1]));
     core.launch();
     return SUCCESS;
-} */
+}
 
-int main()
+/* int main()
 {
     math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
@@ -46,12 +46,15 @@ int main()
     math::Point3D point4{1, -1, 0};
     math::Vector3D vector{-1, 1, -1};
     raytracer::Canva canva{point3};
-    double size = 6.0;
+    double size = 7;
     // Set up camera
     raytracer::Camera camera(point1, canva);
     // Set up sphere
     std::unique_ptr<math::IPrimitive> sphere =
-        raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), std::forward_as_tuple(point2, size));
+        raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
+            const math::Point3D &, double)>(SPHERE_LIB.data(), std::forward_as_tuple(point2, size));
+    // raytracer::PrimitiveFactory::create(SPHERE_LIB.data(), std::forward_as_tuple(point2, size));
+    // return 0;
     // std::unique_ptr<light::ILight> light = raytracer::LightFactory::createPoint(point4);
     std::unique_ptr<light::ILight> light =
         raytracer::LightFactory::create(DIRECTIONAL_LIB.data(), vector);
@@ -73,7 +76,7 @@ int main()
         }
     }
     return 0;
-}
+} */
 
 /* int main()
 {
