@@ -7,17 +7,23 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
+
+using njson = nlohmann::json;
+
 namespace math
 {
     class Vector3D
     {
         public:
+            /* ctor / dtor */
             Vector3D() = default;
             Vector3D(double c_x, double c_y, double c_z);
             Vector3D(const Vector3D &) = default;
             Vector3D(Vector3D &&) = default;
             ~Vector3D() = default;
 
+            /* operator overload */
             Vector3D &operator=(const Vector3D &) = default;
             Vector3D &operator=(Vector3D &&) = default;
             Vector3D &operator+=(Vector3D &vector);
@@ -32,6 +38,10 @@ namespace math
             Vector3D operator/(const Vector3D &vector) const;
             Vector3D operator*(double coefficient) const;
             Vector3D operator/(double coefficient) const;
+
+            /* needed to load config */
+            Vector3D(const njson &json);
+            Vector3D &operator=(const njson &json);
 
             [[nodiscard]] double length() const;
             [[nodiscard]] double dot(const Vector3D &vector) const;

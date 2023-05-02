@@ -15,6 +15,22 @@ raytracer::Canva::Canva(math::Point3D &origin)
     this->m_origin = origin;
 }
 
+/* njson */
+raytracer::Canva::Canva(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_bottom_side = json.at("bottom");
+    this->m_left_side = json.at("left");
+}
+
+raytracer::Canva &raytracer::Canva::operator=(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_bottom_side = json.at("bottom");
+    this->m_left_side = json.at("left");
+    return *this;
+}
+
 // Methods
 
 math::Vector3D &raytracer::Canva::getBottomSide()

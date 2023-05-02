@@ -9,7 +9,6 @@
 
 #include <exception>
 #include <nlohmann/json.hpp>
-#include <nlohmann/json_fwd.hpp>
 #include <raytracer/config/Scene.hh>
 #include <string>
 #include <string_view>
@@ -17,7 +16,7 @@
 using njson = nlohmann::json;
 
 /* utils to get the file */
-constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/config/"};
+constexpr std::string_view DEFAULT_CONFIG_PATH{"assets/configs/"};
 constexpr char FULLPATH_INDIC{'/'};
 
 /* exception messages */
@@ -41,7 +40,7 @@ namespace raytracer
             ConfigFile &operator=(ConfigFile &&to_move) = default;
 
             // methods
-            void parse();
+            [[nodiscard]] Scene parse();
 
             // exception class
             class ConfigException : public std::exception

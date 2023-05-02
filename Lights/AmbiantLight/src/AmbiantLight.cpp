@@ -14,14 +14,15 @@
 // Constructor & Destructor
 
 light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
+    : m_coefficient{coefficient}
 {
     this->m_position = position;
-    this->m_coefficient = coefficient;
 }
 
 // Methods
 
-Color light::AmbientLight::lighten(HitInfos &infos, raytracer::Ray &view, Color color)
+raytracer::Color light::AmbientLight::lighten(raytracer::HitInfos & /* infos */,
+                                              raytracer::Ray & /* view */, raytracer::Color color)
 {
     color.red = static_cast<int>(color.red * this->m_coefficient);
     color.green = static_cast<int>(color.green * this->m_coefficient);
@@ -29,8 +30,9 @@ Color light::AmbientLight::lighten(HitInfos &infos, raytracer::Ray &view, Color 
     return color;
 }
 
-bool light::AmbientLight::isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
-                                     std::unique_ptr<math::IPrimitive> &current, HitInfos &infos)
+bool light::AmbientLight::isShadowed(
+    std::vector<std::unique_ptr<math::IPrimitive>> & /* primitives */,
+    std::unique_ptr<math::IPrimitive> & /* current */, raytracer::HitInfos & /* infos */)
 {
     return false;
 }

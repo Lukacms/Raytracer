@@ -7,22 +7,31 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
 #include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
+
+using njson = nlohmann::json;
 
 namespace raytracer
 {
     class Canva
     {
         public:
+            /* ctor / dtor */
             Canva() = default;
             Canva(math::Point3D &origin);
             Canva(const Canva &) = default;
             Canva(Canva &&) = default;
             ~Canva() = default;
 
+            /* operator overload */
             Canva &operator=(const Canva &) = default;
             Canva &operator=(Canva &&) = default;
+
+            /* needed to load config */
+            Canva(const njson &json);
+            Canva &operator=(const njson &json);
 
             [[nodiscard]] math::Vector3D &getBottomSide();
             [[nodiscard]] math::Vector3D &getLeftSide();

@@ -29,7 +29,8 @@ namespace light
 
             virtual void setLightPosition(math::Point3D position) = 0;
             [[nodiscard]] virtual math::Point3D &getLightPosition() = 0;
-            virtual Color lighten(HitInfos &infos, raytracer::Ray &view, Color color) = 0;
+            virtual raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
+                                             raytracer::Color color) = 0;
             virtual bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
                                     std::unique_ptr<math::IPrimitive> &current,
                                     HitInfos &infos) = 0;

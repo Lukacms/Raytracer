@@ -25,7 +25,8 @@ namespace math
             Plane &operator=(const Plane &) = default;
             Plane &operator=(Plane &&);
 
-            bool hits(raytracer::Ray &ray, HitInfos &infos) const final;
+            bool hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const final;
+
         private:
             math::Vector3D m_normal;
     };

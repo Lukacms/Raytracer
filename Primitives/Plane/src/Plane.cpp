@@ -28,7 +28,7 @@ math::Plane::Plane(math::Point3D corigin, math::Axis axis)
 
 // Methods
 
-bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
+bool math::Plane::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
 {
     double value_d = -(this->m_normal.getX() * this->m_origin.getX() +
                        this->m_normal.getY() * this->m_origin.getY() + this->m_normal.getZ() +
@@ -42,7 +42,7 @@ bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
         value_d;
     double solution = -value_b / value_a;
 
-    if (this->m_normal.dot(ray.m_direction) == 0 || solution < 0)
+    if (this->m_normal.dot(ray.m_direction) == 0.0 || solution < 0)
         return false;
     infos.normal = this->m_normal;
     infos.point = Point3D{ray.m_origin.getX() + ray.m_direction.getX() * solution,
