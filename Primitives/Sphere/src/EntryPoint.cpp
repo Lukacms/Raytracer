@@ -14,8 +14,8 @@
 
 extern "C" { // NOLINT
 
-std::unique_ptr<math::Sphere> entry_point_primitive(const math::Point3D &origin,
-                                                    double radius) // NOLINT
+std::unique_ptr<math::Sphere> primitive_entrypoint(const math::Point3D &origin,
+                                                   double radius) // NOLINT
 {
     std::unique_ptr<math::Sphere> new_sphere = std::make_unique<math::Sphere>(origin, radius);
 
