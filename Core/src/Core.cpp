@@ -6,7 +6,6 @@
 */
 
 #include <cmath>
-#include <fmt/core.h>
 #include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>

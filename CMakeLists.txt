@@ -153,21 +153,6 @@ FetchContent_MakeAvailable(json)
 
 message("${BoldRed}Finished loading library${ColourReset}")
 
-# make sure fmt is installed
-message("${BoldRed}Loading fmt${ColourReset}")
-
-set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
-
-include(FetchContent)
-
-FetchContent_Declare(fmt
-  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-  GIT_TAG master
-)
-FetchContent_MakeAvailable(fmt)
-
-message("${BoldRed}Finished loading library${ColourReset}")
-
 # link shared libraries and compile them
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
@@ -201,7 +186,6 @@ target_link_libraries(
     raytracer-core PRIVATE
     sfml-graphics
     sfml-window
-    fmt::fmt
     PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 
@@ -218,7 +202,6 @@ target_link_libraries(
     raytracer
     raytracer-interface
     raytracer-core
-    fmt::fmt
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

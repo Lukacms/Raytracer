@@ -8,14 +8,13 @@
 #include "raytracer/Ray.hh"
 #include "raytracer/math/Point3D.hh"
 #include <Plane.hh>
-#include <fmt/core.h>
 #include <memory>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
 
-math::Plane::Plane(math::Point3D corigin, math::Axis axis)
+math::Plane::Plane(math::Point3D corigin, math::Axis axis) : m_normal{math::Vector3D{0, 0, 0}}
 {
     this->m_origin = corigin;
     if (axis == math::Axis::X)

@@ -7,7 +7,6 @@
 
 #include <PointLight.hh>
 #include <cmath>
-#include <fmt/core.h>
 #include <iostream>
 #include <memory>
 #include <raytracer/Ray.hh>
@@ -82,7 +81,6 @@ math::Vector3D light::PointLight::getPhongSpecular(math::Vector3D &normal,
     math::Vector3D reflected_vector = (normal * (2 * light_vector.dot(normal))) - light_vector;
 
     if (reflected_vector.dot(cam_vector) > 0 && reflected_vector.dot(cam_vector) < 1) {
-        fmt::print("Dot Product : {}\n", reflected_vector.dot(cam_vector));
         double specular = 255 * reflected_vector.dot(cam_vector) /
             (reflected_vector.length() * camera_vector.length());
         return math::Vector3D{specular, specular, specular};

@@ -5,7 +5,6 @@
 ** main
 */
 
-#include <fmt/core.h>
 #include <iostream>
 #include <memory>
 #include <raytracer/Core.hh>
