@@ -7,7 +7,6 @@
 
 #include <cmath>
 #include <fmt/core.h>
-#include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>
@@ -51,7 +50,6 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection,
     for (auto &object : m_objects) {
         HitInfos infos{};
         if (object->hits(ray, infos)) {
-            std::cout << "test\n";
             if (incr == 0) {
                 m_max_infos = infos;
                 incr++;
@@ -69,9 +67,7 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection,
         ray.reflect_ray(m_max_infos);
         raytracer::Ray copy{ray};
         get_closest(copy, --index_reflection, index_closest);
-        std::cout << index_closest << "\n";
     }
-    // std::cout << index_closest << '\n';
     return index_closest;
 }
 
@@ -86,11 +82,6 @@ void raytracer::Raytracer::shader_b_w()
 void raytracer::Raytracer::launch()
 {
 
-    for (auto &object : m_objects) {
-        //        std::cout << object->getColor().red << ' ';
-        //       std::cout << object->getColor().green << ' ';
-        //      std::cout << object->getColor().blue << '\n';
-    }
     for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
         for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
             raytracer::Ray ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
