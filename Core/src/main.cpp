@@ -67,7 +67,7 @@ int main()
     math::Point3D point1{0, 0, 1};
     math::Point3D point2{0, 0, -1};
     math::Point3D point3{-0.5, -0.5, 0};
-    math::Point3D point4{2, -2, 3};
+    math::Point3D point4{10, -10, 10};
     math::Point3D point5{-2, 0, -3};
     math::Point3D point6{0.5, 0, -2};
     math::Point3D point7{0, -0.5, 0};

@@ -65,5 +65,6 @@ bool math::Sphere::hits(raytracer::Ray &ray, HitInfos &infos) const
                                       infos.point.getY() - this->m_origin.getY(),
                                       infos.point.getZ() - this->m_origin.getZ()};
     }
+    infos.normal /= infos.normal.length();
     return delta >= 0;
 }

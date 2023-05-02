@@ -32,18 +32,25 @@ Color light::PointLight::lighten(HitInfos &infos, raytracer::Ray &view, Color co
                          this->m_position.getY() - infos.point.getY(),
                          this->m_position.getZ() - infos.point.getZ()};
     light /= light.length();
+    math::Vector3D reflection =  infos.normal * 2 * infos.normal.dot(light) - light;
+    math::Vector3D inversed_view = view.m_direction * -1;
     double rho = light.dot(infos.normal);
-    // math::Vector3D specular = getPhongSpecular(infos.normal, view.m_direction, light);
+    double light_coefficient = 0.2;
+    double specular = reflection.dot(inversed_view) / (reflection.length() * inversed_view.length());
 
-    if (rho <= 0)
-        return Color{0, 0, 0};
-    // fmt::print("Specular : {} {} {}\n", specular.getX(), specular.getY(), specular.getZ());
-    // color.red = (color.red * rho) + specular.getX();
-    // color.green = (color.green * rho) + specular.getY();
-    // color.blue = (color.blue * rho) + specular.getZ();
-    color.red = (color.red * rho);
-    color.green = (color.green * rho);
-    color.blue = (color.blue * rho);
+    if (rho > 0)
+        light_coefficient += 0.6 * rho;
+    if (specular > 0 && specular < 1)
+        light_coefficient += 0.6 * pow(specular, 10);
+    color.red *= light_coefficient;
+    color.green *= light_coefficient;
+    color.blue *= light_coefficient;
+    if (color.red > 255)
+        color.red = 255;
+    if (color.green > 255)
+        color.green = 255;
+    if (color.blue > 255)
+        color.blue = 255;
     return color;
 }
 
