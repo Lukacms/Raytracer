@@ -5,24 +5,23 @@
 ** Sphere
 */
 
-#include "raytracer/math/Point3D.hh"
 #include <Sphere.hh>
 #include <cmath>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
 
-math::Sphere::Sphere(math::Point3D corigin, double cradius)
+math::Sphere::Sphere(math::Point3D corigin, double cradius) : m_radius{cradius}
 {
     this->m_origin = corigin;
-    this->m_radius = cradius;
 }
 
 // Methods
 
-bool math::Sphere::hits(raytracer::Ray &ray, HitInfos &infos) const
+bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
 {
     double value_a = pow(ray.get_direction().getX(), 2) + pow(ray.get_direction().getY(), 2) +
         pow(ray.get_direction().getZ(), 2);
@@ -55,7 +54,7 @@ bool math::Sphere::hits(raytracer::Ray &ray, HitInfos &infos) const
         infos.normal = math::Vector3D{infos.point.getX() - this->m_origin.getX(),
                                       infos.point.getY() - this->m_origin.getY(),
                                       infos.point.getZ() - this->m_origin.getZ()};
-    } else if (delta == 0) {
+    } else if (delta == 0.0) {
         infos.is_solution = true;
         double x_0 = (-value_b - sqrt(delta)) / (2 * value_a);
         infos.point = math::Point3D{ray.get_origin().getX() + x_0 * ray.get_direction().getX(),

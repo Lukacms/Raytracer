@@ -25,7 +25,7 @@ include_directories(Core/include/)
 # Warning flags
 set(GCC_WARNING_FLAGS
     -Wmisleading-indentation -Wduplicated-cond -Wduplicated-branches
-    -Wlogical-op -Wnull-dereference -Wuseless-cast -fno-gnu-unique)
+    -Wlogical-op -Wnull-dereference -Wuseless-cast -fno-gnu-unique -Wno-pragmas)
 
 set(CLANG_WARNING_FLAGS
     -Weverything
@@ -37,6 +37,7 @@ set(CLANG_WARNING_FLAGS
     -Wno-disabled-macro-expansion
     -Wno-documentation-unknown-command
     -Wno-exit-time-destructors
+    -Wno-missing-prototypes
     -Wno-global-constructors
     -Wno-implicit-int-float-conversion
     -Wno-return-std-move
@@ -57,6 +58,7 @@ set(WARNING_FLAGS
     -Wold-style-cast
     -Wcast-align
     -Wunused
+    -Wno-covered-switch-default
     -Woverloaded-virtual
     -Wpedantic
     -Wconversion
@@ -66,11 +68,6 @@ set(WARNING_FLAGS
     -Weffc++
     -Wno-padded
     -Wno-ctad-maybe-unsupported)
-
-# add a subdirectory to compile, to uncomment when CMakeLists will be complete
-# directories will need to change
-add_subdirectory(Primitives)
-add_subdirectory(Lights)
 
 # set colors for the messages because why not ?
 if(NOT WIN32)
@@ -137,13 +134,34 @@ message("Warning flags: ${Cyan} ${WARNING_FLAGS}${ColourReset}")
 
 add_library(raytracer-interface INTERFACE)
 
+message("${Green}Loading shared libraries")
+add_subdirectory(Primitives)
+add_subdirectory(Lights)
+message("${Green}Finished loading shared libraries${ColourReset}")
+
+# make sure nlohmann_json is installed
+message("${BoldRed}Loading nlohmann_json${ColourReset}")
+
+set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
+
+include(FetchContent)
+
+FetchContent_Declare(json
+    URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+    DOWNLOAD_EXTRACT_TIMESTAMP true)
+FetchContent_MakeAvailable(json)
+
+message("${BoldRed}Finished loading library${ColourReset}")
+
 # link shared libraries and compile them
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-interface PROPERTY CXX_STANDARD_REQUIRED ON)
 
+message("Loading raytracer-core")
+
 add_library(
     raytracer-core
-    STATIC
+    SHARED
     Core/src/math/APrimitive.cpp
     Core/src/math/Vector3D.cpp
     Core/src/math/Point3D.cpp
@@ -158,53 +176,33 @@ add_library(
     Core/src/PpmCreator.cpp
     Core/src/config/ConfigFile.cpp
     Core/src/config/ConfigException.cpp
+    Core/src/Raytracer.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer-core PROPERTY CXX_STANDARD_REQUIRED ON)
+target_link_libraries(
+    raytracer-core PRIVATE
+    sfml-graphics
+    sfml-window
+    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
+    )
 
-# make sure nlohmann_json is installed
-message("${BoldGreen}Loading nlohmann_json${ColourReset}")
-
-set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
-
-include(FetchContent)
-
-FetchContent_Declare(json
-    URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
-    DOWNLOAD_EXTRACT_TIMESTAMP true)
-FetchContent_MakeAvailable(json)
-
-message("${BoldGreen}Finished loading library${ColourReset}")
+message("Finished loading raytracer-core")
 
 # adding executables
 add_executable(
     raytracer
     Core/src/main.cpp
-    Core/src/math/APrimitive.cpp
-    Core/src/math/Vector3D.cpp
-    Core/src/math/Point3D.cpp
-    Core/src/Canva.cpp
-    Core/src/Camera.cpp
-    Core/src/Ray.cpp
-    Core/src/factory/PrimitiveFactory.cpp
-    Core/src/factory/AFactory.cpp
-    Core/src/factory/LightFactory.cpp
-    Core/src/ALight.cpp
-    Core/src/Core.cpp
-    Core/src/PpmCreator.cpp
     )
 
 # rules for raytracer project
 target_link_libraries(
-    raytracer PRIVATE
-    raytracer-core
+    raytracer
     raytracer-interface
-    sfml-graphics
-    sfml-window
+    raytracer-core
     fmt
-    #    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

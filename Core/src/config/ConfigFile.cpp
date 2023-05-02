@@ -6,11 +6,15 @@
 */
 
 #include <fstream>
+#include <iostream>
 #include <raytracer/config/ConfigFile.hh>
+#include <raytracer/config/Scene.hh>
+#include <raytracer/factory/AFactory.hh>
+#include <raytracer/factory/LightFactory.hpp>
+#include <raytracer/factory/PrimitiveFactory.hpp>
 #include <string>
 
 /* ctor and dtor for class */
-
 raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pfilepath)}
 {
     this->filepath = this->getFullPath();
@@ -41,11 +45,23 @@ void raytracer::ConfigFile::initConfig()
     }
 }
 
-void raytracer::ConfigFile::parse()
+raytracer::Scene raytracer::ConfigFile::parse()
 {
     try {
         this->initConfig();
     } catch (ConfigFile::ConfigException &e) {
         throw e;
     }
+    try {
+        this->scene.camera = this->config.at("camera");
+        for (auto &primitive : this->config.at("primitives"))
+            this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
+        for (auto &light : this->config.at("lights"))
+            this->scene.lights.emplace_back(LightFactory::createLight(light));
+    } catch (njson::exception &e) {
+        throw ConfigFile::ConfigException(std::string{"Couldn't load json: "} + e.what());
+    } catch (raytracer::AFactory::FactoryException &e) {
+        throw ConfigFile::ConfigException(e.what());
+    }
+    return std::move(this->scene);
 }

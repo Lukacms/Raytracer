@@ -5,16 +5,16 @@
 ** PointLight
 */
 
-#include "raytracer/RayTracer.hh"
-#include "raytracer/math/IPrimitive.hh"
-#include "raytracer/math/Vector3D.hh"
 #include <PointLight.hh>
 #include <cmath>
 #include <fmt/core.h>
 #include <iostream>
 #include <memory>
 #include <raytracer/Ray.hh>
+#include <raytracer/RayTracer.hh>
+#include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
+#include <raytracer/math/Vector3D.hh>
 #include <vector>
 
 // Constructor & Destructor
@@ -26,7 +26,8 @@ light::PointLight::PointLight(math::Point3D &position)
 
 // Methods
 
-Color light::PointLight::lighten(HitInfos &infos, raytracer::Ray &view, Color color)
+raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Ray & /* view */,
+                                            raytracer::Color color)
 {
     math::Vector3D light{this->m_position.getX() - infos.point.getX(),
                          this->m_position.getY() - infos.point.getY(),
@@ -36,25 +37,26 @@ Color light::PointLight::lighten(HitInfos &infos, raytracer::Ray &view, Color co
     //    math::Vector3D specular = getPhongSpecular(infos.normal, view.m_direction, light);
 
     if (rho <= 0)
-        return Color{0, 0, 0};
-    //   fmt::print("Specular : {} {} {}\n", specular.getX(), specular.getY(), specular.getZ());
-    //  color.red = static_cast<int>((color.red * rho) + specular.getX());
-    //  color.green = static_cast<int>((color.green * rho) + specular.getY());
-    //  color.blue = static_cast<int>((color.blue * rho) + specular.getZ());
-    color.red = static_cast<int>((color.red * rho));
-    color.green = static_cast<int>((color.green * rho));
-    color.blue = static_cast<int>((color.blue * rho));
+        return raytracer::Color{0, 0, 0};
+    // fmt::print("Specular : {} {} {}\n", specular.getX(), specular.getY(), specular.getZ());
+    // color.red = (color.red * rho) + specular.getX();
+    // color.green = (color.green * rho) + specular.getY();
+    // color.blue = (color.blue * rho) + specular.getZ();
+    color.red = static_cast<int>(color.red * rho);
+    color.green = static_cast<int>(color.green * rho);
+    color.blue = static_cast<int>(color.blue * rho);
     return color;
 }
 
 bool light::PointLight::isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
-                                   std::unique_ptr<math::IPrimitive> &current, HitInfos &infos)
+                                   std::unique_ptr<math::IPrimitive> &current,
+                                   raytracer::HitInfos &infos)
 {
     math::Vector3D vector = {this->m_position.getX() - infos.point.getX(),
                              this->m_position.getY() - infos.point.getY(),
                              this->m_position.getZ() - infos.point.getZ()};
     math::Vector3D tmp;
-    HitInfos info{};
+    raytracer::HitInfos info{};
     double scalaire1 = vector.dot(vector);
     double scalaire2;
     bool is_hit;
@@ -62,8 +64,9 @@ bool light::PointLight::isShadowed(std::vector<std::unique_ptr<math::IPrimitive>
     raytracer::Ray shadow_ray{infos.point, vector};
     for (auto &primitive : primitives) {
         is_hit = primitive->hits(shadow_ray, info);
-        tmp = {info.point.getX() - infos.point.getX(), info.point.getY() - infos.point.getY(),
-               info.point.getZ() - infos.point.getZ()};
+        tmp = math::Vector3D{info.point.getX() - infos.point.getX(),
+                             info.point.getY() - infos.point.getY(),
+                             info.point.getZ() - infos.point.getZ()};
         scalaire2 = vector.dot(tmp);
         if (is_hit && primitive != current && (0 < scalaire2 && scalaire2 < scalaire1))
             return true;

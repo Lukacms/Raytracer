@@ -1,4 +1,5 @@
-rm -rf build && mkdir build
+# rm -rf build && mkdir build
+mkdir build
 cd build
 
 if [ "$1" = "--gcc" ]; then

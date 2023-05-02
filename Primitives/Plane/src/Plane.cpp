@@ -28,7 +28,7 @@ math::Plane::Plane(math::Point3D corigin, math::Axis axis)
 
 // Methods
 
-bool math::Plane::hits(raytracer::Ray &ray, HitInfos &infos) const
+bool math::Plane::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
 {
     double value_d = -(this->m_normal.getX() * this->m_origin.getX() +
                        this->m_normal.getY() * this->m_origin.getY() + this->m_normal.getZ() +

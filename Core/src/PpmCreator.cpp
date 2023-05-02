@@ -13,13 +13,13 @@
 #include <string>
 #include <utility>
 
-PpmCreator::PpmCreator(std::vector<Pixel> &result, raytracer::Resolution &res,
+PpmCreator::PpmCreator(std::vector<raytracer::Pixel> &result, raytracer::Resolution &res,
                        std::string &filename) noexcept
     : m_result(result), m_res(res), m_name(filename)
 {
 }
 
-void PpmCreator::create_ppm_file(std::vector<Pixel> result, raytracer::Resolution res,
+void PpmCreator::create_ppm_file(std::vector<raytracer::Pixel> result, raytracer::Resolution res,
                                  std::string name)
 {
     PpmCreator creator{result, res, name};

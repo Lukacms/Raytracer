@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "raytracer/math/Point3D.hh"
 #include <raytracer/ALight.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/math/Point3D.hh>
 
 namespace light
 {
@@ -26,9 +26,11 @@ namespace light
             AmbientLight &operator=(const AmbientLight &) = default;
             AmbientLight &operator=(AmbientLight &&);
 
-            Color lighten(HitInfos &infos, raytracer::Ray &view, Color color) final;
+            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
+                                     raytracer::Color color) final;
             bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
-                            std::unique_ptr<math::IPrimitive> &current, HitInfos &infos) final;
+                            std::unique_ptr<math::IPrimitive> &current,
+                            raytracer::HitInfos &infos) final;
 
         private:
             double m_coefficient;

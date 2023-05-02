@@ -2,3 +2,4 @@
 # e.g.: add_subdirectory(Sphere)
 add_subdirectory(Sphere)
 add_subdirectory(Plane)
+add_subdirectory(Moebius)

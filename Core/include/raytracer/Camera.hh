@@ -7,13 +7,15 @@
 
 #pragma once
 
+#include <nlohmann/json.hpp>
 #include <raytracer/Canva.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
 
+using njson = nlohmann::json;
+
 namespace raytracer
 {
-
     class Camera
     {
         public:
@@ -24,7 +26,11 @@ namespace raytracer
             ~Camera() = default;
 
             Camera &operator=(const Camera &) = default;
-            Camera &operator=(Camera &&);
+            Camera &operator=(Camera &&) = default;
+
+            /* constructor and operators with json */
+            Camera(const njson &json);
+            Camera &operator=(const njson &json);
 
             raytracer::Ray ray(double canva_x, double canva_y);
             [[nodiscard]] math::Point3D get_origin() const;

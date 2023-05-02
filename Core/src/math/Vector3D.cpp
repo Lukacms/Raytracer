@@ -6,7 +6,6 @@
 */
 
 #include <cmath>
-#include <math.h>
 #include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
@@ -16,6 +15,22 @@ math::Vector3D::Vector3D(double c_x, double c_y, double c_z)
     this->m_x = c_x;
     this->m_y = c_y;
     this->m_z = c_z;
+}
+
+/* njson config */
+math::Vector3D::Vector3D(const njson &json)
+{
+    this->m_x = json.at("x");
+    this->m_y = json.at("y");
+    this->m_z = json.at("z");
+}
+
+math::Vector3D &math::Vector3D::operator=(const njson &json)
+{
+    this->m_x = json.at("x");
+    this->m_y = json.at("y");
+    this->m_z = json.at("z");
+    return *this;
 }
 
 // Operators

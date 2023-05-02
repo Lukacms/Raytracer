@@ -5,9 +5,10 @@
 ** Camera
 */
 
-#include "raytracer/math/Point3D.hh"
+#include <nlohmann/json.hpp>
 #include <raytracer/Camera.hh>
 #include <raytracer/Ray.hh>
+#include <raytracer/math/Point3D.hh>
 
 // Constructor & Destructor
 
@@ -23,6 +24,20 @@ raytracer::Camera::Camera(math::Point3D &origin, raytracer::Canva &canva)
 {
     this->m_origin = origin;
     this->m_canva = canva;
+}
+
+/* constructor and operators with json */
+raytracer::Camera::Camera(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_canva = json.at("canva");
+}
+
+raytracer::Camera &raytracer::Camera::operator=(const njson &json)
+{
+    this->m_origin = json.at("origin");
+    this->m_canva = json.at("canva");
+    return *this;
 }
 
 // Methods

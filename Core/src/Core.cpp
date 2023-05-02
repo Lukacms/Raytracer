@@ -5,14 +5,14 @@
 ** Core
 */
 
-#include "raytracer/PpmCreator.hh"
-#include "raytracer/Ray.hh"
-#include "raytracer/RayTracer.hh"
-#include "raytracer/math/Point3D.hh"
 #include <cmath>
 #include <fmt/core.h>
 #include <iostream>
 #include <raytracer/Core.hh>
+#include <raytracer/PpmCreator.hh>
+#include <raytracer/Ray.hh>
+#include <raytracer/RayTracer.hh>
+#include <raytracer/math/Point3D.hh>
 #include <utility>
 
 raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res)
