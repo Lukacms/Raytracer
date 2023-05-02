@@ -162,21 +162,21 @@ message("Loading raytracer-core")
 add_library(
     raytracer-core
     SHARED
-    Core/src/math/APrimitive.cpp
-    Core/src/math/Vector3D.cpp
-    Core/src/math/Point3D.cpp
-    Core/src/Canva.cpp
-    Core/src/Camera.cpp
-    Core/src/Ray.cpp
-    Core/src/factory/PrimitiveFactory.cpp
     Core/src/factory/AFactory.cpp
+    Core/src/factory/PrimitiveFactory.cpp
     Core/src/factory/LightFactory.cpp
     Core/src/ALight.cpp
-    Core/src/Core.cpp
-    Core/src/PpmCreator.cpp
-    Core/src/config/ConfigFile.cpp
-    Core/src/config/ConfigException.cpp
+    Core/src/math/Vector3D.cpp
+    Core/src/math/Point3D.cpp
+    Core/src/math/APrimitive.cpp
+    Core/src/Camera.cpp
     Core/src/Raytracer.cpp
+    Core/src/Core.cpp
+    Core/src/Canva.cpp
+    Core/src/PpmCreator.cpp
+    Core/src/config/ConfigException.cpp
+    Core/src/config/ConfigFile.cpp
+    Core/src/Ray.cpp
     )
 target_compile_options(raytracer-core PRIVATE ${WARNING_FLAGS})
 target_include_directories(raytracer-core PUBLIC include)
@@ -189,7 +189,7 @@ target_link_libraries(
     PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 
-message("Finished loading raytracer-core")
+message("${BoldWhite}Finished loading raytracer-core${ColourReset}")
 
 # adding executables
 add_executable(
@@ -199,9 +199,10 @@ add_executable(
 
 # rules for raytracer project
 target_link_libraries(
-    raytracer
+    raytracer PRIVATE
     raytracer-interface
     raytracer-core
+    PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})

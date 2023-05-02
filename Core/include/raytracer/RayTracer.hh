@@ -53,15 +53,15 @@ namespace raytracer
     struct HitInfos {
         public:
             /* attributes */
-            bool is_solution;
-            math::Point3D point;
-            math::Vector3D normal;
+            bool is_solution{true};
+            math::Point3D point{};
+            math::Vector3D normal{};
     };
 
     struct Pixel {
         public:
             /* attributes */
-            Color color;
-            HitInfos infos;
+            Color color{};
+            HitInfos infos{};
     };
 } // namespace raytracer
