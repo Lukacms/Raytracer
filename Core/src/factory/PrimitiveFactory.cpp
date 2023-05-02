@@ -24,7 +24,7 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
          raytracer::Color color = json["color"];
          std::unique_ptr<math::IPrimitive> prim =
              raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-                 const math::Point3D &, double)>(lib, std::forward_as_tuple(origin, radius));
+                 const math::Point3D &, double)>(lib, origin, radius);
          prim->setColor(color.red, color.green, color.blue);
          return prim;
      }},
@@ -35,8 +35,7 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
          raytracer::Color color = json["color"];
          std::unique_ptr<math::IPrimitive> prim =
              raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-                 const math::Point3D &, const math::Axis &)>(lib,
-                                                             std::forward_as_tuple(origin, axis));
+                 const math::Point3D &, const math::Axis &)>(lib, origin, axis);
          prim->setColor(color.red, color.green, color.blue);
          return prim;
      }},
@@ -46,8 +45,7 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
          double radius = json["radius"];
          raytracer::Color color = json["color"];
          return raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-             const math::Point3D &, double, const raytracer::Color &)>(
-             lib, std::forward_as_tuple(origin, radius, color));
+             const math::Point3D &, double, const raytracer::Color &)>(lib, origin, radius, color);
      }},
 };
 

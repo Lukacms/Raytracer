@@ -61,8 +61,6 @@ int main(int argc, const char *argv[])
     sphere->setColor(220, 20, 60);
     raytracer::HitInfos infos{};
     std::cout << "P3\n1600 1600\n255\n";
-    std::cerr << "sphere:\n\tcolors:" << sphere->getColor().green << sphere->getColor().red
-              << sphere->getColor().blue << "\n";
     for (double y = 0.000625; y <= 1; y += 0.000625) {
         for (double x = 0.000625; x <= 1; x += 0.000625) {
             // Calculate ray for current pixel

@@ -19,8 +19,6 @@ std::unique_ptr<math::Sphere> entry_point_primitive(const math::Point3D &origin,
 {
     std::unique_ptr<math::Sphere> new_sphere = std::make_unique<math::Sphere>(origin, radius);
 
-    std::cerr << "radius -> " << radius << "\n";
-    std::cerr << "origin -> " << origin.getX() << "\n";
     return new_sphere;
 }
 }

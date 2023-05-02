@@ -50,7 +50,7 @@ namespace raytracer
 
             template <typename TSignature, typename... TValues>
             static std::unique_ptr<math::IPrimitive> create(const std::string &path,
-                                                            std::tuple<TValues...> values)
+                                                            TValues... values)
             {
                 std::unique_ptr<math::IPrimitive> new_primitive;
                 void *handle = nullptr;
@@ -62,7 +62,7 @@ namespace raytracer
                 if (!loader)
                     throw raytracer::PrimitiveFactory::FactoryException(
                         ERROR_PRIMITIVE_CANNOT_LOAD.data());
-                if (!(new_primitive = loader(std::forward<TValues>(std::get<TValues>(values))...)))
+                if (!(new_primitive = loader(std::forward<TValues>(values)...)))
                     throw raytracer::PrimitiveFactory::FactoryException(ERROR_NOT_PRIMITIVE.data());
                 return new_primitive;
             }

@@ -50,19 +50,19 @@ namespace raytracer
 
             static std::unique_ptr<light::ILight> createLight(njson &json);
 
-            template <typename... T_values> static std::unique_ptr<light::ILight>
-            create(const std::string &path, T_values &&...values)
+            template <typename TSignature, typename... TValues>
+            static std::unique_ptr<light::ILight> create(const std::string &path, TValues... values)
             {
                 std::unique_ptr<light::ILight> new_light;
                 void *handle = nullptr;
 
                 if (!(handle = dlopen(path.c_str(), RTLD_LAZY)))
                     throw raytracer::LightFactory::FactoryException(dlerror());
-                auto *loader = reinterpret_cast<std::unique_ptr<light::ILight> (*)(T_values & ...)>(
-                    dlsym(handle, LOAD_LIGHT_METHOD.data()));
+                auto *loader =
+                    reinterpret_cast<TSignature *>(dlsym(handle, LOAD_LIGHT_METHOD.data()));
                 if (!loader)
                     throw raytracer::LightFactory::FactoryException(ERROR_LIGHT_CANNOT_LOAD.data());
-                if (!(new_light = loader(std::forward<T_values>(values)...)))
+                if (!(new_light = loader(std::forward<TValues>(values)...)))
                     throw raytracer::LightFactory::FactoryException(ERROR_NOT_LIGHT.data());
                 return new_light;
             }
