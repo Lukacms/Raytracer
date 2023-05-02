@@ -39,6 +39,7 @@ namespace raytracer
             /* overload operator */
             Color &operator=(const Color &) = default;
             Color &operator=(Color &&) = default;
+            Color &operator*=(double coefficient);
 
             /* needed to load config */
             Color(const njson &json);
@@ -50,12 +51,35 @@ namespace raytracer
             int blue;
     };
 
+
+    struct Material {
+        public:
+            /* Constructor & Destructor */
+            Material() = default;
+            Material(raytracer::Color color, double pspecular, double preflection);
+            Material(const Material &) = default;
+            Material(Material &&) = default;
+            ~Material() = default;
+
+            /* Overload operator */
+            Material &operator=(const Material &) = default;
+            Material &operator=(Material &&) = default;
+
+            /* needed to load config */
+            Material(const njson &json);
+            Material &operator=(const njson &json);
+
+            /* Attributes */
+            double specularity;
+            double reflection;
+            Color material_color;
+    };
+
     struct HitInfos {
         public:
-            /* attributes */
-            bool is_solution;
             math::Point3D point;
             math::Vector3D normal;
+            double specularity;
     };
 
     struct Pixel {

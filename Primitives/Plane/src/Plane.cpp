@@ -15,7 +15,7 @@
 
 // Constructor & Destructor
 
-math::Plane::Plane(math::Point3D corigin, math::Axis axis)
+math::Plane::Plane(math::Point3D corigin, math::Axis axis, raytracer::Material material)
 {
     this->m_origin = corigin;
     if (axis == math::Axis::X)
@@ -24,6 +24,7 @@ math::Plane::Plane(math::Point3D corigin, math::Axis axis)
         this->m_normal = math::Vector3D{0, -1, 0};
     if (axis == math::Axis::Z)
         this->m_normal = math::Vector3D{0, 0, 1};
+    this->m_material = material;
 }
 
 // Methods
@@ -48,5 +49,6 @@ bool math::Plane::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
     infos.point = Point3D{ray.m_origin.getX() + ray.m_direction.getX() * solution,
                           ray.m_origin.getY() + ray.m_direction.getY() * solution,
                           ray.m_origin.getZ() + ray.m_direction.getZ() * solution};
+    infos.specularity = this->m_material.specularity;
     return true;
 }

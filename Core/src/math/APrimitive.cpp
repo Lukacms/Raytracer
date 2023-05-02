@@ -16,13 +16,13 @@
 math::APrimitive::APrimitive(const njson &json)
 {
     this->m_origin = json.at("origin");
-    this->m_color = json.at("color");
+    this->m_material.material_color = json.at("color");
 }
 
 math::APrimitive &math::APrimitive::operator=(const njson &json)
 {
     this->m_origin = json.at("origin");
-    this->m_color = json.at("color");
+    this->m_material.material_color = json.at("color");
     return *this;
 }
 
@@ -102,12 +102,12 @@ void math::APrimitive::translate(double t_x, double t_y, double t_z)
 
 raytracer::Color math::APrimitive::getColor() const
 {
-    return this->m_color;
+    return this->m_material.material_color;
 }
 
 void math::APrimitive::setColor(int red, int green, int blue)
 {
-    this->m_color.red = red;
-    this->m_color.green = green;
-    this->m_color.blue = blue;
+    this->m_material.material_color.red = red;
+    this->m_material.material_color.green = green;
+    this->m_material.material_color.blue = blue;
 }

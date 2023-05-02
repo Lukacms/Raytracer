@@ -15,9 +15,10 @@
 
 // Constructor & Destructor
 
-math::Sphere::Sphere(math::Point3D corigin, double cradius) : m_radius{cradius}
+math::Sphere::Sphere(math::Point3D corigin, double cradius, raytracer::Material material) : m_radius{cradius}
 {
     this->m_origin = corigin;
+    this->m_material = material;
 }
 
 // Methods
@@ -41,7 +42,6 @@ bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
     double delta = pow(value_b, 2) - 4 * value_a * value_c;
 
     if (delta > 0) {
-        infos.is_solution = true;
         double x_1 = (-value_b - sqrt(delta)) / (2 * value_a);
         double x_2 = (-value_b + sqrt(delta)) / (2 * value_a);
         if (x_1 < x_2)
@@ -56,7 +56,6 @@ bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
                                       infos.point.getY() - this->m_origin.getY(),
                                       infos.point.getZ() - this->m_origin.getZ()};
     } else if (delta == 0.0) {
-        infos.is_solution = true;
         double x_0 = (-value_b - sqrt(delta)) / (2 * value_a);
         infos.point = math::Point3D{ray.m_origin.getX() + x_0 * ray.m_direction.getX(),
                                     ray.m_origin.getY() + x_0 * ray.m_direction.getY(),
@@ -66,5 +65,6 @@ bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
                                       infos.point.getZ() - this->m_origin.getZ()};
     }
     infos.normal /= infos.normal.length();
+    infos.specularity = this->m_material.specularity;
     return delta >= 0;
 }

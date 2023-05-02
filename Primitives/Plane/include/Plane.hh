@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
 #include <raytracer/Ray.hh>
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/Vector3D.hh>
@@ -17,7 +18,7 @@ namespace math
     {
         public:
             Plane() = default;
-            Plane(math::Point3D corigin, math::Axis axis);
+            Plane(math::Point3D corigin, math::Axis axis, raytracer::Material material);
             Plane(const Plane &) = default;
             Plane(Plane &&) = default;
             ~Plane() override = default;

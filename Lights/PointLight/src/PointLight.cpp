@@ -19,14 +19,15 @@
 
 // Constructor & Destructor
 
-light::PointLight::PointLight(math::Point3D &position)
+light::PointLight::PointLight(math::Point3D &position, double intensity)
 {
     this->m_position = position;
+    this->m_intensity = intensity;
 }
 
 // Methods
 
-raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Ray & /* view */,
+raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Ray & view,
                                             raytracer::Color color)
 {
     math::Vector3D light{this->m_position.getX() - infos.point.getX(),
@@ -42,10 +43,8 @@ raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytrace
     if (rho > 0)
         light_coefficient += this->m_intensity * rho;
     if (specular > 0 && specular < 1)
-        light_coefficient += this->m_intensity * pow(specular, 10);
-    color.red *= light_coefficient;
-    color.green *= light_coefficient;
-    color.blue *= light_coefficient;
+        light_coefficient += this->m_intensity * pow(specular, infos.specularity);
+    color *= light_coefficient;
     if (color.red > 255)
         color.red = 255;
     if (color.green > 255)
@@ -79,20 +78,4 @@ bool light::PointLight::isShadowed(std::vector<std::unique_ptr<math::IPrimitive>
             return true;
     }
     return false;
-}
-
-math::Vector3D light::PointLight::getPhongSpecular(math::Vector3D &normal,
-                                                   math::Vector3D &camera_vector,
-                                                   math::Vector3D &light_vector)
-{
-    math::Vector3D cam_vector = (camera_vector / camera_vector.length()) * -1;
-    math::Vector3D reflected_vector = (normal * (2 * light_vector.dot(normal))) - light_vector;
-
-    if (reflected_vector.dot(cam_vector) > 0 && reflected_vector.dot(cam_vector) < 1) {
-        fmt::print("Dot Product : {}\n", reflected_vector.dot(cam_vector));
-        double specular = 255 * reflected_vector.dot(cam_vector) /
-            (reflected_vector.length() * camera_vector.length());
-        return math::Vector3D{specular, specular, specular};
-    }
-    return math::Vector3D{0, 0, 0};
 }

@@ -13,10 +13,11 @@
 
 extern "C" { // NOLINT
 
-std::unique_ptr<math::Plane> primitive_entrypoint(math::Point3D &origin, math::Axis axis) // NOLINT
-{
-    std::unique_ptr<math::Plane> new_plane = std::make_unique<math::Plane>(origin, axis);
+std::unique_ptr<math::Plane> primitive_entrypoint(math::Point3D &origin, math::Axis axis,
+                                                  raytracer::Material material) // NOLINT
+    {
+        std::unique_ptr<math::Plane> new_plane = std::make_unique<math::Plane>(origin, axis, material);
 
-    return new_plane;
-}
+        return new_plane;
+    }
 }
