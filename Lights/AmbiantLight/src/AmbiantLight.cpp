@@ -5,6 +5,7 @@
 ** AmbiantLight
 */
 
+#include "raytracer/math/Vector3D.hh"
 #include <AmbiantLight.hh>
 #include <iostream>
 #include <raytracer/Ray.hh>
@@ -21,10 +22,17 @@ light::AmbientLight::AmbientLight(math::Point3D &position, double coefficient)
 // Methods
 
 raytracer::Color light::AmbientLight::lighten(raytracer::HitInfos & /* infos */,
-                                              raytracer::Color color)
+                                              raytracer::Ray & /* view */, raytracer::Color color)
 {
-    color.red *= static_cast<int>(this->m_coefficient);
-    color.green *= static_cast<int>(this->m_coefficient);
-    color.blue *= static_cast<int>(this->m_coefficient);
+    color.red = static_cast<int>(color.red * this->m_coefficient);
+    color.green = static_cast<int>(color.green * this->m_coefficient);
+    color.blue = static_cast<int>(color.blue * this->m_coefficient);
     return color;
+}
+
+bool light::AmbientLight::isShadowed(
+    std::vector<std::unique_ptr<math::IPrimitive>> & /* primitives */,
+    std::unique_ptr<math::IPrimitive> & /* current */, raytracer::HitInfos & /* infos */)
+{
+    return false;
 }

@@ -26,7 +26,11 @@ namespace light
             AmbientLight &operator=(const AmbientLight &) = default;
             AmbientLight &operator=(AmbientLight &&);
 
-            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Color color) final;
+            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
+                                     raytracer::Color color) final;
+            bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
+                            std::unique_ptr<math::IPrimitive> &current,
+                            raytracer::HitInfos &infos) final;
 
         private:
             double m_coefficient;

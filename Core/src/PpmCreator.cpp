@@ -13,13 +13,13 @@
 #include <string>
 #include <utility>
 
-PpmCreator::PpmCreator(std::vector<raytracer::Color> &result, raytracer::Resolution &res,
+PpmCreator::PpmCreator(std::vector<raytracer::Pixel> &result, raytracer::Resolution &res,
                        std::string &filename) noexcept
     : m_result(result), m_res(res), m_name(filename)
 {
 }
 
-void PpmCreator::create_ppm_file(std::vector<raytracer::Color> result, raytracer::Resolution res,
+void PpmCreator::create_ppm_file(std::vector<raytracer::Pixel> result, raytracer::Resolution res,
                                  std::string name)
 {
     PpmCreator creator{result, res, name};
@@ -38,12 +38,12 @@ void PpmCreator::create_ppm()
         throw e;
     }
     file.open(m_name);
-    std::string res{"P3\n" + std::to_string(static_cast<int>(1 / m_res.x)) + " " +
-                    std::to_string(static_cast<int>(1 / m_res.y)) + "\n255\n"};
+    std::string res{"P3\n" + std::to_string(m_res.x) + " " + std::to_string(m_res.y) + "\n255\n"};
     file << res;
-    for (auto color : m_result) {
-        std::string result{std::to_string(color.red) + ' ' + std::to_string(color.green) + ' ' +
-                           std::to_string(color.blue) + '\n'};
+    for (auto result_info : m_result) {
+        std::string result{std::to_string(result_info.color.red) + ' ' +
+                           std::to_string(result_info.color.green) + ' ' +
+                           std::to_string(result_info.color.blue) + '\n'};
         file << result;
     }
 }

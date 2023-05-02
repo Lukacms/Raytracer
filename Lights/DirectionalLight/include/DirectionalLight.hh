@@ -27,7 +27,11 @@ namespace light
             DirectionalLight &operator=(const DirectionalLight &) = default;
             DirectionalLight &operator=(DirectionalLight &&);
 
-            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Color color) final;
+            raytracer::Color lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
+                                     raytracer::Color color) final;
+            bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
+                            std::unique_ptr<math::IPrimitive> &current,
+                            raytracer::HitInfos &infos) final;
 
         private:
             math::Vector3D m_direction;

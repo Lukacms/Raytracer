@@ -25,7 +25,10 @@ raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pf
 std::string raytracer::ConfigFile::getFullPath()
 {
     std::string fullpath{};
+    std::ifstream ifstream{this->filepath};
 
+    if (ifstream.is_open())
+        return this->filepath;
     if (this->filepath.find(FULLPATH_INDIC) != std::string::npos)
         return this->filepath;
     fullpath = DEFAULT_CONFIG_PATH.data() + this->filepath;
