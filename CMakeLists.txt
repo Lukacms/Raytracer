@@ -160,11 +160,11 @@ set(JSON_BuildTests OFF CACHE INTERNAL "") # don't test the library
 
 include(FetchContent)
 
-FetchContent_Declare(json
-    GIT_REPOSITORY https://github.com/fmtlib/fmt
-    GIT_TAG 9.1.0
-    )
-FetchContent_MakeAvailable(json)
+FetchContent_Declare(fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(fmt)
 
 message("${BoldRed}Finished loading library${ColourReset}")
 
@@ -201,7 +201,7 @@ target_link_libraries(
     raytracer-core PRIVATE
     sfml-graphics
     sfml-window
-    fmt
+    fmt::fmt
     PRIVATE nlohmann_json::nlohmann_json  # library for nlohmann_json => parse configuration files
     )
 
@@ -218,7 +218,7 @@ target_link_libraries(
     raytracer
     raytracer-interface
     raytracer-core
-    fmt
+    fmt::fmt
     )
 target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})
