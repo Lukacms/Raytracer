@@ -21,7 +21,7 @@
 constexpr std::string_view SPHERE_LIB = "./plugins/raytracer_sphere.so";
 constexpr std::string_view PLANE_LIB = "./plugins/raytracer_plane.so";
 constexpr std::string_view MOEBIUS_LIB = "./plugins/raytracer_moebius.so";
-constexpr std::string_view LOAD_PRIMITIVE_METHOD = "entry_point_primitive";
+constexpr std::string_view LOAD_PRIMITIVE_METHOD = "primitive_entrypoint";
 constexpr std::string_view ERROR_PRIMITIVE_CANNOT_LOAD = "RayTracer: Unable to load library.";
 constexpr std::string_view ERROR_NOT_PRIMITIVE = "RayTracer: Not a primitive library.";
 
@@ -48,8 +48,9 @@ namespace raytracer
 
             static std::unique_ptr<math::IPrimitive> createPrimitive(njson &json);
 
-            template <typename... T_values> static std::unique_ptr<math::IPrimitive>
-            create(const std::string &path, T_values &&...values)
+            template <typename TSignature, typename... TValues>
+            static std::unique_ptr<math::IPrimitive> create(const std::string &path,
+                                                            TValues... values)
             {
                 std::unique_ptr<math::IPrimitive> new_primitive;
                 void *handle = nullptr;
@@ -57,12 +58,11 @@ namespace raytracer
                 if (!(handle = dlopen(path.c_str(), RTLD_LAZY)))
                     throw raytracer::PrimitiveFactory::FactoryException(dlerror());
                 auto *loader =
-                    reinterpret_cast<std::unique_ptr<math::IPrimitive> (*)(T_values & ...)>(
-                        dlsym(handle, LOAD_PRIMITIVE_METHOD.data()));
+                    reinterpret_cast<TSignature *>(dlsym(handle, LOAD_PRIMITIVE_METHOD.data()));
                 if (!loader)
                     throw raytracer::PrimitiveFactory::FactoryException(
                         ERROR_PRIMITIVE_CANNOT_LOAD.data());
-                if (!(new_primitive = loader(std::forward<T_values>(values)...)))
+                if (!(new_primitive = loader(std::forward<TValues>(values)...)))
                     throw raytracer::PrimitiveFactory::FactoryException(ERROR_NOT_PRIMITIVE.data());
                 return new_primitive;
             }
