@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/RayTracer.hh"
 #include <nlohmann/json.hpp>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
@@ -66,9 +67,10 @@ namespace math
             // void scale(double t_x, double t_y, double t_z) final;
             [[nodiscard]] raytracer::Color getColor() const final;
             void setColor(int red, int green, int blue) final;
+            void setMaterial(raytracer::Material material);
 
         protected:
             math::Point3D m_origin{};
-            raytracer::Color m_color{0, 0, 0};
+            raytracer::Material m_material{};
     };
 } // namespace math

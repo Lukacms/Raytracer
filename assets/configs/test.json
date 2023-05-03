@@ -32,13 +32,15 @@
                 "z": -2
             },
             "radius": 0.5,
-            "color": {
-                "r": 0,
-                "g": 0,
-                "b": 255
-            },
-            "reflection": 0.2,
-            "spec": 500
+            "material": {
+                "color": {
+                    "r": 0,
+                    "g": 0,
+                    "b": 255
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
         },
         {
             "type": "sphere",
@@ -48,13 +50,15 @@
                 "z": -3
             },
             "radius": 0.5,
-            "color": {
-                "r": 255,
-                "g": 0,
-                "b": 0
-            },
-            "reflection": 0.3,
-            "spec": 500
+            "material": {
+                "color": {
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
+                },
+                "reflection": 0.3,
+                "spec": 500
+            }
         },
         {
             "type": "sphere",
@@ -64,13 +68,15 @@
                 "z": -1
             },
             "radius": 0.5,
-            "color": {
-                "r": 0,
-                "g": 255,
-                "b": 0
-            },
-            "reflection": 0.4,
-            "spec": 10
+            "material": {
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0
+                },
+                "reflection": 0.4,
+                "spec": 10
+            }
         },
         {
             "type": "sphere",
@@ -80,13 +86,15 @@
                 "z": 0
             },
             "radius": 5000,
-            "color": {
-                "r": 255,
-                "g": 255,
-                "b": 0
-            },
-            "reflection": 0.5,
-            "spec": 1000
+            "material": {
+                "color": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 0
+                },
+                "reflection": 0.5,
+                "spec": 1000
+            }
         }
     ],
     "lights": [
@@ -105,7 +113,8 @@
                 "x": 2,
                 "y": 1,
                 "z": 0
-            }
+            },
+            "intensity": 0.3
         },
         {
             "type": "directional",
@@ -113,7 +122,8 @@
                 "x": 1,
                 "y": 4,
                 "z": 4
-            }
+            },
+            "intensity": 0.3
         }
     ]
 }

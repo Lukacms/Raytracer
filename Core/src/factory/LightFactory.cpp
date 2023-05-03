@@ -17,26 +17,25 @@ static const std::vector<raytracer::LightHandler> HANDLER{
      [](const std::string &lib, njson &json) -> std::unique_ptr<light::ILight> {
          math::Point3D origin = json["origin"];
          double coefficient = json["coefficient"];
+
          return raytracer::LightFactory::create<std::unique_ptr<light::ILight>(
-             const math::Point3D &, double)>(lib, origin, coefficient);
-     }},
-    {"diffuse", "",
-     [](const std::string &lib, njson &json) -> std::unique_ptr<light::ILight> {
-         double coefficient = json["coefficient"];
-         return raytracer::LightFactory::create<std::unique_ptr<light::ILight>(double)>(
-             lib, coefficient);
+             const math::Point3D &, const double &)>(lib, origin, coefficient);
      }},
     {"directional", DIRECTIONAL_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<light::ILight> {
          math::Vector3D direction = json["direction"];
+         double intensity = json["intensity"];
+
          return raytracer::LightFactory::create<std::unique_ptr<light::ILight>(
-             const math::Vector3D &)>(lib, direction);
+             const math::Vector3D &, const double &)>(lib, direction, intensity);
      }},
     {"point", POINT_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<light::ILight> {
          math::Point3D origin = json["origin"];
+         double intensity = json["intensity"];
+
          return raytracer::LightFactory::create<std::unique_ptr<light::ILight>(
-             const math::Point3D &)>(lib, origin);
+             const math::Point3D &, const double &)>(lib, origin, intensity);
      }},
 };
 

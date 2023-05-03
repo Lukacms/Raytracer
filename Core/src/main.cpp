@@ -32,6 +32,7 @@ int main(int argc, const char *argv[])
     core.add_object(std::move(scene.primitives[0]));
     core.add_object(std::move(scene.primitives[1]));
     core.add_object(std::move(scene.primitives[2]));
+    core.add_object(std::move(scene.primitives[3]));
     core.add_lights(std::move(scene.lights[1]));
     core.launch();
     return SUCCESS;
