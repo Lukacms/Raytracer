@@ -6,7 +6,6 @@
 */
 
 #include <fstream>
-#include <iostream>
 #include <raytracer/config/ConfigFile.hh>
 #include <raytracer/config/Scene.hh>
 #include <raytracer/factory/AFactory.hh>
@@ -48,7 +47,8 @@ void raytracer::ConfigFile::initConfig()
     }
 }
 
-raytracer::Scene raytracer::ConfigFile::parse()
+// private
+raytracer::Scene raytracer::ConfigFile::doParse()
 {
     try {
         this->initConfig();
@@ -67,4 +67,16 @@ raytracer::Scene raytracer::ConfigFile::parse()
         throw ConfigFile::ConfigException(e.what());
     }
     return std::move(this->scene);
+}
+
+// public
+raytracer::Scene raytracer::ConfigFile::parser(const std::string &pfilepath)
+{
+    raytracer::ConfigFile config{pfilepath};
+
+    try {
+        return config.doParse();
+    } catch (ConfigFile::ConfigException &e) {
+        throw e;
+    }
 }
