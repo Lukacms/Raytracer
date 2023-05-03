@@ -38,9 +38,11 @@ namespace raytracer
             [[nodiscard]] math::Point3D &getOrigin();
             void setOrigin(math::Point3D &origin);
             math::Point3D pointAt(double canva_x, double canva_y);
+            void reset();
 
         private:
             math::Point3D m_origin{0, 0, 0};
+            math::Point3D m_backup{0, 0, 0};
             math::Vector3D m_bottom_side{1, 0, 0};
             math::Vector3D m_left_side{0, 1, 0};
     };

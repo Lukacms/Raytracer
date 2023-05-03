@@ -14,12 +14,14 @@
 raytracer::Canva::Canva(math::Point3D &origin)
 {
     this->m_origin = origin;
+    this->m_backup = origin;
 }
 
 /* njson */
 raytracer::Canva::Canva(const njson &json)
 {
     this->m_origin = json.at("origin");
+    this->m_backup = json.at("origin");
     this->m_bottom_side = json.at("bottom");
     this->m_left_side = json.at("left");
 }
@@ -27,6 +29,7 @@ raytracer::Canva::Canva(const njson &json)
 raytracer::Canva &raytracer::Canva::operator=(const njson &json)
 {
     this->m_origin = json.at("origin");
+    this->m_backup = json.at("origin");
     this->m_bottom_side = json.at("bottom");
     this->m_left_side = json.at("left");
     return *this;
@@ -52,6 +55,7 @@ math::Point3D &raytracer::Canva::getOrigin()
 void raytracer::Canva::setOrigin(math::Point3D &origin)
 {
     this->m_origin = origin;
+    this->m_backup = origin;
 }
 
 math::Point3D raytracer::Canva::pointAt(double canva_x, double canva_y)
@@ -60,4 +64,9 @@ math::Point3D raytracer::Canva::pointAt(double canva_x, double canva_y)
     double y_pos = canva_y + (this->m_origin.getY() * this->m_left_side.getY());
 
     return math::Point3D{x_pos, y_pos, this->m_origin.getZ()};
+}
+
+void raytracer::Canva::reset()
+{
+    this->m_origin = this->m_backup;
 }
