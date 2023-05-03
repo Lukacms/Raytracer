@@ -51,7 +51,6 @@ namespace raytracer
             int blue;
     };
 
-
     struct Material {
         public:
             /* Constructor & Destructor */
@@ -77,6 +76,7 @@ namespace raytracer
 
     struct HitInfos {
         public:
+            /* attributes */
             math::Point3D point;
             math::Vector3D normal;
             double specularity;
@@ -85,7 +85,7 @@ namespace raytracer
     struct Pixel {
         public:
             /* attributes */
-            Color color;
-            HitInfos infos;
+            Color color{};
+            HitInfos infos{};
     };
 } // namespace raytracer

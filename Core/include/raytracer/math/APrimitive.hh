@@ -67,9 +67,10 @@ namespace math
             // void scale(double t_x, double t_y, double t_z) final;
             [[nodiscard]] raytracer::Color getColor() const final;
             void setColor(int red, int green, int blue) final;
+            void setMaterial(raytracer::Material material);
 
         protected:
             math::Point3D m_origin{};
-            raytracer::Material m_material{{0, 0, 0}, 0, 0};
+            raytracer::Material m_material{};
     };
 } // namespace math

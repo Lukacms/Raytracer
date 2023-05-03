@@ -95,11 +95,6 @@ void math::APrimitive::translate(double t_x, double t_y, double t_z)
     this->m_origin = math::Point3D{n_x, n_y, n_z};
 }
 
-// void math::APrimitive::scale(double t_x, double t_y, double t_z)
-// {
-
-// }
-
 raytracer::Color math::APrimitive::getColor() const
 {
     return this->m_material.material_color;
@@ -110,4 +105,9 @@ void math::APrimitive::setColor(int red, int green, int blue)
     this->m_material.material_color.red = red;
     this->m_material.material_color.green = green;
     this->m_material.material_color.blue = blue;
+}
+
+void math::APrimitive::setMaterial(raytracer::Material material)
+{
+    this->m_material = std::move(material);
 }

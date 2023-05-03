@@ -7,7 +7,6 @@
 
 #include <PointLight.hh>
 #include <cmath>
-#include <fmt/core.h>
 #include <iostream>
 #include <memory>
 #include <raytracer/Ray.hh>
@@ -27,18 +26,19 @@ light::PointLight::PointLight(math::Point3D &position, double intensity)
 
 // Methods
 
-raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Ray & view,
+raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytracer::Ray &view,
                                             raytracer::Color color)
 {
     math::Vector3D light{this->m_position.getX() - infos.point.getX(),
                          this->m_position.getY() - infos.point.getY(),
                          this->m_position.getZ() - infos.point.getZ()};
     light /= light.length();
-    math::Vector3D reflection =  infos.normal * 2 * infos.normal.dot(light) - light;
+    math::Vector3D reflection = infos.normal * 2 * infos.normal.dot(light) - light;
     math::Vector3D inversed_view = view.m_direction * -1;
     double rho = light.dot(infos.normal);
     double light_coefficient = 0.2;
-    double specular = reflection.dot(inversed_view) / (reflection.length() * inversed_view.length());
+    double specular =
+        reflection.dot(inversed_view) / (reflection.length() * inversed_view.length());
 
     if (rho > 0)
         light_coefficient += this->m_intensity * rho;

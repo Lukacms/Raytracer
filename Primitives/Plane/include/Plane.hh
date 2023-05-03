@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "raytracer/RayTracer.hh"
 #include <raytracer/Ray.hh>
+#include <raytracer/RayTracer.hh>
 #include <raytracer/math/APrimitive.hh>
 #include <raytracer/math/Vector3D.hh>
 

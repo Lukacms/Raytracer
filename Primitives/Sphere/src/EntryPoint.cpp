@@ -7,19 +7,22 @@
 
 #pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
 
-#include <raytracer/RayTracer.hh>
-#include <iostream>
 #include <Sphere.hh>
+#include <iostream>
 #include <memory>
+#include <raytracer/RayTracer.hh>
 #include <raytracer/math/Point3D.hh>
 
 extern "C" { // NOLINT
 
 std::unique_ptr<math::Sphere> primitive_entrypoint(const math::Point3D &origin,
-                                                   double radius, raytracer::Material material) // NOLINT
+                                                   const double &radius,
+                                                   const raytracer::Material &material) // NOLINT
 {
-    std::unique_ptr<math::Sphere> new_sphere = std::make_unique<math::Sphere>(origin, radius, material);
+    std::unique_ptr<math::Sphere> new_sphere =
+        std::make_unique<math::Sphere>(origin, radius, material);
 
+    new_sphere->setMaterial(material);
     return new_sphere;
 }
 }

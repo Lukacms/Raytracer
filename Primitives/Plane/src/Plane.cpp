@@ -5,12 +5,11 @@
 ** Plane
 */
 
-#include "raytracer/Ray.hh"
-#include "raytracer/math/Point3D.hh"
 #include <Plane.hh>
-#include <fmt/core.h>
 #include <memory>
+#include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
 
 // Constructor & Destructor
