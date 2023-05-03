@@ -21,9 +21,8 @@ int main(int argc, const char *argv[])
         std::cout << HELP_MSG;
         return FAILURE;
     }
-    raytracer::ConfigFile config{argv[1]};
     try {
-        scene = config.parse();
+        scene = raytracer::ConfigFile::parser(argv[1]);
     } catch (raytracer::ConfigFile::ConfigException &e) {
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;

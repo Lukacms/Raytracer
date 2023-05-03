@@ -40,7 +40,7 @@ namespace raytracer
             ConfigFile &operator=(ConfigFile &&to_move) = default;
 
             // methods
-            [[nodiscard]] Scene parse();
+            [[nodiscard]] static Scene parser(const std::string &pfilepath);
 
             // exception class
             class ConfigException : public std::exception
@@ -69,5 +69,6 @@ namespace raytracer
             // private methods
             std::string getFullPath();
             void initConfig();
+            [[nodiscard]] Scene doParse();
     };
 } // namespace raytracer
