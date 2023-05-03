@@ -64,7 +64,15 @@ bool math::Sphere::hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const
                                       infos.point.getY() - this->m_origin.getY(),
                                       infos.point.getZ() - this->m_origin.getZ()};
     }
+    math::Vector3D vector = {infos.point.getX() - ray.m_origin.getX(),
+                             infos.point.getY() - ray.m_origin.getY(),
+                            infos.point.getZ() - ray.m_origin.getZ()};
     infos.normal /= infos.normal.length();
     infos.specularity = this->m_material.specularity;
+    double scalaire1 = ray.m_direction.dot(ray.m_direction);
+    double scalaire2 = ray.m_direction.dot(vector);
+
+    if (0 > scalaire2 && scalaire2 < scalaire1)
+            return false;
     return delta >= 0;
 }

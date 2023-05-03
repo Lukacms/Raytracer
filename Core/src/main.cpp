@@ -67,9 +67,7 @@ int main(int argc, const char *argv[])
             raytracer::Color c1 = sphere->getColor();
             if (sphere->hits(ray, infos)) {
                 c1 = light->lighten(infos, ray, c1);
-                fmt::print("{} {} {}\n", c1.red, c1.green, c1.blue);
             } else
-                fmt::print("105 105 105\n");
         }
     }
     return 0;
