@@ -7,6 +7,7 @@
 
 #include <cmath>
 #include <fmt/core.h>
+#include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>
@@ -38,11 +39,12 @@ static double get_length(math::Point3D first, math::Point3D second)
                      std::pow(second.getZ() - first.getZ(), 2));
 }
 
-int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection, int index_closest)
+int raytracer::Raytracer::get_closest(raytracer::Ray &ray)
 {
     int index{0};
     int incr{0};
     math::Point3D camera_origin = m_camera.get_origin();
+    int index_closest{-1};
 
     if (m_objects.empty())
         return 0;
@@ -56,17 +58,11 @@ int raytracer::Raytracer::get_closest(raytracer::Ray &ray, int index_reflection,
             }
             if (get_length(camera_origin, infos.point) <=
                 get_length(camera_origin, m_max_infos.point)) {
-                if (index_closest == -1)
-                    index_closest = index;
+                index_closest = index;
                 m_max_infos = infos;
             }
         }
         index++;
-    }
-    if (index_reflection > 0 && index_closest == 0) {
-        ray.reflect_ray(m_max_infos);
-        raytracer::Ray copy{ray};
-        get_closest(copy, --index_reflection, index_closest);
     }
     return index_closest;
 }
@@ -86,7 +82,7 @@ void raytracer::Raytracer::launch()
         for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
             raytracer::Ray ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
                                               static_cast<double>(y_axes) * m_resolution.y_value);
-            int closest = get_closest(ray, 1, -1);
+            int closest = get_closest(ray);
             m_result.emplace_back();
             m_result[0].color = Color{0, 0, 0};
             m_result[0].infos = HitInfos{false, math::Point3D{}, math::Vector3D{}};

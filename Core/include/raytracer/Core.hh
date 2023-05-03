@@ -42,12 +42,13 @@ namespace raytracer
             void shader_b_w();
 
         private:
-            int get_closest(raytracer::Ray &ray, int nb_reflection, int nb_closest);
+            int get_closest(raytracer::Ray &ray);
             std::vector<std::unique_ptr<light::ILight>> m_lights{};
             std::vector<std::unique_ptr<math::IPrimitive>> m_objects{};
             raytracer::Camera m_camera{};
             Resolution m_resolution{};
             std::vector<Pixel> m_result{};
             HitInfos m_max_infos{};
+            HitInfos m_true_max_infos{};
     };
 } // namespace raytracer
