@@ -35,10 +35,12 @@ namespace raytracer
 
             raytracer::Ray ray(double canva_x, double canva_y);
             void transform(std::vector<std::vector<double>> &matrix);
+            void reset();
             [[nodiscard]] math::Point3D get_origin() const;
 
         private:
             math::Point3D m_origin{0, 0, -1};
+            math::Point3D m_backup{};
             raytracer::Canva m_canva{};
     };
 } // namespace raytracer

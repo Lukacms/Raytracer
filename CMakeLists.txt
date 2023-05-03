@@ -175,6 +175,7 @@ add_library(
     Core/src/math/Vector3D.cpp
     Core/src/math/Point3D.cpp
     Core/src/math/APrimitive.cpp
+    Core/src/math/Math.cpp
     Core/src/Camera.cpp
     Core/src/Raytracer.cpp
     Core/src/Core.cpp

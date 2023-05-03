@@ -82,3 +82,8 @@ void math::APrimitive::setMaterial(raytracer::Material material)
 {
     this->m_material = std::move(material);
 }
+
+std::vector<std::vector<double>> math::APrimitive::getTransform() const
+{
+    return this->m_transform;
+}

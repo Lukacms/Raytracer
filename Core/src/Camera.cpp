@@ -19,11 +19,13 @@ raytracer::Camera::Camera()
     raytracer::Canva canva{};
 
     this->m_canva.setOrigin(point);
+    this->m_backup = this->m_origin;
 }
 
 raytracer::Camera::Camera(math::Point3D &origin, raytracer::Canva &canva)
 {
     this->m_origin = origin;
+    this->m_backup = origin;
     this->m_canva = canva;
 }
 
@@ -31,12 +33,14 @@ raytracer::Camera::Camera(math::Point3D &origin, raytracer::Canva &canva)
 raytracer::Camera::Camera(const njson &json)
 {
     this->m_origin = json.at("origin");
+    this->m_backup = json.at("origin");
     this->m_canva = json.at("canva");
 }
 
 raytracer::Camera &raytracer::Camera::operator=(const njson &json)
 {
     this->m_origin = json.at("origin");
+    this->m_backup = json.at("origin");
     this->m_canva = json.at("canva");
     return *this;
 }
@@ -65,4 +69,9 @@ void raytracer::Camera::transform(std::vector<std::vector<double>> &matrix)
 
     this->m_origin = math::multiply_point_by_matrix(this->m_origin, matrix);
     this->m_canva.setOrigin(new_canva_point);
+}
+
+void raytracer::Camera::reset()
+{
+    this->m_origin = this->m_backup;
 }
