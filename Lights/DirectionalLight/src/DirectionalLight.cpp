@@ -13,7 +13,11 @@
 
 // Constructor & Destructor
 
-light::DirectionalLight::DirectionalLight(math::Vector3D &direction) : m_direction{direction} {}
+light::DirectionalLight::DirectionalLight(math::Vector3D &direction, double intensity)
+    : m_direction{direction}
+{
+    this->m_intensity = intensity;
+}
 
 // Methods
 

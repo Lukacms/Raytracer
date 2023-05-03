@@ -17,7 +17,7 @@ namespace math
     {
         public:
             Sphere() = default;
-            Sphere(math::Point3D corigin, double cradius);
+            Sphere(math::Point3D corigin, double cradius, raytracer::Material material);
             Sphere(const Sphere &) = default;
             Sphere(Sphere &&) = default;
             ~Sphere() override = default;

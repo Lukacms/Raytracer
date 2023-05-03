@@ -19,7 +19,7 @@ namespace light
     {
         public:
             PointLight() = default;
-            PointLight(math::Point3D &position);
+            PointLight(math::Point3D &position, double intensity);
             PointLight(const PointLight &) = default;
             PointLight(PointLight &&) = default;
             ~PointLight() override = default;
@@ -32,10 +32,5 @@ namespace light
             bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
                             std::unique_ptr<math::IPrimitive> &current,
                             raytracer::HitInfos &infos) final;
-
-        private:
-            static math::Vector3D getPhongSpecular(math::Vector3D &normal,
-                                                   math::Vector3D &camera_vector,
-                                                   math::Vector3D &light_vector);
     };
 } // namespace light

@@ -6,7 +6,6 @@
 */
 
 #include <cmath>
-#include <fmt/core.h>
 #include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>
@@ -85,7 +84,7 @@ void raytracer::Raytracer::launch()
             int closest = get_closest(ray);
             m_result.emplace_back();
             m_result[0].color = Color{0, 0, 0};
-            m_result[0].infos = HitInfos{false, math::Point3D{}, math::Vector3D{}};
+            m_result[0].infos = HitInfos{math::Point3D{}, math::Vector3D{}, 0};
             if (closest >= 0) {
                 m_result[m_result.size() - 1].color =
                     m_objects[static_cast<size_t>(closest)]->getColor();

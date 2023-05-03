@@ -5,7 +5,6 @@
 ** main
 */
 
-#include <fmt/core.h>
 #include <iostream>
 #include <memory>
 #include <raytracer/Core.hh>
@@ -20,9 +19,8 @@ int main(int argc, const char *argv[])
         std::cout << HELP_MSG;
         return FAILURE;
     }
-    raytracer::ConfigFile config{argv[1]};
     try {
-        scene = config.parse();
+        scene = raytracer::ConfigFile::parser(argv[1]);
     } catch (raytracer::ConfigFile::ConfigException &e) {
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
@@ -31,6 +29,7 @@ int main(int argc, const char *argv[])
     core.add_object(std::move(scene.primitives[0]));
     core.add_object(std::move(scene.primitives[1]));
     core.add_object(std::move(scene.primitives[2]));
+    core.add_object(std::move(scene.primitives[3]));
     core.add_lights(std::move(scene.lights[1]));
     core.launch();
     return SUCCESS;

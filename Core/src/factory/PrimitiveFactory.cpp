@@ -8,6 +8,7 @@
 #include <dlfcn.h>
 #include <iostream>
 #include <memory>
+#include <raytracer/RayTracer.hh>
 #include <raytracer/factory/AFactory.hh>
 #include <raytracer/factory/PrimitiveFactory.hpp>
 #include <raytracer/math/APrimitive.hh>
@@ -21,31 +22,35 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          double radius = json["radius"];
-         raytracer::Color color = json["color"];
+         raytracer::Material material = json["material"];
+
          std::unique_ptr<math::IPrimitive> prim =
              raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-                 const math::Point3D &, double)>(lib, origin, radius);
-         prim->setColor(color.red, color.green, color.blue);
+                 const math::Point3D &, const double &, const raytracer::Material &)>(
+                 lib, origin, radius, material);
          return prim;
      }},
     {"plane", PLANE_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          math::Axis axis = json["axis"];
-         raytracer::Color color = json["color"];
+         raytracer::Material material = json["material"];
+
          std::unique_ptr<math::IPrimitive> prim =
              raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-                 const math::Point3D &, const math::Axis &)>(lib, origin, axis);
-         prim->setColor(color.red, color.green, color.blue);
+                 const math::Point3D &, const math::Axis &, const raytracer::Material &)>(
+                 lib, origin, axis, material);
          return prim;
      }},
     {"moebius", MOEBIUS_LIB.data(),
      [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
          math::Point3D origin = json["origin"];
          double radius = json["radius"];
-         raytracer::Color color = json["color"];
+         raytracer::Material material = json["material"];
+
          return raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
-             const math::Point3D &, double, const raytracer::Color &)>(lib, origin, radius, color);
+             const math::Point3D &, double, const raytracer::Material &)>(lib, origin, radius,
+                                                                          material);
      }},
 };
 

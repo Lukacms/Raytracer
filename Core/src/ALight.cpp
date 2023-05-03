@@ -37,3 +37,8 @@ void light::ALight::setLightPosition(math::Point3D position)
 {
     this->m_position = position;
 }
+
+void light::ALight::setIntensity(double intensity)
+{
+    this->m_intensity = intensity;
+}

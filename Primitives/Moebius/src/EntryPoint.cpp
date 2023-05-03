@@ -13,12 +13,13 @@
 #pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
 
 extern "C" {
-std::unique_ptr<math::Moebius> primitive_entrypoint(math::Point3D &origin, double radius,
-                                                    const raytracer::Color &color)
+std::unique_ptr<math::Moebius> primitive_entrypoint(const math::Point3D &origin,
+                                                    const double &radius,
+                                                    const raytracer::Material &material)
 {
     std::unique_ptr<math::Moebius> new_prim = std::make_unique<math::Moebius>(origin, radius);
 
-    new_prim->setColor(color.red, color.green, color.blue);
+    new_prim->setMaterial(std::move(material));
     return new_prim;
 }
 }
