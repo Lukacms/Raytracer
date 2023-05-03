@@ -30,6 +30,7 @@ namespace math
             virtual bool hits(raytracer::Ray &ray, raytracer::HitInfos &infos) const = 0;
             // virtual void scale(double t_x, double t_y, double t_z);
             [[nodiscard]] virtual raytracer::Color getColor() const = 0;
+            [[nodiscard]] virtual std::vector<std::vector<double>> getTransform() const = 0;
             virtual void setColor(int red, int green, int blue) = 0;
     };
 } // namespace math

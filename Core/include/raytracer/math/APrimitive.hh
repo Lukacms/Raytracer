@@ -7,10 +7,11 @@
 
 #pragma once
 
-#include "raytracer/RayTracer.hh"
 #include <nlohmann/json.hpp>
+#include <raytracer/RayTracer.hh>
 #include <raytracer/math/IPrimitive.hh>
 #include <raytracer/math/Point3D.hh>
+#include <vector>
 
 using njson = nlohmann::json;
 
@@ -66,11 +67,18 @@ namespace math
             void translate(double t_x, double t_y, double t_z) final;
             // void scale(double t_x, double t_y, double t_z) final;
             [[nodiscard]] raytracer::Color getColor() const final;
+            [[nodiscard]] std::vector<std::vector<double>> getTransform() const final;
             void setColor(int red, int green, int blue) final;
             void setMaterial(raytracer::Material material);
 
         protected:
             math::Point3D m_origin{};
             raytracer::Material m_material{};
+            std::vector<std::vector<double>> m_transform {
+                {1, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 0, 1, 0},
+                {0, 0, 0, 1}
+            };
     };
 } // namespace math

@@ -11,6 +11,7 @@
 #include <raytracer/Canva.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
+#include <vector>
 
 using njson = nlohmann::json;
 
@@ -33,6 +34,7 @@ namespace raytracer
             Camera &operator=(const njson &json);
 
             raytracer::Ray ray(double canva_x, double canva_y);
+            void transform(std::vector<std::vector<double>> &matrix);
             [[nodiscard]] math::Point3D get_origin() const;
 
         private:
