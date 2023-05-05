@@ -49,6 +49,8 @@ if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 13.0.0)
     set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
 endif()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
+
 set(WARNING_FLAGS
     -Wall
     -Wextra

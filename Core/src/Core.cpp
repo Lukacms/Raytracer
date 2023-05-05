@@ -12,22 +12,36 @@
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/config/Scene.hh>
 #include <raytracer/math/Point3D.hh>
 #include <utility>
+
+/* ctor / dtor */
 
 raytracer::Raytracer::Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res)
     : m_resolution(res)
 {
-    for (size_t i{0}; i < scene.primitives.size(); i++) {
-        m_objects.push_back(std::move(scene.primitives[i]));
-    }
-    m_lights.push_back(std::move(scene.lights[1]));
+    for (auto &prim : scene.primitives)
+        m_objects.push_back(std::move(prim));
+    for (auto &light : scene.lights)
+        this->m_lights.push_back(std::move(light));
     this->m_camera = std::move(scene.camera);
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
-    std::cout << m_resolution.y_value;
-    std::cout << m_resolution.x_value;
 }
+
+/* overload operators */
+raytracer::Raytracer &raytracer::Raytracer::operator=(raytracer::Scene &&update)
+{
+    for (auto &prim : update.primitives)
+        m_objects.push_back(std::move(prim));
+    for (auto &light : update.lights)
+        this->m_lights.push_back(std::move(light));
+    this->m_camera = std::move(update.camera);
+    return *this;
+}
+
+/* methods */
 
 void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)
 {
@@ -82,7 +96,7 @@ void raytracer::Raytracer::shader_b_w()
     }
 }
 
-void raytracer::Raytracer::launch()
+void raytracer::Raytracer::render()
 {
     for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
         for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
@@ -101,11 +115,11 @@ void raytracer::Raytracer::launch()
                 if (m_lights[0]->isShadowed(this->m_objects,
                                             m_objects[static_cast<size_t>(closest)], m_max_infos)) {
                     m_result[m_result.size() - 1].color.red =
-                        static_cast<int>(m_result[m_result.size() - 1].color.red * 0.3);
+                        static_cast<int>(m_result[m_result.size() - 1].color.red * SHADOW_RENDER);
                     m_result[m_result.size() - 1].color.green =
-                        static_cast<int>(m_result[m_result.size() - 1].color.green * 0.3);
+                        static_cast<int>(m_result[m_result.size() - 1].color.green * SHADOW_RENDER);
                     m_result[m_result.size() - 1].color.blue =
-                        static_cast<int>(m_result[m_result.size() - 1].color.blue * 0.3);
+                        static_cast<int>(m_result[m_result.size() - 1].color.blue * SHADOW_RENDER);
                 }
             } else {
                 m_result[m_result.size() - 1].color = Color{0, 0, 0};
