@@ -31,7 +31,6 @@ namespace raytracer
         public:
             Raytracer() = delete;
             Raytracer(Raytracer const &to_copy) = delete;
-            Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
             Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res = DEFAULT_RES);
             Raytracer(Raytracer &&to_move) = default;
             Raytracer &operator=(Raytracer const &to_copy) = delete;

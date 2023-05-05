@@ -15,13 +15,6 @@
 #include <raytracer/math/Point3D.hh>
 #include <utility>
 
-raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res)
-    : m_camera(camera), m_resolution(res)
-{
-    m_resolution.x_value = 1.0 / res.x;
-    m_resolution.y_value = 1.0 / res.y;
-}
-
 raytracer::Raytracer::Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res)
     : m_resolution(res)
 {
