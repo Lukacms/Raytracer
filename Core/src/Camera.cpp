@@ -6,6 +6,7 @@
 */
 
 #include "raytracer/math/Math.hh"
+#include <iostream>
 #include <nlohmann/json.hpp>
 #include <raytracer/Camera.hh>
 #include <raytracer/Ray.hh>
@@ -62,16 +63,26 @@ raytracer::Ray raytracer::Camera::ray(double canva_x, double canva_y)
     return m_origin;
 }
 
-void raytracer::Camera::transform(std::vector<std::vector<double>> &matrix)
+void raytracer::Camera::transform(const std::vector<std::vector<double>> &matrix)
 {
+    /*std::cout << "canva back trasnform :\n";
+    std::cout << m_canva.getOrigin().getX() << ' ';
+    std::cout << m_canva.getOrigin().getY() << ' ';
+    std::cout << m_canva.getOrigin().getZ() << '\n';*/
     math::Point3D new_canva_point =
         math::multiply_point_by_matrix(this->m_canva.getOrigin(), matrix);
 
-    this->m_origin = math::multiply_point_by_matrix(this->m_origin, matrix);
+    math::Point3D test{math::multiply_point_by_matrix(this->m_origin, matrix)};
+    this->m_origin = test;
     this->m_canva.setOrigin(new_canva_point);
+    /*std::cout << "canva after trasnform :\n";
+    std::cout << m_canva.getOrigin().getX() << ' ';
+    std::cout << m_canva.getOrigin().getY() << ' ';
+    std::cout << m_canva.getOrigin().getZ() << '\n';*/
 }
 
 void raytracer::Camera::reset()
 {
     this->m_origin = this->m_backup;
+    m_canva.reset();
 }

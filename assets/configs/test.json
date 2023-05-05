@@ -3,13 +3,13 @@
         "origin": {
             "x": 0,
             "y": 0,
-            "z": 1
+            "z":-2
         },
         "canva": {
             "origin": {
                 "x": -0.5,
                 "y": -0.5,
-                "z": 0
+                "z": -1 
             },
             "bottom": {
                 "x": 1,
@@ -27,46 +27,11 @@
         {
             "type": "sphere",
             "origin": {
-                "x": -0.5,
-                "y": 0,
-                "z": -2
-            },
-            "radius": 0.5,
-            "material": {
-                "color": {
-                    "r": 0,
-                    "g": 0,
-                    "b": 255
-                },
-                "reflection": 0.2,
-                "spec": 500
-            }
-        },
-        {
-            "type": "sphere",
-            "origin": {
-                "x": -2,
-                "y": 0,
-                "z": -3
-            },
-            "radius": 0.5,
-            "material": {
-                "color": {
-                    "r": 255,
-                    "g": 0,
-                    "b": 0
-                },
-                "reflection": 0.3,
-                "spec": 500
-            }
-        },
-        {
-            "type": "sphere",
-            "origin": {
                 "x": 0,
                 "y": 0,
-                "z": -1
+                "z": 1
             },
+            "rotation": [0, 0, 0],
             "radius": 0.5,
             "material": {
                 "color": {
@@ -76,24 +41,6 @@
                 },
                 "reflection": 0.4,
                 "spec": 10
-            }
-        },
-        {
-            "type": "sphere",
-            "origin": {
-                "x": 0,
-                "y": 5001,
-                "z": 0
-            },
-            "radius": 5000,
-            "material": {
-                "color": {
-                    "r": 255,
-                    "g": 255,
-                    "b": 0
-                },
-                "reflection": 0.5,
-                "spec": 1000
             }
         }
     ],

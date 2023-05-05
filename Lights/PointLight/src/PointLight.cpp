@@ -34,7 +34,7 @@ raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytrace
                          this->m_position.getZ() - infos.point.getZ()};
     light /= light.length();
     math::Vector3D reflection = infos.normal * 2 * infos.normal.dot(light) - light;
-    math::Vector3D inversed_view = view.m_direction * -1;
+    math::Vector3D inversed_view = view.get_direction() * -1;
     double rho = light.dot(infos.normal);
     double light_coefficient = 0.2;
     double specular =

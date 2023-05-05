@@ -12,6 +12,7 @@
 
 namespace raytracer
 {
+
     class Ray
     {
         public:
@@ -22,9 +23,17 @@ namespace raytracer
             ~Ray() = default;
 
             Ray &operator=(const Ray &) = default;
-            Ray &operator=(Ray &&);
+            Ray &operator=(Ray &&) = default;
 
+            [[nodiscard]] math::Point3D get_origin() const;
+            [[nodiscard]] math::Vector3D get_direction() const;
+            void transform(const std::vector<std::vector<double>> &matrix);
+            void reset();
+
+        private:
             math::Point3D m_origin{};
             math::Vector3D m_direction{};
+            math::Point3D m_origin_backup{};
+            math::Vector3D m_direction_backup{};
     };
 } // namespace raytracer

@@ -34,13 +34,14 @@ namespace raytracer
             Camera &operator=(const njson &json);
 
             raytracer::Ray ray(double canva_x, double canva_y);
-            void transform(std::vector<std::vector<double>> &matrix);
+            void transform(const std::vector<std::vector<double>> &matrix);
             void reset();
             [[nodiscard]] math::Point3D get_origin() const;
+
+            raytracer::Canva m_canva{};
 
         private:
             math::Point3D m_origin{0, 0, -1};
             math::Point3D m_backup{};
-            raytracer::Canva m_canva{};
     };
 } // namespace raytracer
