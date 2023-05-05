@@ -5,6 +5,7 @@
 ** Core
 */
 
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <raytracer/Core.hh>
@@ -14,11 +15,18 @@
 #include <raytracer/math/Point3D.hh>
 #include <utility>
 
-raytracer::Raytracer::Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res)
-    : m_camera(camera), m_resolution(res)
+raytracer::Raytracer::Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res)
+    : m_resolution(res)
 {
+    for (size_t i{0}; i < scene.primitives.size(); i++) {
+        m_objects.push_back(std::move(scene.primitives[i]));
+    }
+    m_lights.push_back(std::move(scene.lights[1]));
+    this->m_camera = std::move(scene.camera);
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
+    std::cout << m_resolution.y_value;
+    std::cout << m_resolution.x_value;
 }
 
 void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "raytracer/RayTracer.hh"
+#include "raytracer/config/Scene.hh"
 #include <memory>
 #include <raytracer/Camera.hh>
 #include <raytracer/ILight.hh>
@@ -28,9 +29,9 @@ namespace raytracer
     class Raytracer
     {
         public:
-            Raytracer(Raytracer const &to_copy) = delete;
             Raytracer() = delete;
-            Raytracer(raytracer::Camera &camera, const raytracer::Resolution &res = DEFAULT_RES);
+            Raytracer(Raytracer const &to_copy) = delete;
+            Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res = DEFAULT_RES);
             Raytracer(Raytracer &&to_move) = default;
             Raytracer &operator=(Raytracer const &to_copy) = delete;
             Raytracer &operator=(Raytracer &&to_move) = default;
