@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <algorithm>
 #include <iostream>
 #include <memory>
 #include <raytracer/Core.hh>
@@ -13,6 +14,7 @@
 #include <raytracer/config/Scene.hh>
 #include <raytracer/factory/LightFactory.hpp>
 #include <raytracer/factory/PrimitiveFactory.hpp>
+#include <utility>
 
 int main(int argc, const char *argv[])
 {
@@ -27,13 +29,14 @@ int main(int argc, const char *argv[])
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
     }
-    raytracer::Raytracer core{scene.camera};
-    core.add_object(std::move(scene.primitives[0]));
-    core.add_object(std::move(scene.primitives[1]));
-    core.add_object(std::move(scene.primitives[2]));
-    core.add_object(std::move(scene.primitives[3]));
-    core.add_lights(std::move(scene.lights[1]));
-    core.launch();
+    raytracer::Raytracer core2{scene};
+    // raytracer::Raytracer core{scene.camera};
+    // core.add_lights(std::move(scene.lights[1]));
+    // core.add_object(std::move(scene.primitives[0]));
+    // core.add_object(std::move(scene.primitives[1]));
+    // core.add_object(std::move(scene.primitives[2]));
+    // core.launch();
+    core2.launch();
     return SUCCESS;
 }
 
