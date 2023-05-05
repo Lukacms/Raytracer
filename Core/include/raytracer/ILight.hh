@@ -34,5 +34,6 @@ namespace light
             virtual bool isShadowed(std::vector<std::unique_ptr<math::IPrimitive>> &primitives,
                                     std::unique_ptr<math::IPrimitive> &current,
                                     raytracer::HitInfos &infos) = 0;
+            virtual void setIntensity(double intensity) = 0;
     };
 } // namespace light

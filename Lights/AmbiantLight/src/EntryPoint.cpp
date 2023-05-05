@@ -14,7 +14,7 @@
 extern "C" { // NOLINT
 
 std::unique_ptr<light::ILight> light_entrypoint(math::Point3D &position,
-                                                double coefficient) // NOLINT
+                                                const double &coefficient) // NOLINT
 {
     if (coefficient > 1 && coefficient < 0)
         throw;
