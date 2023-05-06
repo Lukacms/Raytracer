@@ -5,6 +5,8 @@
 ** EntryPoint
 */
 
+#include "raytracer/RayTracer.hh"
+#include "raytracer/math/IPrimitive.hh"
 #pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
 
 #include <Cylinder.hh>
@@ -13,9 +15,11 @@
 
 extern "C" { // NOLINT
 
-std::unique_ptr<math::Cylinder> entry_point_primitive(math::Point3D origin, double radius, double height, math::Vector3D axe) // NOLINT
+std::unique_ptr<math::Cylinder> primitive_entrypoint(const math::Point3D &origin, double radius, const raytracer::Material &material) // NOLINT
 {
-    std::unique_ptr<math::Cylinder> new_Cylinder = std::make_unique<math::Cylinder>(origin, radius, height, axe);
-    return new_Cylinder;
+    std::unique_ptr<math::Cylinder> new_cylinder = std::make_unique<math::Cylinder>(origin, radius);
+
+    new_cylinder->setMaterial(material);
+    return new_cylinder;
 }
 }
