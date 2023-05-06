@@ -52,6 +52,18 @@ static const std::vector<raytracer::PrimitiveHandler> HANDLER{
              const math::Point3D &, double, const raytracer::Material &)>(lib, origin, radius,
                                                                           material);
      }},
+     {"cylinder", CYLINDER_LIB.data(),
+     [](const std::string &lib, njson &json) -> std::unique_ptr<math::IPrimitive> {
+         math::Point3D origin = json["origin"];
+         double radius = json["radius"];
+         raytracer::Material material = json["material"];
+
+         std::unique_ptr<math::IPrimitive> prim =
+             raytracer::PrimitiveFactory::create<std::unique_ptr<math::IPrimitive>(
+                 const math::Point3D &, double, const raytracer::Material &)>(
+                 lib, origin, radius, material);
+         return prim;
+     }},
 };
 
 // Methods
