@@ -18,7 +18,7 @@ constexpr int FAILURE = 84;
 
 /* Help message */
 constexpr std::string_view HELP_MSG{"USAGE: ./raytracer <SCENE_FILE> <DISPLAY>\n\tSCENE_FILE: "
-                                    "scene configuration\nDISPLAY: '-ppm' <FILENAME> | -sfml\n"};
+                                    "scene configuration\nDISPLAY: -ppm <FILENAME> | -sfml"};
 
 /* to display first when printing error messages (or any) */
 constexpr std::string_view HEADER_MSG{"Raytracer: "};

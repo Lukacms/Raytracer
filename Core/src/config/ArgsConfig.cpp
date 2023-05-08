@@ -13,7 +13,7 @@ raytracer::Infos raytracer::ArgsConfig::getArgs(int argc, const char *const *arg
 {
     Infos infos{};
 
-    if (argc == 2 && argv[1] == HELP_INDIC.data()) {
+    if (argc == 2 && std::string(argv[1]) == HELP_INDIC.data()) {
         throw ArgsException(HELP_MSG.data());
     }
     if (argc == PPM_NB_ARGS) {
