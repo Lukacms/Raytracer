@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "raytracer/config/ArgsConfig.hh"
 #include <memory>
 #include <raytracer/Camera.hh>
 #include <raytracer/ILight.hh>
@@ -35,6 +36,7 @@ namespace raytracer
             Raytracer() = delete;
             Raytracer(Raytracer const &to_copy) = delete;
             Raytracer(raytracer::Scene &scene, const raytracer::Resolution &res = DEFAULT_RES);
+            Raytracer(Infos infos, const raytracer::Resolution &res = DEFAULT_RES);
             Raytracer(Raytracer &&to_move) = default;
             ~Raytracer() = default;
 
@@ -53,18 +55,16 @@ namespace raytracer
 
         private:
             /* attributes */
-            std::vector<std::unique_ptr<light::ILight>> m_lights{};
-            std::vector<std::unique_ptr<math::IPrimitive>> m_objects{};
-            raytracer::Camera m_camera{};
+            raytracer::Scene scene;
+            raytracer::Infos infos;
 
             Resolution m_resolution{};
             std::vector<Pixel> m_result{};
             HitInfos m_max_infos{};
 
-            // NOTE loading with options from argv
-            std::string filepath{};
-
             /* methods */
             int get_closest(raytracer::Ray &ray);
+            void ppmOutput();
+            void sfmlOutput();
     };
 } // namespace raytracer

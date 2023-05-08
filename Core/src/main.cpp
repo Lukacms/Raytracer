@@ -29,7 +29,7 @@ int main(int argc, const char *argv[])
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
     }
-    raytracer::Raytracer core{scene};
+    raytracer::Raytracer core{infos};
     core.launch();
     return SUCCESS;
 }

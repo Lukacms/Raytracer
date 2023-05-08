@@ -174,9 +174,13 @@ add_library(
     Core/src/Camera.cpp
     Core/src/Raytracer.cpp
     Core/src/Core.cpp
+    Core/src/display/Display.cpp
+    Core/src/display/Clock.cpp
+    Core/src/display/Window.cpp
     Core/src/Canva.cpp
     Core/src/PpmCreator.cpp
     Core/src/config/ConfigException.cpp
+    Core/src/config/ArgsConfig.cpp
     Core/src/config/ConfigFile.cpp
     Core/src/Ray.cpp
     )
