@@ -15,16 +15,36 @@
 #include <raytracer/display/Display.hh>
 
 /* ctor / dtor */
-raytracer::Display::Display(const raytracer::Resolution &pres) : res{pres} {}
+raytracer::Display::Display(const raytracer::Resolution &pres) : res{pres}
+{
+    this->font.loadFromFile(FONT_PATH.data());
+    this->t_filename.setPosition(TEXT_POS.x, TEXT_POS.y);
+    this->t_filename.setFillColor(TEXT_COLOR);
+    this->t_filename.setFont(this->font);
+    this->t_filename.setString(TEXT_BASIS.data());
+    this->t_filename.setCharacterSize(TEXT_SIZE);
+}
 
 /* methods */
 
 void raytracer::Display::display(const std::vector<Pixel> &pixels)
 {
+    this->window.update();
+    this->m_pixels = pixels;
+    if (this->status == WindowStatus::Normal) {
+        displayPixels();
+        return;
+    }
+    this->t_filename.setString(TEXT_BASIS.data() + this->filename.substr(1));
+    this->window.getWindow().draw(this->t_filename);
+    this->window.getWindow().display();
+}
+
+void raytracer::Display::displayPixels()
+{
     sf::RectangleShape r_pixel{sf::Vector2f{1, 1}};
 
-    this->window.update();
-    for (const auto &pixel : pixels) {
+    for (const auto &pixel : this->m_pixels) {
         r_pixel.setFillColor(sf::Color{static_cast<sf::Uint8>(pixel.color.red),
                                        static_cast<sf::Uint8>(pixel.color.green),
                                        static_cast<sf::Uint8>(pixel.color.blue)});
@@ -33,7 +53,6 @@ void raytracer::Display::display(const std::vector<Pixel> &pixels)
         this->window.getWindow().draw(r_pixel);
     }
     this->window.getWindow().display();
-    this->m_pixels = pixels;
 }
 
 raytracer::DisplayStatus raytracer::Display::getEvents()
@@ -54,6 +73,11 @@ raytracer::DisplayStatus raytracer::Display::getEvents()
 
 void raytracer::Display::saveOutput(sf::Event &event)
 {
+    if (event.key.code == sf::Keyboard::Escape) {
+        this->status = WindowStatus::Normal;
+        this->filename.erase(this->filename.begin(), this->filename.end());
+        return;
+    }
     if (event.key.code == sf::Keyboard::Enter) {
         if (!this->filename.ends_with(".ppm"))
             this->filename += ".ppm";
@@ -63,8 +87,8 @@ void raytracer::Display::saveOutput(sf::Event &event)
         this->filename.erase(this->filename.begin(), this->filename.end());
         return;
     }
-    if (event.key.code == sf::Keyboard::Delete)
+    if (event.key.code == sf::Keyboard::BackSpace && this->filename.size() > 1) {
         this->filename.pop_back();
-    else if (event.type == sf::Event::TextEntered)
+    } else if (event.type == sf::Event::TextEntered)
         this->filename += static_cast<char>(event.text.unicode);
 }

@@ -7,10 +7,18 @@
 
 #pragma once
 
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Event.hpp>
 #include <raytracer/Core.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/display/Window.hh>
+
+constexpr std::string_view FONT_PATH{"./assets/font/raytracer.ttf"};
+constexpr std::string_view TEXT_BASIS{"ENTER NAME PLEASE:\t"};
+const sf::Color TEXT_COLOR{255, 255, 255};
+const sf::Vector2f TEXT_POS{20, 20};
+constexpr unsigned int TEXT_SIZE{12};
 
 namespace raytracer
 {
@@ -38,8 +46,11 @@ namespace raytracer
             Resolution res{};
             WindowStatus status{WindowStatus::Normal};
             std::string filename{};
+            sf::Text t_filename{};
+            sf::Font font{};
 
             /* methods */
             void saveOutput(sf::Event &event);
+            void displayPixels();
     };
 } // namespace raytracer
