@@ -171,6 +171,11 @@ void raytracer::Raytracer::sfmlOutput()
 
     while (display.getEvents() != DisplayStatus::Stopped) {
         if (clock.getElapsedTimeInS() > CLOCK_UPDATE_TIME) {
+            try {
+                this->scene = raytracer::ConfigFile::parser(this->infos.input);
+            } catch (ConfigFile::ConfigException &e) {
+                throw e;
+            }
             this->render();
             display.display(m_result);
             m_result.erase(m_result.begin(), m_result.end());

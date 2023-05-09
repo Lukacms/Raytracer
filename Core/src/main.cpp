@@ -14,7 +14,6 @@
 
 int main(int argc, const char *argv[])
 {
-    raytracer::Scene scene{};
     raytracer::Infos infos{};
 
     try {
@@ -24,12 +23,11 @@ int main(int argc, const char *argv[])
         return e.what() == HELP_MSG ? SUCCESS : FAILURE;
     }
     try {
-        scene = raytracer::ConfigFile::parser(infos.input);
+        raytracer::Raytracer core{infos};
+        core.launch();
     } catch (raytracer::ConfigFile::ConfigException &e) {
         std::cout << HEADER_MSG << e.what() << "\n";
         return FAILURE;
     }
-    raytracer::Raytracer core{infos};
-    core.launch();
     return SUCCESS;
 }
