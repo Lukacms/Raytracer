@@ -15,6 +15,10 @@ We had the following objectives:
 ### Dependencies
 The project is done in [C++](https://en.wikipedia.org/wiki/C%2B%2B), and build using [CMake](https://cmake.org/)
 
+### Documentation
+
+To have more information, look at the [docs](https://github.com/Lukacms/Raytracer/docs) folder.
+
 ## Build
 To build the project, follow the steps below:
 ```bash
@@ -28,7 +32,7 @@ sudo apt-get install -y --no-install-recommends nlohmann-json3-dev libsfml-dev
 
 # clone the repository
 git clone git@github.com:Lukacms/Raytracer.git
-cd redoom
+cd Raytracer
 
 # compile the project with flags required to close properly shared libraries, only available with g++
 ./compile.sh --gcc
