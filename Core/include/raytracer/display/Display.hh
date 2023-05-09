@@ -42,7 +42,7 @@ namespace raytracer
         private:
             /* attributes */
             raytracer::Window window{};
-            std::vector<Pixel> m_pixels;
+            std::vector<Pixel> m_pixels{};
             Resolution res{};
             WindowStatus status{WindowStatus::Normal};
             std::string filename{};

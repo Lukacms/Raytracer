@@ -55,8 +55,8 @@ namespace raytracer
 
         private:
             /* attributes */
-            raytracer::Scene scene;
-            raytracer::Infos infos;
+            raytracer::Scene scene{};
+            raytracer::Infos infos{};
 
             Resolution m_resolution{};
             std::vector<Pixel> m_result{};

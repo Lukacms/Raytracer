@@ -5,10 +5,6 @@
 ** Core
 */
 
-#include "raytracer/config/ArgsConfig.hh"
-#include "raytracer/config/ConfigFile.hh"
-#include "raytracer/display/Clock.hh"
-#include "raytracer/display/Display.hh"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -16,27 +12,26 @@
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
+#include <raytracer/config/ArgsConfig.hh>
+#include <raytracer/config/ConfigFile.hh>
 #include <raytracer/config/Scene.hh>
+#include <raytracer/display/Clock.hh>
+#include <raytracer/display/Display.hh>
 #include <raytracer/math/Point3D.hh>
 #include <utility>
 
 /* ctor / dtor */
 
 raytracer::Raytracer::Raytracer(raytracer::Scene &pscene, const raytracer::Resolution &res)
-    : m_resolution{res}
+    : scene{std::move(pscene)}, m_resolution{res}
 {
-    for (auto &prim : pscene.primitives)
-        scene.primitives.push_back(std::move(prim));
-    for (auto &light : pscene.lights)
-        scene.lights.push_back(std::move(light));
-    scene.camera = std::move(pscene.camera);
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
 }
 
-raytracer::Raytracer::Raytracer(Infos pinfos, const raytracer::Resolution &res) : m_resolution{res}
+raytracer::Raytracer::Raytracer(Infos pinfos, const raytracer::Resolution &res)
+    : infos{std::move(pinfos)}, m_resolution{res}
 {
-    this->infos = std::move(pinfos);
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
 }
