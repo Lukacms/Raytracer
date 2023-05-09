@@ -32,8 +32,9 @@ namespace raytracer
             /* attributes */
             raytracer::Window window{};
             sf::Event event{};
+            std::vector<Pixel> m_pixels;
 
             /* methods */
-            void saveOutput(const std::vector<Pixel> &pixels, const std::string &filename);
+            void saveOutput();
     };
 } // namespace raytracer

@@ -7,6 +7,8 @@
 
 #include "raytracer/config/ArgsConfig.hh"
 #include "raytracer/config/ConfigFile.hh"
+#include "raytracer/display/Clock.hh"
+#include "raytracer/display/Display.hh"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -160,4 +162,17 @@ void raytracer::Raytracer::ppmOutput()
     PpmCreator::create_ppm_file(m_result, m_resolution, infos.output);
 }
 
-void raytracer::Raytracer::sfmlOutput() {}
+void raytracer::Raytracer::sfmlOutput()
+{
+    Display display{};
+    Clock clock{};
+
+    while (display.getEvents() != DisplayStatus::Stopped) {
+        if (clock.getElapsedTimeInS() > CLOCK_UPDATE_TIME) {
+            this->render();
+            display.display(m_result);
+            m_result.erase(m_result.begin(), m_result.end());
+            clock.reset();
+        }
+    }
+}
