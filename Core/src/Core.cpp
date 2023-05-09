@@ -169,16 +169,15 @@ void raytracer::Raytracer::sfmlOutput()
     Display display{m_resolution};
     Clock clock{};
 
+    this->render();
     while (display.getEvents() != DisplayStatus::Stopped) {
         if (clock.getElapsedTimeInS() > CLOCK_UPDATE_TIME) {
-            try {
+            if (raytracer::ArgsConfig::wasFileModified(this->infos)) {
                 this->scene = raytracer::ConfigFile::parser(this->infos.input);
-            } catch (ConfigFile::ConfigException &e) {
-                throw e;
+                m_result.erase(m_result.begin(), m_result.end());
+                this->render();
             }
-            this->render();
             display.display(m_result);
-            m_result.erase(m_result.begin(), m_result.end());
             clock.reset();
         }
     }

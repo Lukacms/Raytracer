@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <ctime>
 #include <exception>
 #include <string>
 
@@ -14,6 +15,7 @@ constexpr int PPM_NB_ARGS{4};
 constexpr int SFML_NB_ARGS{3};
 
 constexpr std::string_view ARGS_NB_ERROR{"Must be either 3 or 4 arguments, try -h to see options."};
+constexpr std::string_view ARGS_NO_STAT{"Can't find stats of input file."};
 constexpr std::string_view HELP_INDIC{"-h"};
 
 namespace raytracer
@@ -24,6 +26,7 @@ namespace raytracer
             DisplayType type{DisplayType::SfmlOutput};
             std::string output{};
             std::string input{};
+            std::time_t input_last_modified{};
     };
 
     class ArgsConfig
@@ -59,6 +62,7 @@ namespace raytracer
 
             /* methods */
             static Infos getArgs(int argc, const char *const *argv);
+            static bool wasFileModified(Infos &infos);
 
         private:
     };
