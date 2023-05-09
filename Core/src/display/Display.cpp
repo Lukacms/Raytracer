@@ -11,7 +11,13 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <iostream>
+#include <raytracer/PpmCreator.hh>
 #include <raytracer/display/Display.hh>
+
+/* ctor / dtor */
+raytracer::Display::Display(const raytracer::Resolution &pres) : res{pres} {}
+
+/* methods */
 
 void raytracer::Display::display(const std::vector<Pixel> &pixels)
 {
@@ -27,6 +33,7 @@ void raytracer::Display::display(const std::vector<Pixel> &pixels)
         this->window.getWindow().draw(r_pixel);
     }
     this->window.getWindow().display();
+    this->m_pixels = pixels;
 }
 
 raytracer::DisplayStatus raytracer::Display::getEvents()
@@ -34,13 +41,30 @@ raytracer::DisplayStatus raytracer::Display::getEvents()
     sf::Event events;
 
     while (this->window.getWindow().pollEvent(events)) {
-        if (events.type == sf::Event::Closed || events.key.code == sf::Keyboard::Q)
+        if (this->status == WindowStatus::SelectingName)
+            this->saveOutput(events);
+        if (events.key.code == sf::Keyboard::S)
+            this->status = WindowStatus::SelectingName;
+        if (events.type == sf::Event::Closed ||
+            (events.key.code == sf::Keyboard::Q && this->status == WindowStatus::Normal))
             return DisplayStatus::Stopped;
-        if (event.key.code == sf::Keyboard::S) {
-            this->saveOutput();
-        }
     }
     return DisplayStatus::Displaying;
 }
 
-void raytracer::Display::saveOutput() {}
+void raytracer::Display::saveOutput(sf::Event &event)
+{
+    if (event.key.code == sf::Keyboard::Enter) {
+        if (!this->filename.ends_with(".ppm"))
+            this->filename += ".ppm";
+        this->filename.erase(this->filename.begin(), this->filename.begin() + 1);
+        PpmCreator::create_ppm_file(this->m_pixels, this->res, this->filename);
+        this->status = WindowStatus::Normal;
+        this->filename.erase(this->filename.begin(), this->filename.end());
+        return;
+    }
+    if (event.key.code == sf::Keyboard::Delete)
+        this->filename.pop_back();
+    else if (event.type == sf::Event::TextEntered)
+        this->filename += static_cast<char>(event.text.unicode);
+}

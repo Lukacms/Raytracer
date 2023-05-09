@@ -8,6 +8,7 @@
 #pragma once
 
 #include <SFML/Window/Event.hpp>
+#include <raytracer/Core.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/display/Window.hh>
 
@@ -15,10 +16,12 @@ namespace raytracer
 {
     enum class DisplayStatus { Displaying, Stopped };
 
+    enum class WindowStatus { Normal, SelectingName };
+
     class Display
     {
         public:
-            Display() = default;
+            Display(const raytracer::Resolution &pres);
             Display(Display const &to_copy);
             Display(Display &&to_move);
             ~Display() = default;
@@ -31,10 +34,12 @@ namespace raytracer
         private:
             /* attributes */
             raytracer::Window window{};
-            sf::Event event{};
             std::vector<Pixel> m_pixels;
+            Resolution res{};
+            WindowStatus status{WindowStatus::Normal};
+            std::string filename{};
 
             /* methods */
-            void saveOutput();
+            void saveOutput(sf::Event &event);
     };
 } // namespace raytracer

@@ -166,7 +166,7 @@ void raytracer::Raytracer::ppmOutput()
 
 void raytracer::Raytracer::sfmlOutput()
 {
-    Display display{};
+    Display display{m_resolution};
     Clock clock{};
 
     while (display.getEvents() != DisplayStatus::Stopped) {
