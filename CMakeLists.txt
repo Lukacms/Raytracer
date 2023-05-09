@@ -49,6 +49,8 @@ if(${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 13.0.0)
     set(CLANG_WARNING_FLAGS ${CLANG_WARNING_FLAGS} -Wno-return-std-move-in-c++11)
 endif()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-color=always")
+
 set(WARNING_FLAGS
     -Wall
     -Wextra
@@ -172,9 +174,13 @@ add_library(
     Core/src/Camera.cpp
     Core/src/Raytracer.cpp
     Core/src/Core.cpp
+    Core/src/display/Display.cpp
+    Core/src/display/Clock.cpp
+    Core/src/display/Window.cpp
     Core/src/Canva.cpp
     Core/src/PpmCreator.cpp
     Core/src/config/ConfigException.cpp
+    Core/src/config/ArgsConfig.cpp
     Core/src/config/ConfigFile.cpp
     Core/src/Ray.cpp
     )

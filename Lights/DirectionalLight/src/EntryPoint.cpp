@@ -13,8 +13,9 @@
 
 extern "C" { // NOLINT
 
-std::unique_ptr<light::ILight> light_entrypoint(math::Vector3D &direction) // NOLINT
+std::unique_ptr<light::ILight> light_entrypoint(math::Vector3D &direction,
+                                                const double &intensity) // NOLINT
 {
-    return std::make_unique<light::DirectionalLight>(direction);
+    return std::make_unique<light::DirectionalLight>(direction, intensity);
 };
 }

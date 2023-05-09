@@ -19,7 +19,7 @@ namespace light
     {
         public:
             DirectionalLight() = default;
-            DirectionalLight(math::Vector3D &direction);
+            DirectionalLight(math::Vector3D &direction, double intensity);
             DirectionalLight(const DirectionalLight &) = default;
             DirectionalLight(DirectionalLight &&) = default;
             ~DirectionalLight() override = default;
