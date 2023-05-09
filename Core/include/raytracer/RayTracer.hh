@@ -87,5 +87,6 @@ namespace raytracer
             /* attributes */
             Color color{};
             HitInfos infos{};
+            math::Point3D coords{};
     };
 } // namespace raytracer

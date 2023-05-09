@@ -28,9 +28,9 @@ namespace raytracer
 
             void update();
             void close();
-
-            sf::RenderWindow window;
+            sf::RenderWindow &getWindow();
 
         private:
+            sf::RenderWindow window;
     };
 } // namespace raytracer

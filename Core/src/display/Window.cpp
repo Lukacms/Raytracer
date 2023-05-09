@@ -21,3 +21,8 @@ void raytracer::Window::close()
 {
     this->window.close();
 }
+
+sf::RenderWindow &raytracer::Window::getWindow()
+{
+    return this->window;
+}

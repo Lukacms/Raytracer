@@ -118,6 +118,8 @@ void raytracer::Raytracer::render()
             m_result.emplace_back();
             m_result[0].color = Color{0, 0, 0};
             m_result[0].infos = HitInfos{math::Point3D{}, math::Vector3D{}, 0};
+            m_result[m_result.size() - 1].coords =
+                math::Point3D{static_cast<double>(x_axes), static_cast<double>(y_axes), 0};
             if (closest >= 0) {
                 m_result[m_result.size() - 1].color =
                     scene.primitives[static_cast<size_t>(closest)]->getColor();
