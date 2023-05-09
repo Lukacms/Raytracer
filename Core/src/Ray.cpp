@@ -33,8 +33,8 @@ math::Vector3D raytracer::Ray::get_direction() const
 
 void raytracer::Ray::transform(const std::vector<std::vector<double>> &matrix)
 {
-    m_origin = math::multiply_point_by_matrix(m_origin, matrix);
-    m_direction = math::multiply_vector_by_matrix(m_direction, matrix);
+    //    m_origin = math::multiply_point_by_matrix(m_origin, matrix);
+    //    m_direction = math::multiply_vector_by_matrix(m_direction, matrix);
 }
 
 void raytracer::Ray::reset()

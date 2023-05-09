@@ -3,13 +3,13 @@
         "origin": {
             "x": 0,
             "y": 0,
-            "z":-2
+            "z": 1
         },
         "canva": {
             "origin": {
                 "x": -0.5,
                 "y": -0.5,
-                "z": -1 
+                "z": 0
             },
             "bottom": {
                 "x": 1,
@@ -29,9 +29,13 @@
             "origin": {
                 "x": 0,
                 "y": 0,
-                "z": 1
+                "z": -4
             },
-            "rotation": [0, 0, 0],
+            "rotation": [
+                0,
+                0,
+                0
+            ],
             "radius": 0.5,
             "material": {
                 "color": {
@@ -48,8 +52,8 @@
         {
             "type": "ambient",
             "origin": {
-                "x": 2,
-                "y": 1,
+                "x": 0,
+                "y": 0,
                 "z": 0
             },
             "coefficient": 0.4
@@ -57,9 +61,9 @@
         {
             "type": "point",
             "origin": {
-                "x": 2,
-                "y": 1,
-                "z": 0
+                "x": 0,
+                "y": 0,
+                "z": 1
             },
             "intensity": 0.3
         },

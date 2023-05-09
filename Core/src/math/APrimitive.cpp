@@ -59,10 +59,10 @@ void math::APrimitive::rotate_z(double angle)
 
 void math::APrimitive::translate(double t_x, double t_y, double t_z)
 {
-    std::vector<std::vector<double>> matrix{{1, 0, 0, 0},
-                                            {0, 1, 0, 0},
-                                            {0, 0, 1, 0},
-                                            {t_x, t_y, t_z, 1}};
+    std::vector<std::vector<double>> matrix{{1, 0, 0, t_x},
+                                            {0, 1, 0, t_y},
+                                            {0, 0, 1, t_z},
+                                            {0, 0, 0, 1}};
     this->m_transform = math::multiply_matrices(this->m_transform, matrix);
 }
 

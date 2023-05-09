@@ -48,26 +48,29 @@ int raytracer::Raytracer::get_closest(int x_axes, int y_axes)
     if (m_objects.empty())
         return 0;
     m_max_infos.point = math::Point3D{-1, -1, -1};
-    m_ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
-                         static_cast<double>(y_axes) * m_resolution.y_value);
     for (auto &object : m_objects) {
         HitInfos infos{};
-        m_ray.transform(object->getTransform());
-        /* std::cout << "camera :\n";
-         std::cout << m_camera.get_origin().getX() << ' ';
-         std::cout << m_camera.get_origin().getY() << ' ';
-         std::cout << m_camera.get_origin().getZ() << '\n';
-         std::cout << "canva:\n";
-         std::cout << m_camera.m_canva.getOrigin().getX() << ' ';
-         std::cout << m_camera.m_canva.getOrigin().getY() << ' ';
-         std::cout << m_camera.m_canva.getOrigin().getZ() << '\n';
-         std::cout << "sphere: \n"; */
-        std::cout << "ray :\n";
+        m_camera.transform(object->getTransform());
+        m_ray = m_camera.ray(static_cast<double>(x_axes) * m_resolution.x_value,
+                             static_cast<double>(y_axes) * m_resolution.y_value);
+        std::cout << "camera : ";
+        std::cout << m_camera.get_origin().getX() << ' ';
+        std::cout << m_camera.get_origin().getY() << ' ';
+        std::cout << m_camera.get_origin().getZ() << '\n';
+        std::cout << "canva: ";
+        std::cout << m_camera.m_canva.getOrigin().getX() << ' ';
+        std::cout << m_camera.m_canva.getOrigin().getY() << ' ';
+        std::cout << m_camera.m_canva.getOrigin().getZ() << '\n';
+        std::cout << "ray : ";
         std::cout << m_ray.get_direction().getX() << ' ';
         std::cout << m_ray.get_direction().getY() << ' ';
         std::cout << m_ray.get_direction().getZ() << '\n';
         if (object->hits(m_ray, infos)) {
-            std::cerr << "*\n";
+            //            std::cerr << "*\n";
+            std::cout << "points hits: ";
+            std::cout << infos.point.getX() << ' ';
+            std::cout << infos.point.getY() << ' ';
+            std::cout << infos.point.getZ() << '\n';
             if (incr == 0) {
                 m_max_infos = infos;
                 incr++;
@@ -79,11 +82,11 @@ int raytracer::Raytracer::get_closest(int x_axes, int y_axes)
             }
         }
         index++;
-        m_ray.reset();
+        m_camera.reset();
     }
-    m_ray.reset();
+    // m_ray.reset();
     if (index_closest == 1)
-        std::cerr << index_closest << '\n';
+        std::cerr << "Closest: " << index_closest << '\n';
     return index_closest;
 }
 
@@ -97,8 +100,12 @@ void raytracer::Raytracer::shader_b_w()
 
 void raytracer::Raytracer::launch()
 {
-    for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
-        for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
+    // for (int y_axes = 1; y_axes <= m_resolution.y; y_axes += 1) {
+    // for (int x_axes = 1; x_axes <= m_resolution.x; x_axes += 1) {
+    {
+        {
+            int x_axes = 400;
+            int y_axes = 400;
             int closest = get_closest(x_axes, y_axes);
             m_result.emplace_back();
             m_result[0].color = Color{0, 0, 0};
@@ -109,15 +116,22 @@ void raytracer::Raytracer::launch()
                 m_result[m_result.size() - 1].color =
                     m_lights[0]->lighten(m_max_infos, m_ray, m_result[m_result.size() - 1].color);
                 m_result[m_result.size() - 1].infos = m_max_infos;
-                if (m_lights[0]->isShadowed(this->m_objects,
-                                            m_objects[static_cast<size_t>(closest)], m_max_infos)) {
-                    m_result[m_result.size() - 1].color.red =
-                        static_cast<int>(m_result[m_result.size() - 1].color.red * 0.3);
-                    m_result[m_result.size() - 1].color.green =
-                        static_cast<int>(m_result[m_result.size() - 1].color.green * 0.3);
-                    m_result[m_result.size() - 1].color.blue =
-                        static_cast<int>(m_result[m_result.size() - 1].color.blue * 0.3);
-                }
+                std::cout << m_result[m_result.size() - 1].color.red << ' ';
+                std::cout << m_result[m_result.size() - 1].color.blue << ' ';
+                std::cout << m_result[m_result.size() - 1].color.green << '\n';
+                //                if (m_lights[0]->isShadowed(this->m_objects,
+                //                                            m_objects[static_cast<size_t>(closest)],
+                //                                            m_max_infos)) {
+                //                    m_result[m_result.size() - 1].color.red =
+                //                        static_cast<int>(m_result[m_result.size() - 1].color.red *
+                //                        0.3);
+                //                    m_result[m_result.size() - 1].color.green =
+                //                        static_cast<int>(m_result[m_result.size() - 1].color.green
+                //                        * 0.3);
+                //                    m_result[m_result.size() - 1].color.blue =
+                //                        static_cast<int>(m_result[m_result.size() - 1].color.blue
+                //                        * 0.3);
+                //                }
             } else {
                 m_result[m_result.size() - 1].color = Color{0, 0, 0};
             }

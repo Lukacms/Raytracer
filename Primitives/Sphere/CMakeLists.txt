@@ -1,5 +1,5 @@
-##
 ## CMakeLists: Plugins/Primitives/Sphere
+##
 ##
 
 add_library(

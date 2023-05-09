@@ -75,7 +75,7 @@ math::Point3D raytracer::Canva::pointAt(double canva_x, double canva_y)
     double x_pos = canva_x + (this->m_origin.getX() * this->m_bottom_side.getX());
     double y_pos = canva_y + (this->m_origin.getY() * this->m_left_side.getY());
 
-    return math::Point3D{x_pos, y_pos, this->m_origin.getZ()};
+    return math::Point3D{x_pos, y_pos, m_origin.getZ()};
 }
 
 void raytracer::Canva::reset()
