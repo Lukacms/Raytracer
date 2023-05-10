@@ -6,8 +6,6 @@
 */
 
 #include <array>
-#include <dlfcn.h>
-#include <iostream>
 #include <raytracer/factory/LightFactory.hpp>
 #include <string>
 #include <vector>
@@ -49,6 +47,5 @@ std::unique_ptr<light::ILight> raytracer::LightFactory::createLight(njson &json)
         if (light.type == type)
             return light.handler(light.libpath, json);
     }
-    std::cout << "type:\t" << type << "\n";
     throw LightFactory::FactoryException(ERROR_NOT_LIGHT.data());
 }

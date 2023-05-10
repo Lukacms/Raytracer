@@ -15,6 +15,16 @@
 
 namespace raytracer
 {
+    struct Resolution {
+        public:
+            int x{0};
+            int y{0};
+            double x_value{0.00};
+            double y_value{0.00};
+
+            Resolution &operator=(const njson &json);
+    };
+
     /*
      * structure used in ConfigFile to return to Core after the file has been parsed
      * NOTE: may need to associate a few methods
@@ -24,5 +34,6 @@ namespace raytracer
             raytracer::Camera camera{};
             std::vector<std::unique_ptr<light::ILight>> lights{};
             std::vector<std::unique_ptr<math::IPrimitive>> primitives{};
+            Resolution res{};
     };
 } // namespace raytracer

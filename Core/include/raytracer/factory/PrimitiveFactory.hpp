@@ -8,7 +8,6 @@
 #pragma once
 
 #include <dlfcn.h>
-#include <iostream>
 #include <memory>
 #include <nlohmann/json_fwd.hpp>
 #include <raytracer/factory/AFactory.hh>

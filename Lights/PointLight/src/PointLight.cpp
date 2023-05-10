@@ -7,7 +7,6 @@
 
 #include <PointLight.hh>
 #include <cmath>
-#include <iostream>
 #include <memory>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
