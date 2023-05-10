@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <cstddef>
 #include <iostream>
 #include <memory>
 #include <raytracer/Core.hh>
@@ -28,10 +29,9 @@ int main(int argc, const char *argv[])
         return FAILURE;
     }
     raytracer::Raytracer core{scene.camera};
-    core.add_object(std::move(scene.primitives[0]));
-    core.add_object(std::move(scene.primitives[1]));
-    core.add_object(std::move(scene.primitives[2]));
-    core.add_object(std::move(scene.primitives[3]));
+    for (int idx = 0; scene.primitives[idx] != NULL; idx += 1) {
+        core.add_object(std::move(scene.primitives[idx]));
+    }
     core.add_lights(std::move(scene.lights[1]));
     core.launch();
     return SUCCESS;
