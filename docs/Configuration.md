@@ -6,6 +6,7 @@ A configuration file needs to have at least:
 * a [camera](#Camera)
 * a [primitive](#Primitives) to draw
 * a [light](#Lights)
+
 And a example of a configuration is [this file](https://github.com/Lukacms/Raytracer/blob/main/assets/configs/test.json).
 
 ## Camera

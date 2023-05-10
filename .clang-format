@@ -1,5 +1,4 @@
-﻿---
-AccessModifierOffset: '0'
+﻿AccessModifierOffset: '0'
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: 'false'
 AlignConsecutiveDeclarations: 'false'
@@ -8,7 +7,7 @@ AlignOperands: 'false'
 AllowAllArgumentsOnNextLine: 'false'
 AllowShortBlocksOnASingleLine: 'false'
 AllowShortCaseLabelsOnASingleLine: 'true'
-AllowShortFunctionsOnASingleLine: Inline
+AllowShortFunctionsOnASingleLine: 'false'
 AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: Inline
 AllowShortLoopsOnASingleLine: 'false'
@@ -20,10 +19,10 @@ BreakBeforeBinaryOperators: None
 BreakBeforeBraces: Linux
 BreakBeforeTernaryOperators: 'false'
 ColumnLimit: '100'
-IndentWidth: '4'
 IndentAccessModifiers: true
 IndentCaseLabels: true
 IndentPPDirectives: BeforeHash
+IndentWidth: '4'
 Language: Cpp
 NamespaceIndentation: All
 SeparateDefinitionBlocks: Always
