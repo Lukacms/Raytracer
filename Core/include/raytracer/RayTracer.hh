@@ -17,8 +17,8 @@ constexpr int SUCCESS = 0;
 constexpr int FAILURE = 84;
 
 /* Help message */
-constexpr std::string_view HELP_MSG{
-    "USAGE: ./raytracer <SCENE_FILE>\n\tSCENE_FILE: scene configuration\n"};
+constexpr std::string_view HELP_MSG{"USAGE: ./raytracer <SCENE_FILE> <DISPLAY>\n\tSCENE_FILE: "
+                                    "scene configuration\nDISPLAY: -ppm <FILENAME> | -sfml"};
 
 /* to display first when printing error messages (or any) */
 constexpr std::string_view HEADER_MSG{"Raytracer: "};
@@ -87,5 +87,6 @@ namespace raytracer
             /* attributes */
             Color color{};
             HitInfos infos{};
+            math::Point3D coords{};
     };
 } // namespace raytracer
