@@ -54,6 +54,19 @@ Once the project is build, the `ratracer` executable is built at the root, and t
 └── raytracer
 ```
 
+### Launch Project
+After building project, here is the output of the help:
+```bash
+$ > ./raytracer -h
+USAGE: ./raytracer <SCENE_FILE> <DISPLAY>
+	SCENE_FILE: scene configuration
+    DISPLAY: -ppm <FILENAME> | -sfml
+```
+
+You can launch the program with two options:
+* `-ppm` with a `filename` specified, to output the file to the filename
+* `-sfml` to render the result to a sfml window, which has the option to be quit using `Q`, and save to a ppm file with `S`
+
 ## Authors
 * [Luka Camus](https://github.com/Lukacms)
 * [Louis Bassagal](https://github.com/LouisBassagal)
