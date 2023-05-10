@@ -5,9 +5,9 @@
 ** testsArgsConfig
 */
 
-#include "raytracer/RayTracer.hh"
 #include <array>
 #include <catch2/catch.hpp>
+#include <raytracer/RayTracer.hh>
 #include <raytracer/config/ArgsConfig.hh>
 
 TEST_CASE("Testing help", "-h")

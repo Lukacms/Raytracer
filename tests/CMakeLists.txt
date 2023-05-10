@@ -24,6 +24,7 @@ set(
     SRCS
     src/main.cpp
     src/Core/config/testsArgsConfig.cpp
+    src/Core/config/testsConfigFile.cpp
 )
 
 # binary

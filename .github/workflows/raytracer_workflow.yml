@@ -61,7 +61,9 @@ jobs:
           fi
         done
     - name: Run tests
-      run: ./compile.sh --tests
+      run: |
+        rm -rf build
+        ./compile.sh --tests
 
   push_to_mirror:
     if: ${{ github.event_name == 'push' }}
