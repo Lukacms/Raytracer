@@ -1,11 +1,7 @@
 {
-    "resolution": {
-        "x": 800,
-        "y": 800
-    },
     "camera": {
         "origin": {
-            "x": 0,
+            "x": "0",
             "y": 0,
             "z": 1
         },
@@ -27,41 +23,22 @@
             }
         }
     },
-    "primitives": [
-        {
-            "type": "plane",
-            "origin": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "axis": 2,
-            "material": {
-                "color": {
-                    "r": 219,
-                    "g": 2,
-                    "b": 219
-                },
-                "reflection": 0.2,
-                "spec": 500
-            }
-        }
-    ],
+    "primitives": [],
     "lights": [
         {
             "type": "point",
             "origin": {
-                "x": 1,
-                "y": 0,
-                "z": 1
+                "x": 2,
+                "y": 1,
+                "z": 0
             },
             "intensity": 0.3
         },
         {
             "type": "ambient",
             "origin": {
-                "x": 0,
-                "y": 0,
+                "x": 2,
+                "y": 1,
                 "z": 0
             },
             "coefficient": 0.4

@@ -51,4 +51,4 @@ build/
 plugins
 *.ppm
 .vscode
-*.json
+/tests-raytracer

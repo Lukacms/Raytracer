@@ -35,7 +35,7 @@
                 "y": 0,
                 "z": -2
             },
-            "radius": 0.5,
+            "radius": 0.3,
             "material": {
                 "color": {
                     "r": 47,
@@ -47,39 +47,94 @@
             }
         },
         {
-            "type": "plane",
+            "type": "sphere",
             "origin": {
-                "x": 0.3,
-                "y": 0,
-                "z": 0
+                "x": 0.5,
+                "y": 1,
+                "z": -2.5
             },
-            "axis": 0,
+            "radius": 0.3,
             "material": {
                 "color": {
-                    "r": 219,
-                    "g": 2,
-                    "b": 219
+                    "r": 47,
+                    "g": 242,
+                    "b": 144
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
+        },
+        {
+            "type": "sphere",
+            "origin": {
+                "x": 0,
+                "y": 1,
+                "z": -1.5
+            },
+            "radius": 0.3,
+            "material": {
+                "color": {
+                    "r": 47,
+                    "g": 242,
+                    "b": 144
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
+        },
+        {
+            "type": "sphere",
+            "origin": {
+                "x": -0.5,
+                "y": 0,
+                "z": 1
+            },
+            "radius": 0.3,
+            "material": {
+                "color": {
+                    "r": 47,
+                    "g": 242,
+                    "b": 144
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
+        },
+        {
+            "type": "sphere",
+            "origin": {
+                "x": 0,
+                "y": 2,
+                "z": 2
+            },
+            "radius": 0.3,
+            "material": {
+                "color": {
+                    "r": 47,
+                    "g": 242,
+                    "b": 144
                 },
                 "reflection": 0.2,
                 "spec": 500
             }
         }
+
     ],
     "lights": [
         {
             "type": "point",
             "origin": {
                 "x": 2,
-                "y": 0,
-                "z": 1
+                "y": 1,
+                "z": -1
             },
             "intensity": 0.3
         },
         {
             "type": "ambient",
             "origin": {
-                "x": 0,
-                "y": 0,
+                "x": 2,
+                "y": 1,
                 "z": 0
             },
             "coefficient": 0.4

@@ -74,6 +74,8 @@ raytracer::Scene raytracer::ConfigFile::doParse()
     } catch (raytracer::AFactory::FactoryException &e) {
         throw ConfigFile::ConfigException(e.what());
     }
+    if (this->scene.lights.empty() || this->scene.primitives.empty())
+        throw ConfigFile::ConfigException(NO_LIGHT_PRIM.data());
     return std::move(this->scene);
 }
 

@@ -31,37 +31,73 @@
         {
             "type": "sphere",
             "origin": {
-                "x": 0,
+                "x": -0.5,
                 "y": 0,
                 "z": -2
             },
             "radius": 0.5,
             "material": {
                 "color": {
-                    "r": 47,
-                    "g": 242,
-                    "b": 144
+                    "r": 0,
+                    "g": 0,
+                    "b": 255
                 },
                 "reflection": 0.2,
                 "spec": 500
             }
         },
         {
-            "type": "plane",
+            "type": "sphere",
             "origin": {
-                "x": 0.3,
+                "x": -2,
                 "y": 0,
-                "z": 0
+                "z": -3
             },
-            "axis": 0,
+            "radius": 0.5,
             "material": {
                 "color": {
-                    "r": 219,
-                    "g": 2,
-                    "b": 219
+                    "r": 255,
+                    "g": 0,
+                    "b": 0
                 },
-                "reflection": 0.2,
+                "reflection": 0.3,
                 "spec": 500
+            }
+        },
+        {
+            "type": "sphere",
+            "origin": {
+                "x": 0,
+                "y": 0,
+                "z": -1
+            },
+            "radius": 0.5,
+            "material": {
+                "color": {
+                    "r": 0,
+                    "g": 255,
+                    "b": 0
+                },
+                "reflection": 0.4,
+                "spec": 10
+            }
+        },
+        {
+            "type": "sphere",
+            "origin": {
+                "x": 0,
+                "y": -5001,
+                "z": 0
+            },
+            "radius": 5000,
+            "material": {
+                "color": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 0
+                },
+                "reflection": 0.5,
+                "spec": 1000
             }
         }
     ],
@@ -70,16 +106,16 @@
             "type": "point",
             "origin": {
                 "x": 2,
-                "y": 0,
-                "z": 1
+                "y": 1,
+                "z": 0
             },
             "intensity": 0.3
         },
         {
             "type": "ambient",
             "origin": {
-                "x": 0,
-                "y": 0,
+                "x": 2,
+                "y": 1,
                 "z": 0
             },
             "coefficient": 0.4

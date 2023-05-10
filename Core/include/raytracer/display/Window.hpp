@@ -30,6 +30,11 @@ namespace raytracer
             void close();
             sf::RenderWindow &getWindow();
 
+            template <typename TObject> void draw(TObject obj)
+            {
+                this->window.draw(obj);
+            }
+
         private:
             sf::RenderWindow window;
     };

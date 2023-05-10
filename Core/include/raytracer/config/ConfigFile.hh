@@ -21,6 +21,8 @@ constexpr char FULLPATH_INDIC{'/'};
 
 /* exception messages */
 constexpr std::string_view INVALID_FILE{"File could not be open."};
+constexpr std::string_view NO_LIGHT_PRIM{
+    "There must be at least a light and a primitive in the config file"};
 
 namespace raytracer
 {
@@ -59,16 +61,16 @@ namespace raytracer
                     std::string excep{};
             };
 
+            // private methods
+            std::string getFullPath();
+            void initConfig();
+            [[nodiscard]] Scene doParse();
+
         private:
             // attributes
             std::string filepath{};
             raytracer::Scene scene{};
             // nlohmann_json
             njson config{};
-
-            // private methods
-            std::string getFullPath();
-            void initConfig();
-            [[nodiscard]] Scene doParse();
     };
 } // namespace raytracer
