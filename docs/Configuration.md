@@ -4,8 +4,9 @@ The configuration file are in `json`, and the library to load them is [nlohmann/
 
 A configuration file needs to have at least:
 * a [camera](#Camera)
-* a [primitive](#Primitives) to draw
-* a [light](#Lights)
+* a [resolution](#Resolution)
+* at least one [primitive](#Primitives) to draw
+* at least one [light](#Lights)
 
 And a example of a configuration is [this file](https://github.com/Lukacms/Raytracer/blob/main/assets/configs/test.json).
 
@@ -37,6 +38,16 @@ It is recognized with the `camera` key, and must have an `origin` and a `canva` 
             }
         }
     },
+```
+
+## Resolution
+Will be loaded in a [Resolution](https://github.com/Lukacms/Raytracer/blob/main/Core/include/raytracer/config/Scene.hh) class.
+It is recognized with the `resolution` key, and must have an `x` and a `y` defined.
+```json
+    "resolution" : {
+        "x": 800,
+        "y": 800
+    }
 ```
 
 ## Primitives
