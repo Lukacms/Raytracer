@@ -42,7 +42,8 @@ Once the project is build, the `ratracer` executable is built at the root, and t
 ```bash
 .
 ├── plugins
-│   ├── fmt.a
+│   ├── Catch2.a
+│   ├── Catch2Main.a
 │   ├── raytracer_ambiant_light.so
 │   ├── raytracer-core.so
 │   ├── raytracer_directional_light.so
