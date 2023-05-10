@@ -42,7 +42,7 @@ raytracer::Color light::PointLight::lighten(raytracer::HitInfos &infos, raytrace
 
     if (rho > 0)
         light_coefficient += this->m_intensity * rho;
-    if (specular > 0 && specular < 1)
+    if ((specular > 0 && specular < 1) && infos.specularity > 0)
         light_coefficient += this->m_intensity * pow(specular, infos.specularity);
     color *= light_coefficient;
     if (color.red > 255)

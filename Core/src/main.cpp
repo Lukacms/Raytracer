@@ -5,6 +5,7 @@
 ** main
 */
 
+#include <cstddef>
 #include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/RayTracer.hh>
