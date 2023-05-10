@@ -86,7 +86,7 @@
             "type": "sphere",
             "origin": {
                 "x": 0,
-                "y": -5001,
+                "y": 5001,
                 "z": 0
             },
             "radius": 5000,
@@ -103,15 +103,6 @@
     ],
     "lights": [
         {
-            "type": "ambient",
-            "origin": {
-                "x": 2,
-                "y": 1,
-                "z": 0
-            },
-            "coefficient": 0.4
-        },
-        {
             "type": "point",
             "origin": {
                 "x": 2,
@@ -119,6 +110,15 @@
                 "z": 0
             },
             "intensity": 0.3
+        },
+        {
+            "type": "ambient",
+            "origin": {
+                "x": 2,
+                "y": 1,
+                "z": 0
+            },
+            "coefficient": 0.4
         },
         {
             "type": "directional",
