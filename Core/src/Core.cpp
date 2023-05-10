@@ -7,7 +7,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>

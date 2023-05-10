@@ -9,7 +9,6 @@
 
 #include <dlfcn.h>
 #include <functional>
-#include <iostream>
 #include <memory>
 #include <nlohmann/json.hpp>
 #include <raytracer/ALight.hh>

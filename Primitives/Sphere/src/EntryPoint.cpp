@@ -8,7 +8,6 @@
 #pragma GCC diagnostic ignored "-Wreturn-type-c-linkage"
 
 #include <Sphere.hh>
-#include <iostream>
 #include <memory>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/math/Point3D.hh>

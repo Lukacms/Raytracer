@@ -6,8 +6,6 @@
 */
 
 #include <array>
-#include <dlfcn.h>
-#include <iostream>
 #include <raytracer/factory/LightFactory.hpp>
 #include <string>
 #include <vector>

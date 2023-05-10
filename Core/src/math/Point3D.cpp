@@ -5,7 +5,6 @@
 ** Point3D
 */
 
-#include <iostream>
 #include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
 

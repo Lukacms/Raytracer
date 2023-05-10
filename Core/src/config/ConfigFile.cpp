@@ -19,6 +19,13 @@ raytracer::ConfigFile::ConfigFile(std::string pfilepath) : filepath{std::move(pf
     this->filepath = this->getFullPath();
 }
 
+raytracer::Resolution &raytracer::Resolution::operator=(const njson &json)
+{
+    this->x = json["x"];
+    this->y = json["y"];
+    return *this;
+}
+
 /* methods */
 
 std::string raytracer::ConfigFile::getFullPath()
@@ -56,6 +63,7 @@ raytracer::Scene raytracer::ConfigFile::doParse()
         throw e;
     }
     try {
+        this->scene.res = this->config.at("resolution");
         this->scene.camera = this->config.at("camera");
         for (auto &primitive : this->config.at("primitives"))
             this->scene.primitives.emplace_back(PrimitiveFactory::createPrimitive(primitive));
