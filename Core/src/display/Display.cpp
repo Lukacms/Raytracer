@@ -50,7 +50,7 @@ void raytracer::Display::displayPixels()
                                        static_cast<sf::Uint8>(pixel.color.blue)});
         r_pixel.setPosition(static_cast<float>(pixel.coords.getX()),
                             static_cast<float>(pixel.coords.getY()));
-        this->window.getWindow().draw(r_pixel);
+        this->window.draw<sf::RectangleShape>(r_pixel);
     }
     this->window.getWindow().display();
 }

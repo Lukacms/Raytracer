@@ -12,7 +12,7 @@
 #include <SFML/Window/Event.hpp>
 #include <raytracer/Core.hh>
 #include <raytracer/RayTracer.hh>
-#include <raytracer/display/Window.hh>
+#include <raytracer/display/Window.hpp>
 
 constexpr std::string_view FONT_PATH{"./assets/font/raytracer.ttf"};
 constexpr std::string_view TEXT_BASIS{"ENTER NAME PLEASE:\t"};

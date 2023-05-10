@@ -6,10 +6,12 @@
 */
 
 #include <SFML/Window/VideoMode.hpp>
-#include <raytracer/display/Window.hh>
+#include <raytracer/display/Window.hpp>
 
 /* ctor / dtor */
-raytracer::Window::Window(sf::VideoMode mode, const std::string &name) : window{mode, name} {}
+raytracer::Window::Window(sf::VideoMode mode, const std::string &name) : window{mode, name}
+{
+}
 
 /* methods */
 void raytracer::Window::update()
