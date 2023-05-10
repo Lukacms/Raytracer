@@ -7,7 +7,6 @@
 
 #include <cstddef>
 #include <fstream>
-#include <iostream>
 #include <raytracer/PpmCreator.hh>
 #include <stdexcept>
 #include <string>

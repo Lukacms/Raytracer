@@ -7,7 +7,6 @@
 
 #include <Sphere.hh>
 #include <cmath>
-#include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/RayTracer.hh>
 #include <raytracer/math/Point3D.hh>
@@ -15,7 +14,8 @@
 
 // Constructor & Destructor
 
-math::Sphere::Sphere(math::Point3D corigin, double cradius, raytracer::Material material) : m_radius{cradius}
+math::Sphere::Sphere(math::Point3D corigin, double cradius, raytracer::Material material)
+    : m_radius{cradius}
 {
     this->m_origin = corigin;
     this->m_material = material;

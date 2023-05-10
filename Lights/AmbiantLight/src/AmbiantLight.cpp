@@ -7,7 +7,6 @@
 
 #include "raytracer/math/Vector3D.hh"
 #include <AmbiantLight.hh>
-#include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
 

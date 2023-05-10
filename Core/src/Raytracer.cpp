@@ -5,7 +5,6 @@
 ** Raytracer
 */
 
-#include <iostream>
 #include <raytracer/RayTracer.hh>
 
 /* ctor / dtor */

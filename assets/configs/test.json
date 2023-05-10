@@ -1,4 +1,8 @@
 {
+    "resolution": {
+        "x": 800,
+        "y": 800 
+    },
     "camera": {
         "origin": {
             "x": 0,

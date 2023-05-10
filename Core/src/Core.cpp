@@ -7,7 +7,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <iostream>
 #include <raytracer/Core.hh>
 #include <raytracer/PpmCreator.hh>
 #include <raytracer/Ray.hh>
@@ -25,8 +24,6 @@ raytracer::Raytracer::Raytracer(raytracer::Scene &scene, const raytracer::Resolu
     this->m_camera = std::move(scene.camera);
     m_resolution.x_value = 1.0 / res.x;
     m_resolution.y_value = 1.0 / res.y;
-    std::cout << m_resolution.y_value;
-    std::cout << m_resolution.x_value;
 }
 
 void raytracer::Raytracer::add_lights(std::unique_ptr<light::ILight> &&light)

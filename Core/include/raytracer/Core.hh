@@ -17,13 +17,6 @@
 
 namespace raytracer
 {
-    struct Resolution {
-            int x{0};
-            int y{0};
-            double x_value{0.00};
-            double y_value{0.00};
-    };
-
     constexpr raytracer::Resolution DEFAULT_RES{800, 800};
 
     class Raytracer

@@ -6,7 +6,6 @@
 */
 
 #include <DirectionalLight.hh>
-#include <iostream>
 #include <raytracer/Ray.hh>
 #include <raytracer/math/Point3D.hh>
 #include <raytracer/math/Vector3D.hh>
