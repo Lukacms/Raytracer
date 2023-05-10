@@ -49,15 +49,6 @@
     ],
     "lights": [
         {
-            "type": "ambient",
-            "origin": {
-                "x": 0,
-                "y": 0,
-                "z": 0
-            },
-            "coefficient": 0.4
-        },
-        {
             "type": "point",
             "origin": {
                 "x": 1,
@@ -65,6 +56,15 @@
                 "z": 1
             },
             "intensity": 0.3
+        },
+        {
+            "type": "ambient",
+            "origin": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "coefficient": 0.4
         },
         {
             "type": "directional",

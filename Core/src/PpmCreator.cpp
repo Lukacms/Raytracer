@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <fstream>
 #include <raytracer/PpmCreator.hh>
+#include <raytracer/PpmExecption.hh>
 #include <stdexcept>
 #include <string>
 #include <utility>
@@ -32,9 +33,9 @@ void PpmCreator::create_ppm()
 
     try {
         if (m_name.size() <= 4 || m_name.substr(m_name.size() - 4) != ".ppm")
-            throw;
+            throw PpmException{"error in ppm name"};
     } catch (std::out_of_range &e) {
-        throw e;
+        throw PpmException{"error to short"};
     }
     file.open(m_name);
     std::string res{"P3\n" + std::to_string(m_res.x) + " " + std::to_string(m_res.y) + "\n255\n"};
