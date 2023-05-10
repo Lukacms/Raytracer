@@ -31,7 +31,7 @@ raytracer::Infos raytracer::ArgsConfig::getArgs(int argc, const char *const *arg
     if (stat(infos.input.c_str(), &filestats) < 0)
         throw ArgsException(ARGS_NO_STAT.data());
     infos.input_last_modified = filestats.st_mtime;
-    if (!infos.output.empty() || !infos.output.ends_with(".ppm"))
+    if (!infos.output.empty() && !infos.output.ends_with(".ppm"))
         infos.output += ".ppm";
     return infos;
 }
