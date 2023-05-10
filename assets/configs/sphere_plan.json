@@ -1,0 +1,93 @@
+{
+    "camera": {
+        "origin": {
+            "x": 0,
+            "y": 0,
+            "z": 1
+        },
+        "canva": {
+            "origin": {
+                "x": -0.5,
+                "y": -0.5,
+                "z": 0
+            },
+            "bottom": {
+                "x": 1,
+                "y": 0,
+                "z": 0
+            },
+            "left": {
+                "x": 0,
+                "y": 1,
+                "z": 0
+            }
+        }
+    },
+    "primitives": [
+        {
+            "type": "sphere",
+            "origin": {
+                "x": 0,
+                "y": 0,
+                "z": -2
+            },
+            "radius": 0.5,
+            "material": {
+                "color": {
+                    "r": 47,
+                    "g": 242,
+                    "b": 144
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
+        },
+        {
+            "type": "plane",
+            "origin": {
+                "x": 0.3,
+                "y": 0,
+                "z": 0
+            },
+            "axis": 0,
+            "material": {
+                "color": {
+                    "r": 219,
+                    "g": 2,
+                    "b": 219
+                },
+                "reflection": 0.2,
+                "spec": 500
+            }
+        }
+    ],
+    "lights": [
+        {
+            "type": "ambient",
+            "origin": {
+                "x": 0,
+                "y": 0,
+                "z": 0
+            },
+            "coefficient": 0.4
+        },
+        {
+            "type": "point",
+            "origin": {
+                "x": 2,
+                "y": 0,
+                "z": 1
+            },
+            "intensity": 0.3
+        },
+        {
+            "type": "directional",
+            "direction": {
+                "x": 1,
+                "y": 4,
+                "z": 4
+            },
+            "intensity": 0.3
+        }
+    ]
+}
