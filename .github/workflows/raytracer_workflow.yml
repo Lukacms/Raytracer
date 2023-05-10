@@ -41,7 +41,7 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y ninja-build clang-tidy-12 ccache
           sudo update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 100
-          sudo apt-get install -y --no-install-recommends nlohmann-json3-dev libsfml-dev
+          sudo apt-get install -y --no-install-recommends nlohmann-json3-dev libsfml-dev catch2
           clang++ --version
           clang-tidy --version
     - uses: actions/checkout@v3
@@ -64,6 +64,7 @@ jobs:
       run: |
         rm -rf build
         ./compile.sh --tests
+      timeout-minutes: 10
 
   push_to_mirror:
     if: ${{ github.event_name == 'push' }}

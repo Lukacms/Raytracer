@@ -25,6 +25,8 @@ set(
     src/main.cpp
     src/Core/config/testsArgsConfig.cpp
     src/Core/config/testsConfigFile.cpp
+    src/Core/factory/testsLightFactory.cpp
+    src/Core/factory/testsPrimitiveFactory.cpp
 )
 
 # binary
