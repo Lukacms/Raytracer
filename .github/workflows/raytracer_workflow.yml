@@ -60,6 +60,8 @@ jobs:
             exit 1
           fi
         done
+    - name: Run tests
+      run: ./compile.sh --tests
 
   push_to_mirror:
     if: ${{ github.event_name == 'push' }}

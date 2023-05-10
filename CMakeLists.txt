@@ -19,6 +19,9 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 # for library compilation => shared libraries of primitives, lights etc
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/plugins)
 
+# option to build tests
+option(RAYTRACER_BUILD_TESTS "Build the tests" OFF)
+
 # include directories
 include_directories(Core/include/)
 
@@ -214,3 +217,8 @@ target_link_options(raytracer PRIVATE -rdynamic)
 target_compile_options(raytracer PRIVATE ${WARNING_FLAGS})
 set_property(TARGET raytracer PROPERTY CXX_STANDARD 20)
 set_property(TARGET raytracer PROPERTY CXX_STANDARD_REQUIRED ON)
+
+# execute tests if needed
+if (RAYTRACER_BUILD_TESTS)
+    add_subdirectory(tests)
+endif()

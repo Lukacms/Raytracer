@@ -15,9 +15,10 @@ raytracer::Infos raytracer::ArgsConfig::getArgs(int argc, const char *const *arg
     Infos infos{};
     struct stat filestats;
 
-    if (argc == 2 && std::string(argv[1]) == HELP_INDIC.data()) {
+    if (!argv)
+        throw ArgsException(ARGS_NB_ERROR.data());
+    if (argc == 2 && std::string(argv[1]) == HELP_INDIC.data())
         throw ArgsException(HELP_MSG.data());
-    }
     if (argc == PPM_NB_ARGS) {
         infos.output = std::string{argv[PPM_NB_ARGS - 1]};
         infos.type = DisplayType::PpmOutput;
@@ -47,7 +48,9 @@ bool raytracer::ArgsConfig::wasFileModified(Infos &infos)
 }
 
 /* ArgsException */
-raytracer::ArgsConfig::ArgsException::ArgsException(std::string perror) : msg{std::move(perror)} {}
+raytracer::ArgsConfig::ArgsException::ArgsException(std::string perror) : msg{std::move(perror)}
+{
+}
 
 const char *raytracer::ArgsConfig::ArgsException::what() const noexcept
 {

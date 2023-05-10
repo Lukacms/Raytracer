@@ -9,6 +9,10 @@ if [ "$1" = "--gcc" ]; then
 elif [ "$1" = "--ninja" ]; then
     cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=true
     ninja
+elif [ "$1" = "--tests" ]; then
+    cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_EXPORT_COMPILE_COMMANDS=true -DRAYTRACER_BUILD_TESTS=true
+    ninja
+    cd .. && ./tests-raytracer
 elif [ "$1" = "--debug" ]; then
     cmake .. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_EXPORT_COMPILE_COMMANDS=true
     cmake --build .
